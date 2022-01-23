@@ -1,19 +1,21 @@
-﻿@{
+﻿@model IEnumerable<PersianMemo.Models.Word>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="card-group">
-    @foreach (var wordie in Model)
+    @foreach (var word in Model)
     {
         <div class="card">
             <div class="card-header text-center">
-                <h3>@wordie</h3>
+                <h3>@word.PersianWord</h3>
             </div>
-            <img class="card-img-top" src="~/images/userimagedefault.png" asp-append-version="true" />
+            <img class="card-img-top" src="~/images/question-mark.jpg" asp-append-version="true" />
             <div class="card-footer text-center">
-                <a asp-controller="home" asp-action="details" asp-route-id="" class="btn btn-primary m-1">View</a>
-                <a href="#" class="btn btn-primary m-1">Edit</a>
-                <a href="#" class="btn btn-danger m-1">Delete</a>
+                <a asp-controller="home" asp-action="details" asp-route-id="" class="btn btn-primary m-1">Szczegóły</a>
+                <a href="#" class="btn btn-primary m-1">Edytuj</a>
+                <a href="#" class="btn btn-danger m-1">Usuń</a>
             </div>
         </div>
     }

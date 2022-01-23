@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PersianMemo.Models;
+using PersianMemo.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,13 +14,44 @@ namespace PersianMemo.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IWordRepository _wordRepository;
+
+        public HomeController(IWordRepository wordRepository, ILogger<HomeController> logger)
         {
+            _wordRepository = wordRepository;
             _logger = logger;
         }
 
         public IActionResult Index()
         {
+            var model = _wordRepository.GetAllWords();
+            return View(model);
+        }
+
+        public ViewResult Details(int? id)
+        {
+            HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
+            {
+                Word = _wordRepository.GetWord(id ?? 1),
+                PageTitle = "Word Details"
+
+            };
+            return View(homeDetailsViewModel);
+        }
+
+        [HttpGet]
+        public ViewResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Word word)
+        {
+            if (ModelState.IsValid)
+            {
+                Word newWord = _wordRepository.Add(word);
+            }
             return View();
         }
 

@@ -1,0 +1,31 @@
+﻿@model HomeDetailsViewModel
+
+@{ 
+    ViewBag.Title = "Szczegóły";
+}
+
+<h3>@Model.PageTitle</h3>
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header">
+                <h1>@Model.Word.PersianWord</h1>
+            </div>
+
+            <div class="card-body text-center">
+                <img class="card-body text-center" src="~/images/house-pic.jpg" />
+                <h4>ID: @Model.Word.Id</h4>
+                <h4>Tłumaczenie : @Model.Word.Translation</h4>
+                <h4>Trudność: @Model.Word.Difficulty.GetDescription()</h4>
+            </div>
+
+            <div class="card-footer text-center">
+                <a asp-controller="home" asp-action="index" class="btn btn-primary">Back</a>
+                <a href="#" class="btn btn-primary">Edytuj</a>
+                <a href="#" class="btn btn-danger">Usuń</a>
+            </div>
+        </div>
+    </div>
+</div>
+
