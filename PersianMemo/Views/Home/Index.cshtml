@@ -1,8 +1,10 @@
 ﻿@model IEnumerable<PersianMemo.Models.Word>
+@inject LanguageService language
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = language.Getkey("homePage");
 }
+
 
 <div class="card-group">
     @foreach (var word in Model)
@@ -13,9 +15,9 @@
             </div>
             <img class="card-img-top" src="~/images/question-mark.jpg" asp-append-version="true" />
             <div class="card-footer text-center">
-                <a asp-controller="home" asp-action="details" asp-route-id="" class="btn btn-primary m-1">Szczegóły</a>
-                <a href="#" class="btn btn-primary m-1">Edytuj</a>
-                <a href="#" class="btn btn-danger m-1">Usuń</a>
+                <a asp-controller="home" asp-action="details" asp-route-id="@word.Id" class="btn btn-primary m-1">@language.Getkey("details")</a>
+                <a href="#" class="btn btn-primary m-1">@language.Getkey("edit")</a>
+                <a href="#" class="btn btn-danger m-1">@language.Getkey("delete")</a>
             </div>
         </div>
     }

@@ -11,9 +11,9 @@ namespace PersianMemo.Models
         [Description("Początkujący")]
         Beginner = 1,
         [Description("Podstawowy")]
-        Intermediate = 2,
+        Basic = 2,
         [Description("Średnio-zaawansowany")]
-        UpperIntermediate = 3,
+        Intermediate = 3,
         [Description("Zaawansowany")]
         Advanced = 4
     }

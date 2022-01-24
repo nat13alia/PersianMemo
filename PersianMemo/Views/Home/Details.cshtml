@@ -1,8 +1,8 @@
 ﻿@model HomeDetailsViewModel
+@inject LanguageService language
 
-@{ 
-    ViewBag.Title = "Szczegóły";
-}
+@{ ViewBag.Title = language.Getkey("wordDetails"); }
+
 
 <h3>@Model.PageTitle</h3>
 
@@ -16,14 +16,14 @@
             <div class="card-body text-center">
                 <img class="card-body text-center" src="~/images/house-pic.jpg" />
                 <h4>ID: @Model.Word.Id</h4>
-                <h4>Tłumaczenie : @Model.Word.Translation</h4>
-                <h4>Trudność: @Model.Word.Difficulty.GetDescription()</h4>
+                <h4>@language.Getkey("translation") : @Model.Word.Translation</h4>
+                <h4>@language.Getkey("difficulty"): @Model.Word.Difficulty.GetDescription()</h4>
             </div>
 
             <div class="card-footer text-center">
                 <a asp-controller="home" asp-action="index" class="btn btn-primary">Back</a>
-                <a href="#" class="btn btn-primary">Edytuj</a>
-                <a href="#" class="btn btn-danger">Usuń</a>
+                <a href="#" class="btn btn-primary">@language.Getkey("edit")</a>
+                <a href="#" class="btn btn-danger">@language.Getkey("delete")</a>
             </div>
         </div>
     </div>

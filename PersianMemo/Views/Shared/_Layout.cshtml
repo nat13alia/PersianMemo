@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@inject LanguageService language
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -36,10 +37,26 @@
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a asp-controller="home" asp-action="index" class="nav-link">Lista</a>
+                        <a asp-controller="home" asp-action="index" class="nav-link">@language.Getkey("list")</a>
                     </li>
                     <li class="nav-item">
-                        <a asp-controller="home" asp-action="create" class="nav-link">Dodaj</a>
+                        <a asp-controller="home" asp-action="create" class="nav-link">@language.Getkey("add")</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                    @language.Getkey("language"):
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <li>
+                        <a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US"
+                           class="dropdown-item"><i class="flag-icon flag-icon-us"></i> @language.Getkey("english")</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="pl-PL"
+                           class="dropdown-item"><i class="flag-icon flag-icon-pl"></i> @language.Getkey("polish")</a>
                     </li>
                 </ul>
             </div>
