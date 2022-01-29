@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PersianMemo.UtilityClasses
 {
-    public static class GetDescriptionExtension
+    public static class EnumExtensions
     {
         public static string GetDescription(this Enum value)
         {

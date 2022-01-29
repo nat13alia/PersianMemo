@@ -23,9 +23,12 @@
     <div class="form-group row mt-1">
         <label asp-for="Difficulty" class="col-sm-2 col-form-label">@language.Getkey("difficulty") </label>
         <div class="col-sm-10">
-            <select asp-for="Difficulty" class="form-select mr-sm-12"
-                    asp-items="Html.GetEnumSelectList<Difficulty>()">
+            <select asp-for="Difficulty" class="form-select mr-sm-12">
                 <option value="" selected>@language.Getkey("selectDifficultyLevel")</option>
+                <option value="@Difficulty.Beginner">@language.Getkey(Enum.GetNames(typeof(Difficulty))[0].ToLower())</option>
+                <option value="@Difficulty.Basic">@language.Getkey(Enum.GetNames(typeof(Difficulty))[1].ToLower())</option>
+                <option value="@Difficulty.Intermediate">@language.Getkey(Enum.GetNames(typeof(Difficulty))[2].ToLower())</option>
+                <option value="@Difficulty.Advanced">@language.Getkey(Enum.GetNames(typeof(Difficulty))[3].ToLower())</option>
             </select>
             <span asp-validation-for="Difficulty" class="text-danger"></span>
 

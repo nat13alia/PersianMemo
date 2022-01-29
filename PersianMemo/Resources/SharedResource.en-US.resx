@@ -123,16 +123,16 @@
   <data name="addANewWord" xml:space="preserve">
     <value>Add a New Word</value>
   </data>
-  <data name="Advanced" xml:space="preserve">
+  <data name="advanced" xml:space="preserve">
     <value>Advanced</value>
   </data>
   <data name="back" xml:space="preserve">
     <value>Back</value>
   </data>
-  <data name="Basic" xml:space="preserve">
+  <data name="basic" xml:space="preserve">
     <value>Basic</value>
   </data>
-  <data name="Beginner" xml:space="preserve">
+  <data name="beginner" xml:space="preserve">
     <value>Beginner</value>
   </data>
   <data name="delete" xml:space="preserve">
@@ -159,7 +159,7 @@
   <data name="insertTranslation" xml:space="preserve">
     <value>Insert Translation</value>
   </data>
-  <data name="Intermediate" xml:space="preserve">
+  <data name="intermediate" xml:space="preserve">
     <value>Intermediate</value>
   </data>
   <data name="language" xml:space="preserve">

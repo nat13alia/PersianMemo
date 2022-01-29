@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,13 +9,13 @@ namespace PersianMemo.Models
 {
     public enum Difficulty
     {
-        [Description("Początkujący")]
+        [Display(Name = "Początkujący")]
         Beginner = 1,
-        [Description("Podstawowy")]
+        [Display(Name = "Podstawowy")]
         Basic = 2,
-        [Description("Średnio-zaawansowany")]
+        [Display(Name = "Średnio-zaawansowany")]
         Intermediate = 3,
-        [Description("Zaawansowany")]
+        [Display(Name ="Zaawansowany")]
         Advanced = 4
     }
 }

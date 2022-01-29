@@ -16,12 +16,15 @@ namespace PersianMemo.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
+        private readonly LanguageService _language;
+
         private readonly IWordRepository _wordRepository;
 
-        public HomeController(IWordRepository wordRepository, ILogger<HomeController> logger)
+        public HomeController(IWordRepository wordRepository, ILogger<HomeController> logger, LanguageService language)
         {
             _wordRepository = wordRepository;
             _logger = logger;
+            _language = language;
         }
 
         public IActionResult Index()
@@ -35,7 +38,7 @@ namespace PersianMemo.Controllers
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
             {
                 Word = _wordRepository.GetWord(id ?? 1),
-                PageTitle = "Word Details"
+                PageTitle = _language.Getkey("wordDetails")
 
             };
             return View(homeDetailsViewModel);

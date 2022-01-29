@@ -17,7 +17,8 @@
                 <img class="card-body text-center" src="~/images/house-pic.jpg" />
                 <h4>ID: @Model.Word.Id</h4>
                 <h4>@language.Getkey("translation") : @Model.Word.Translation</h4>
-                <h4>@language.Getkey("difficulty"): @Model.Word.Difficulty.GetDescription()</h4>
+                <h4>@language.Getkey("difficulty"): @language.Getkey(Enum.GetName(typeof(Difficulty), Model.Word.Difficulty).ToString().ToLower())</h4>
+                
             </div>
 
             <div class="card-footer text-center">
