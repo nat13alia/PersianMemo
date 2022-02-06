@@ -14,18 +14,11 @@ namespace PersianMemo.Models
                  new Word
                  {
                      Id = 1,
-                     PersianWord = "خونه",
-                     Translation = "Dom",
-                     Difficulty = Difficulty.Beginner,
-                     PhotoPath = null 
-                 },
-                 new Word
-                 {
-                     Id = 2,
                      PersianWord = "ایران",
                      Translation = "Iran",
                      Difficulty = Difficulty.Beginner,
-                     PhotoPath = null
+                     PhotoPath = "bac074b4 - 83ad - 4ec5 - 8b8a - e498fe02e048_Iran.png",
+                     PronunciationPath = "d4838478-2fba-4c1c-864d-21c8cc6f941e_pronunciation_fa_ایران.mp3"
                  });
         }
     }

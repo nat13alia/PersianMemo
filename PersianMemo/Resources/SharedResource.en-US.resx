@@ -135,6 +135,12 @@
   <data name="beginner" xml:space="preserve">
     <value>Beginner</value>
   </data>
+  <data name="chooseAPhoto" xml:space="preserve">
+    <value>Choose a Photo</value>
+  </data>
+  <data name="choosePronunciationAudioFile" xml:space="preserve">
+    <value>Choose a File with Pronunciation</value>
+  </data>
   <data name="delete" xml:space="preserve">
     <value>Delete</value>
   </data>
@@ -171,8 +177,14 @@
   <data name="newWord" xml:space="preserve">
     <value>New Word</value>
   </data>
+  <data name="photo" xml:space="preserve">
+    <value>Photo</value>
+  </data>
   <data name="polish" xml:space="preserve">
     <value>Polish</value>
+  </data>
+  <data name="pronunciation" xml:space="preserve">
+    <value>Pronunciation</value>
   </data>
   <data name="selectDifficultyLevel" xml:space="preserve">
     <value>Select Difficulty Level</value>

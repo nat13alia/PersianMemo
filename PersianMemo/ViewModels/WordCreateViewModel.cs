@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Http;
+using PersianMemo.Models;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace PersianMemo.Models
+namespace PersianMemo.ViewModels
 {
-    public class Word
+    public class WordCreateViewModel
     {
         public int Id { get; set; }
         [Required]
@@ -16,7 +14,7 @@ namespace PersianMemo.Models
         public string Translation { get; set; }
         [Required(ErrorMessage = "Please select the difficulty")]
         public Difficulty? Difficulty { get; set; }
-        public string PhotoPath { get; set; }
-        public string PronunciationPath { get; set; }
+        public IFormFile Photo { get; set; }
+        public IFormFile Pronunciation { get; set; }
     }
 }

@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PersianMemo.Models;
 
 namespace PersianMemo.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220204210518_AddedPronunciationPath")]
+    partial class AddedPronunciationPath
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,9 +54,14 @@ namespace PersianMemo.Migrations
                         {
                             Id = 1,
                             Difficulty = 1,
+                            PersianWord = "خونه",
+                            Translation = "Dom"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Difficulty = 1,
                             PersianWord = "ایران",
-                            PhotoPath = "bac074b4 - 83ad - 4ec5 - 8b8a - e498fe02e048_Iran.png",
-                            PronunciationPath = "d4838478-2fba-4c1c-864d-21c8cc6f941e_pronunciation_fa_ایران.mp3",
                             Translation = "Iran"
                         });
                 });

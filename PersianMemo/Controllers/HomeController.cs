@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -7,6 +8,7 @@ using PersianMemo.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,6 +21,7 @@ namespace PersianMemo.Controllers
         private readonly LanguageService _language;
 
         private readonly IWordRepository _wordRepository;
+        private readonly string wwwrootDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
 
         public HomeController(IWordRepository wordRepository, ILogger<HomeController> logger, LanguageService language)
         {
@@ -37,7 +40,7 @@ namespace PersianMemo.Controllers
         {
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
             {
-                Word = _wordRepository.GetWord(id ?? 1),
+                Word = _wordRepository.GetWord(id ?? _wordRepository.GetAllWords().FirstOrDefault().Id),
                 PageTitle = _language.Getkey("wordDetails")
 
             };
@@ -51,11 +54,39 @@ namespace PersianMemo.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Word word)
+        public IActionResult Create(WordCreateViewModel model)
         {
             if (ModelState.IsValid)
             {
-                Word newWord = _wordRepository.Add(word);
+                string uniquePhotoFileName = null;
+                string uniquePronunciationFileName = null;
+                if (model.Photo != null)
+                {
+                    // Photo upload
+                    string imagesUploadsFolder = Path.Combine(wwwrootDirectory, "images");
+                    uniquePhotoFileName = $"{Guid.NewGuid().ToString()}_{model.Photo.FileName}";
+                    string photoFilePath = Path.Combine(imagesUploadsFolder, uniquePhotoFileName);
+                    model.Photo.CopyTo(new FileStream(photoFilePath, FileMode.Create));
+                }
+
+                if (model.Pronunciation != null)
+                {
+                    // Pronunciation upload
+                    string audioUploadsFolder = Path.Combine(wwwrootDirectory, "audio");
+                    uniquePronunciationFileName = $"{Guid.NewGuid().ToString()}_{model.Pronunciation.FileName}";
+                    string pronunciationFilePath = Path.Combine(audioUploadsFolder, uniquePronunciationFileName);
+                    model.Pronunciation.CopyTo(new FileStream(pronunciationFilePath, FileMode.Create));
+                }
+                Word newWord = new Word
+                {
+                    PersianWord = model.PersianWord,
+                    Translation = model.Translation,
+                    Difficulty = model.Difficulty,
+                    PhotoPath = uniquePhotoFileName,
+                    PronunciationPath = uniquePronunciationFileName
+                };
+                _wordRepository.Add(newWord);
+                return RedirectToAction("details", new { id = newWord.Id });
             }
             return View();
         }
