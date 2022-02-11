@@ -15,11 +15,11 @@
                 <h3>@word.PersianWord</h3>
             </div>
             <a asp-controller="home" asp-action="details" asp-route-id="@word.Id">
-                <img class="card-img-top" src="@photoPath" asp-append-version="true" />
+                <img class="card-img-top imgThumbnail" src="@photoPath" asp-append-version="true" />
             </a>
             <div class="card-footer text-center">
                 <a asp-controller="home" asp-action="details" asp-route-id="@word.Id" class="btn btn-primary m-1">@language.Getkey("details")</a>
-                <a href="#" class="btn btn-primary m-1">@language.Getkey("edit")</a>
+                <a asp-controller="home" asp-action="edit" asp-route-id="@word.Id" class="btn btn-primary m-1">@language.Getkey("edit")</a>
                 <a href="#" class="btn btn-danger m-1">@language.Getkey("delete")</a>
             </div>
         </div>

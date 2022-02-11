@@ -153,6 +153,9 @@
   <data name="edit" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="editTheWord" xml:space="preserve">
+    <value>Edit The Word</value>
+  </data>
   <data name="english" xml:space="preserve">
     <value>English</value>
   </data>
@@ -161,6 +164,9 @@
   </data>
   <data name="insertANewWord" xml:space="preserve">
     <value>Insert a New Word</value>
+  </data>
+  <data name="insertTheWord" xml:space="preserve">
+    <value>Insert The Word</value>
   </data>
   <data name="insertTranslation" xml:space="preserve">
     <value>Insert Translation</value>
@@ -191,6 +197,12 @@
   </data>
   <data name="translation" xml:space="preserve">
     <value>Translation</value>
+  </data>
+  <data name="update" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="word" xml:space="preserve">
+    <value>Word</value>
   </data>
   <data name="wordDetails" xml:space="preserve">
     <value>Word Details</value>

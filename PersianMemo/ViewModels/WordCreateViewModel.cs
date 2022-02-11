@@ -6,7 +6,6 @@ namespace PersianMemo.ViewModels
 {
     public class WordCreateViewModel
     {
-        public int Id { get; set; }
         [Required]
         [MaxLength(50, ErrorMessage = "Entered value cannot exceed 50 characters")]
         public string PersianWord { get; set; }

@@ -153,6 +153,9 @@
   <data name="edit" xml:space="preserve">
     <value>Edytuj</value>
   </data>
+  <data name="editTheWord" xml:space="preserve">
+    <value>Edytuj Słówko</value>
+  </data>
   <data name="english" xml:space="preserve">
     <value>Angielski</value>
   </data>
@@ -161,6 +164,9 @@
   </data>
   <data name="insertANewWord" xml:space="preserve">
     <value>Wprowadź nowe słówko</value>
+  </data>
+  <data name="insertTheWord" xml:space="preserve">
+    <value>Wprowadź Słówko</value>
   </data>
   <data name="insertTranslation" xml:space="preserve">
     <value>Wprowadź Tlumaczenie</value>
@@ -191,6 +197,12 @@
   </data>
   <data name="translation" xml:space="preserve">
     <value>Tłumaczenie</value>
+  </data>
+  <data name="update" xml:space="preserve">
+    <value>Zapisz Zmiany</value>
+  </data>
+  <data name="word" xml:space="preserve">
+    <value>Słówko</value>
   </data>
   <data name="wordDetails" xml:space="preserve">
     <value>Szczegóły Słówka</value>

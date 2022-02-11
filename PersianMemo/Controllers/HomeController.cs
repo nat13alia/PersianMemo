@@ -58,25 +58,9 @@ namespace PersianMemo.Controllers
         {
             if (ModelState.IsValid)
             {
-                string uniquePhotoFileName = null;
-                string uniquePronunciationFileName = null;
-                if (model.Photo != null)
-                {
-                    // Photo upload
-                    string imagesUploadsFolder = Path.Combine(wwwrootDirectory, "images");
-                    uniquePhotoFileName = $"{Guid.NewGuid().ToString()}_{model.Photo.FileName}";
-                    string photoFilePath = Path.Combine(imagesUploadsFolder, uniquePhotoFileName);
-                    model.Photo.CopyTo(new FileStream(photoFilePath, FileMode.Create));
-                }
+                string uniquePhotoFileName = ProcessUploadedPhotoFile(model);
+                string uniquePronunciationFileName = ProcessUploadedAudioFile(model);
 
-                if (model.Pronunciation != null)
-                {
-                    // Pronunciation upload
-                    string audioUploadsFolder = Path.Combine(wwwrootDirectory, "audio");
-                    uniquePronunciationFileName = $"{Guid.NewGuid().ToString()}_{model.Pronunciation.FileName}";
-                    string pronunciationFilePath = Path.Combine(audioUploadsFolder, uniquePronunciationFileName);
-                    model.Pronunciation.CopyTo(new FileStream(pronunciationFilePath, FileMode.Create));
-                }
                 Word newWord = new Word
                 {
                     PersianWord = model.PersianWord,
@@ -89,6 +73,94 @@ namespace PersianMemo.Controllers
                 return RedirectToAction("details", new { id = newWord.Id });
             }
             return View();
+        }
+
+        [HttpGet]
+        public ViewResult Edit(int id)
+        {
+            Word word = _wordRepository.GetWord(id);
+            WordEditViewModel wordEditViewModel = new WordEditViewModel
+            {
+                Id = word.Id,
+                PersianWord = word.PersianWord,
+                Translation = word.Translation,
+                Difficulty = word.Difficulty,
+                ExistingPhotoPath = word.PhotoPath,
+                ExistingPronunciationPath = word.PronunciationPath
+
+            };
+            return View(wordEditViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(WordEditViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Word word = _wordRepository.GetWord(model.Id);
+                word.PersianWord = model.PersianWord;
+                word.Translation = model.Translation;
+                word.Difficulty = model.Difficulty;
+                if(model.Photo != null)
+                {
+                    if(model.ExistingPhotoPath != null)
+                    {
+                        string existingPhotoFilePath = Path.Combine(wwwrootDirectory, "images", model.ExistingPhotoPath);
+                        System.IO.File.Delete(existingPhotoFilePath);
+                    }
+                    word.PhotoPath = ProcessUploadedPhotoFile(model);
+                }
+                if (model.Pronunciation != null)
+                {
+                    if (model.ExistingPronunciationPath != null)
+                    {
+                        string existingAudioFilePath = Path.Combine(wwwrootDirectory, "images", model.ExistingPronunciationPath);
+                        System.IO.File.Delete(existingAudioFilePath);
+                    }
+                    word.PronunciationPath = ProcessUploadedAudioFile(model);
+                }
+                Word updatedWord = _wordRepository.Update(word);
+                return RedirectToAction("index");
+            }
+            return View(model);
+        }
+
+        private string ProcessUploadedAudioFile(WordCreateViewModel model)
+        {
+            string uniquePronunciationFileName = null;
+
+            if (model.Pronunciation != null)
+            {
+                // Pronunciation upload
+                string audioUploadsFolder = Path.Combine(wwwrootDirectory, "audio");
+                uniquePronunciationFileName = $"{Guid.NewGuid().ToString()}_{model.Pronunciation.FileName}";
+                string pronunciationFilePath = Path.Combine(audioUploadsFolder, uniquePronunciationFileName);
+                using (var fileStream = new FileStream(pronunciationFilePath, FileMode.Create))
+                {
+                    model.Pronunciation.CopyTo(fileStream);
+                }
+            }
+
+            return uniquePronunciationFileName;
+        }
+
+        private string ProcessUploadedPhotoFile(WordCreateViewModel model)
+        {
+            string uniquePhotoFileName = null;
+
+            if (model.Photo != null)
+            {
+                // Photo upload
+                string imagesUploadsFolder = Path.Combine(wwwrootDirectory, "images");
+                uniquePhotoFileName = $"{Guid.NewGuid().ToString()}_{model.Photo.FileName}";
+                string photoFilePath = Path.Combine(imagesUploadsFolder, uniquePhotoFileName);
+                using (var fileStream = new FileStream(photoFilePath, FileMode.Create))
+                {
+                    model.Photo.CopyTo(fileStream);
+                }
+            }
+
+            return uniquePhotoFileName;
         }
 
         public IActionResult ChangeLanguage(string culture)

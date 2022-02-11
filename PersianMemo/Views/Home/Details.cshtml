@@ -29,13 +29,13 @@
 
                 else
                 {
-                    <img class="card-body text-center" width="100" height ="100" src="~/Images/noimage.png" asp-append-version="true" />
+                    <img class="card-body text-center" width="100" height ="100" src="~/Audio/noaudio.png" asp-append-version="true" />
                 }
             </div>
 
             <div class="card-footer text-center">
                 <a asp-controller="home" asp-action="index" class="btn btn-primary">Back</a>
-                <a href="#" class="btn btn-primary">@language.Getkey("edit")</a>
+                <a asp-controller="home" asp-action="edit" asp-route-id="@Model.Word.Id" class="btn btn-primary">@language.Getkey("edit")</a>
                 <a href="#" class="btn btn-danger">@language.Getkey("delete")</a>
             </div>
         </div>
