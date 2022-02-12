@@ -125,6 +125,26 @@ namespace PersianMemo.Controllers
             return View(model);
         }
 
+        public IActionResult Delete(int? id)
+        {
+            if (ModelState.IsValid)
+            {
+                Word word = _wordRepository.GetWord(id.Value);
+                if (word.PhotoPath != null)
+                {
+                    string existingPhotoFilePath = Path.Combine(wwwrootDirectory, "images", word.PhotoPath);
+                    System.IO.File.Delete(existingPhotoFilePath);
+                }
+                if (word.PronunciationPath != null)
+                {
+                    string existingAudioFilePath = Path.Combine(wwwrootDirectory, "audio", word.PronunciationPath);
+                    System.IO.File.Delete(existingAudioFilePath);
+                }
+                Word deletedWord = _wordRepository.Delete(id.Value);
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
         private string ProcessUploadedAudioFile(WordCreateViewModel model)
         {
             string uniquePronunciationFileName = null;

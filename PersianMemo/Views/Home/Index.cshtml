@@ -20,7 +20,7 @@
             <div class="card-footer text-center">
                 <a asp-controller="home" asp-action="details" asp-route-id="@word.Id" class="btn btn-primary m-1">@language.Getkey("details")</a>
                 <a asp-controller="home" asp-action="edit" asp-route-id="@word.Id" class="btn btn-primary m-1">@language.Getkey("edit")</a>
-                <a href="#" class="btn btn-danger m-1">@language.Getkey("delete")</a>
+                <a asp-controller="home" asp-action="delete" asp-route-id="@word.Id" class="btn btn-danger m-1">@language.Getkey("delete")</a>
             </div>
         </div>
     }
