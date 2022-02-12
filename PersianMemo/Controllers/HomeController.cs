@@ -38,6 +38,12 @@ namespace PersianMemo.Controllers
 
         public ViewResult Details(int? id)
         {
+            Word word = _wordRepository.GetWord(id.Value);
+            if(word == null)
+            {
+                Response.StatusCode = 404;
+                return View("WordNotFound", id.Value);
+            }
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
             {
                 Word = _wordRepository.GetWord(id ?? _wordRepository.GetAllWords().FirstOrDefault().Id),
@@ -79,6 +85,11 @@ namespace PersianMemo.Controllers
         public ViewResult Edit(int id)
         {
             Word word = _wordRepository.GetWord(id);
+            if (word == null)
+            {
+                Response.StatusCode = 404;
+                return View("WordNotFound", id);
+            }
             WordEditViewModel wordEditViewModel = new WordEditViewModel
             {
                 Id = word.Id,
