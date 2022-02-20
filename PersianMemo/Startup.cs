@@ -80,7 +80,8 @@ namespace PersianMemo
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseStatusCodePagesWithReExecute("/Error/{0}");
+                app.UseExceptionHandler("/Error");
             }
             app.UseStaticFiles();
 

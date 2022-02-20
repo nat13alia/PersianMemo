@@ -42,6 +42,7 @@ namespace PersianMemo.Controllers
             if(word == null)
             {
                 Response.StatusCode = 404;
+                _logger.LogWarning($"404 Error occured. Word with ID = {id.Value} cannot be found ");
                 return View("WordNotFound", id.Value);
             }
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
@@ -88,6 +89,7 @@ namespace PersianMemo.Controllers
             if (word == null)
             {
                 Response.StatusCode = 404;
+                _logger.LogWarning($"404 Error occured. Word with ID = {id} cannot be found ");
                 return View("WordNotFound", id);
             }
             WordEditViewModel wordEditViewModel = new WordEditViewModel
@@ -206,12 +208,6 @@ namespace PersianMemo.Controllers
         public IActionResult Privacy()
         {
             return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
