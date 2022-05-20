@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -31,6 +32,10 @@ namespace PersianMemo
             services.AddDbContextPool<AppDbContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("PersianMemoDB"))
             );
+
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+            }).AddEntityFrameworkStores<AppDbContext>();
 
             services.AddScoped<IWordRepository, SQLWordRepository>();
 
@@ -84,6 +89,8 @@ namespace PersianMemo
                 app.UseExceptionHandler("/Error");
             }
             app.UseStaticFiles();
+            app.UseAuthentication();
+
 
             var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
             app.UseRequestLocalization(locOptions.Value);
