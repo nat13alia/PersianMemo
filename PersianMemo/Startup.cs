@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -43,8 +45,13 @@ namespace PersianMemo
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");
 
-            services.AddMvc(options => options.EnableEndpointRouting = false)
-                .AddXmlSerializerFormatters()
+            services.AddMvc(options => {
+                var policy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+                options.Filters.Add(new AuthorizeFilter(policy));
+                options.EnableEndpointRouting = false;
+                }).AddXmlSerializerFormatters()
                 .AddViewLocalization()
                 .AddDataAnnotationsLocalization(options =>
                 {

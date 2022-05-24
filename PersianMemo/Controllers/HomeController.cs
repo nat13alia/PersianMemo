@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
@@ -30,12 +31,14 @@ namespace PersianMemo.Controllers
             _language = language;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var model = _wordRepository.GetAllWords();
             return View(model);
         }
 
+        [AllowAnonymous]
         public ViewResult Details(int? id)
         {
             Word word = _wordRepository.GetWord(id.Value);
