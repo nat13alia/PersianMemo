@@ -5,18 +5,27 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PersianMemo.Controllers;
 
 namespace PersianMemo.Controllers
 {
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
+        private readonly UserManager<IdentityUser> userManager;
 
-        public AdministrationController(RoleManager<IdentityRole> roleManager)
+        public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
         {
             this.roleManager = roleManager;
+            this.userManager = userManager;
         }
 
+        [HttpGet]
+        public IActionResult RolesList()
+        {
+            var roles = roleManager.Roles;
+            return View(roles);
+        }
         [HttpGet]
         public IActionResult CreateRole()
         {
@@ -37,7 +46,7 @@ namespace PersianMemo.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("index", "home");
+                    return RedirectToAction("roleslist");
                 }
 
                 foreach (IdentityError error in result.Errors)
@@ -48,6 +57,61 @@ namespace PersianMemo.Controllers
 
 
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditRole(string id)
+        {
+            var role = await roleManager.FindByIdAsync(id);
+            if (role == null)
+            {
+                ViewBag.ErrorMessage = $"Cannot find a role with {id}";
+                return View("NotFound");
+            }
+
+            var model = new EditRoleViewModel()
+            {
+                Id = role.Id,
+                RoleName = role.Name
+            };
+
+            //we need to turn it into a List in order to avoid DataReader exception
+            foreach(var user in userManager.Users.ToList())
+            {
+                if(await userManager.IsInRoleAsync(user, role.Name))
+                {
+                    model.Users.Add(user.UserName);
+                }
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditRole(EditRoleViewModel model)
+        {
+            var role = await roleManager.FindByIdAsync(model.Id);
+            if (role == null)
+            {
+                ViewBag.ErrorMessage = $"Cannot find a role with {model.Id}";
+                return View("NotFound");
+            }
+            else
+            {
+                role.Name = model.RoleName;
+
+                var result = await roleManager.UpdateAsync(role);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("roleslist");
+                }
+
+                foreach(var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View(model);
+            }
         }
     }
 }

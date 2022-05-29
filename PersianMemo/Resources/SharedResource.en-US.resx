@@ -123,6 +123,12 @@
   <data name="addANewWord" xml:space="preserve">
     <value>Add a New Word</value>
   </data>
+  <data name="addNewRole" xml:space="preserve">
+    <value>Add New Role</value>
+  </data>
+  <data name="addRemoveUsersFromRole" xml:space="preserve">
+    <value>Add or Remove Users From/To this Role</value>
+  </data>
   <data name="advanced" xml:space="preserve">
     <value>Advanced</value>
   </data>
@@ -135,11 +141,23 @@
   <data name="beginner" xml:space="preserve">
     <value>Beginner</value>
   </data>
+  <data name="cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="chooseAPhoto" xml:space="preserve">
     <value>Choose a Photo</value>
   </data>
   <data name="choosePronunciationAudioFile" xml:space="preserve">
     <value>Choose a File with Pronunciation</value>
+  </data>
+  <data name="confirmPassword" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="createNewRole" xml:space="preserve">
+    <value>Create New Role</value>
+  </data>
+  <data name="createRole" xml:space="preserve">
+    <value>Create Role</value>
   </data>
   <data name="delete" xml:space="preserve">
     <value>Delete</value>
@@ -152,6 +170,9 @@
   </data>
   <data name="edit" xml:space="preserve">
     <value>Edit</value>
+  </data>
+  <data name="editRole" xml:space="preserve">
+    <value>Edit Role</value>
   </data>
   <data name="editTheWord" xml:space="preserve">
     <value>Edit The Word</value>
@@ -180,8 +201,20 @@
   <data name="list" xml:space="preserve">
     <value>List</value>
   </data>
+  <data name="login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
   <data name="newWord" xml:space="preserve">
     <value>New Word</value>
+  </data>
+  <data name="noneRightNow" xml:space="preserve">
+    <value>None Right Now</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>Password</value>
   </data>
   <data name="photo" xml:space="preserve">
     <value>Photo</value>
@@ -192,14 +225,41 @@
   <data name="pronunciation" xml:space="preserve">
     <value>Pronunciation</value>
   </data>
+  <data name="register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="rememberMe" xml:space="preserve">
+    <value>Remember Me</value>
+  </data>
+  <data name="roleId" xml:space="preserve">
+    <value>Role Id</value>
+  </data>
+  <data name="roleName" xml:space="preserve">
+    <value>Role Name</value>
+  </data>
+  <data name="roles" xml:space="preserve">
+    <value>Roles</value>
+  </data>
   <data name="selectDifficultyLevel" xml:space="preserve">
     <value>Select Difficulty Level</value>
+  </data>
+  <data name="thereAreNoRolesToDisplay" xml:space="preserve">
+    <value>Currently there are no roles to display</value>
   </data>
   <data name="translation" xml:space="preserve">
     <value>Translation</value>
   </data>
   <data name="update" xml:space="preserve">
     <value>Update</value>
+  </data>
+  <data name="userLogin" xml:space="preserve">
+    <value>User Login</value>
+  </data>
+  <data name="userRegistration" xml:space="preserve">
+    <value>User Registration</value>
+  </data>
+  <data name="usersInThisRole" xml:space="preserve">
+    <value>Users in this Role</value>
   </data>
   <data name="word" xml:space="preserve">
     <value>Word</value>

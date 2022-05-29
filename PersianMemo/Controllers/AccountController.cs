@@ -74,6 +74,7 @@ namespace PersianMemo.Controllers
 
                 if (result.Succeeded)
                 {
+
                     if (Url.IsLocalUrl(returnUrl))
                     {
                         return Redirect(returnUrl);

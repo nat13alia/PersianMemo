@@ -45,7 +45,7 @@
                         <a asp-controller="home" asp-action="index" class="nav-link">@language.Getkey("list")</a>
                     </li>
                     <li class="nav-item">
-                        <a asp-controller="home" asp-action="create" class="nav-link">@language.Getkey("add")</a>
+                        <a asp-controller="home" asp-action="create" class="nav-link">@language.Getkey("addANewWord")</a>
                     </li>
                 </ul>
             </div>
@@ -57,7 +57,7 @@
                         <form method="post" asp-controller="account" asp-action="logout">
                             <button type="submit" style="width:auto"
                                     class="nav-link btn btn-link py-0">
-                                Logout @User.Identity.Name
+                                @language.Getkey("logout") @User.Identity.Name
                             </button>
                         </form>
                     </li>
@@ -65,10 +65,10 @@
                 else
                 {
                     <li class="nav-item">
-                        <a asp-controller="account" asp-action="register" class="nav-link">Register</a>
+                        <a asp-controller="account" asp-action="register" class="nav-link">@language.Getkey("register")</a>
                     </li>
                     <li class="nav-item">
-                        <a asp-controller="account" asp-action="login" class="nav-link">Login</a>
+                        <a asp-controller="account" asp-action="login" class="nav-link">@language.Getkey("login")</a>
                     </li>
                 }
 
@@ -80,11 +80,11 @@
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                     <li>
-                        <a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US"
+                        <a asp-controller="Language" asp-action="ChangeLanguage" asp-route-culture="en-US"
                            class="dropdown-item"><i class="flag-icon flag-icon-us"></i> @language.Getkey("english")</a>
                     </li>
                     <li>
-                        <a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="pl-PL"
+                        <a asp-controller="Language" asp-action="ChangeLanguage" asp-route-culture="pl-PL"
                            class="dropdown-item"><i class="flag-icon flag-icon-pl"></i> @language.Getkey("polish")</a>
                     </li>
                 </ul>
