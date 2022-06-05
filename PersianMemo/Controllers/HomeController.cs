@@ -34,8 +34,14 @@ namespace PersianMemo.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
-            var model = _wordRepository.GetAllWords();
-            return View(model);
+            return View();
+        }
+
+        [AllowAnonymous]
+        public IActionResult GetAll()
+        {
+            var data = _wordRepository.GetAllWords();
+            return Json(new { data = data });
         }
 
         [AllowAnonymous]

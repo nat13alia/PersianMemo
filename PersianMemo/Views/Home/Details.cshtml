@@ -34,7 +34,7 @@
             </div>
 
             <div class="card-footer text-center">
-                <a asp-controller="home" asp-action="index" class="btn btn-primary">Back</a>
+                <a asp-controller="home" asp-action="index" class="btn btn-primary">@language.Getkey("back")</a>
                 <a asp-controller="home" asp-action="edit" asp-route-id="@Model.Word.Id" class="btn btn-primary">@language.Getkey("edit")</a>
                 <a asp-controller="home" asp-action="delete" asp-route-id="@Model.Word.Id" class="btn btn-danger">@language.Getkey("delete")</a>
             </div>

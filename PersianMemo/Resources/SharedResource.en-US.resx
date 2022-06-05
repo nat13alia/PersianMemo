@@ -195,6 +195,9 @@
   <data name="intermediate" xml:space="preserve">
     <value>Intermediate</value>
   </data>
+  <data name="lang" xml:space="preserve">
+    <value>ENG</value>
+  </data>
   <data name="language" xml:space="preserve">
     <value>Language</value>
   </data>
@@ -266,5 +269,8 @@
   </data>
   <data name="wordDetails" xml:space="preserve">
     <value>Word Details</value>
+  </data>
+  <data name="wordsList" xml:space="preserve">
+    <value>Words List</value>
   </data>
 </root>
