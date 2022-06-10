@@ -273,4 +273,7 @@
   <data name="wordsList" xml:space="preserve">
     <value>Lista Słówek</value>
   </data>
+  <data name="wordsToLearn" xml:space="preserve">
+    <value>Słówka do Nauki</value>
+  </data>
 </root>

@@ -273,4 +273,7 @@
   <data name="wordsList" xml:space="preserve">
     <value>Words List</value>
   </data>
+  <data name="wordsToLearn" xml:space="preserve">
+    <value>Words To Learn</value>
+  </data>
 </root>

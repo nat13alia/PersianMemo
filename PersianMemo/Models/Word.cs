@@ -8,6 +8,11 @@ namespace PersianMemo.Models
 {
     public class Word
     {
+        public Word()
+        {
+            Status = WordStatus.NotStarted;
+            EF = 2.5;
+        }
         public int Id { get; set; }
         [Required]
         [MaxLength(50, ErrorMessage = "Entered value cannot exceed 50 characters")]
@@ -18,5 +23,8 @@ namespace PersianMemo.Models
         public Difficulty? Difficulty { get; set; }
         public string PhotoPath { get; set; }
         public string PronunciationPath { get; set; }
+
+        public WordStatus Status { get; set; }
+        public double EF { get; set; }
     }
 }

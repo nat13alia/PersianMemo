@@ -17,7 +17,16 @@ $(document).ready(function () {
 
 
 function loadDataTable(details) {
-    dataTable = $('#tblData').DataTable({
+    dataTable = $('#tblWords').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                text: 'Go to Exercise',
+                attr: {
+                    id: 'button'
+                }
+            }
+        ],
         "ajax": {
             "url": "/Home/GetAll"
         },
@@ -42,16 +51,59 @@ function loadDataTable(details) {
                 }, "autoWidth": "true"
             },
             {
+                "data": "status",
+                "render": function (data) {
+
+
+                    if (data == 1) {
+                        return `
+                        <a>*</a>
+                        `
+                    } else if (data == 2) {
+                        return `
+                        <a>**</a>
+                        `
+                    } else {
+                        return `
+                        <a>***</a>
+                        `
+                    }
+                }, "autoWidth": "true"
+            },
+            {
                 "data": "id",
                 "render": function (data) {
                     return `
                     <a href="home/details/${data}" class="btn btn-primary m-1">${details}</a>
-                    <a href="home/edit/${data}" class="btn btn-primary m-1"><i class="fa-solid fa-pen-to-square"></i></a>
                     <a href="home/delete/${data}" class="btn btn-danger m-1"><i class="fa-solid fa-trash"></i></a>
-                    <a href="#" class="btn btn-danger m-1"><i class="fa-solid fa-graduation-cap"></i></a>
-                    `
-                }
+                    `                }
             }
         ]
+    });
+
+    $('#tblWords tbody').on('click', 'tr', function () {
+        $(this).toggleClass('selected');
+    });
+
+    $('#button').click(function () {
+        var selectedData = dataTable.rows('.selected').data();
+        var selectedIds = []
+
+        for (var i = 0; i < selectedData.length; i++) {
+            selectedIds.push(selectedData[i].id);
+        }
+
+        console.log(selectedIds);
+
+        $.ajax({
+            type: "POST",
+            url: "/Exercise/SaveExercise",
+            data: { ids: selectedIds },
+            dataType: "json",
+            traditional: "true",
+            success: function (data) {
+                alert("SUCCESS");
+            },
+        })
     });
 }

@@ -40,6 +40,9 @@ namespace PersianMemo
             }).AddEntityFrameworkStores<AppDbContext>();
 
             services.AddScoped<IWordRepository, SQLWordRepository>();
+            services.AddScoped<IExerciseRepository, SQLExerciseRepository>();
+            services.AddScoped<IExercisesWordsRepository, SQLExercisesWordsRepository>();
+
 
             services.AddSingleton<LanguageService>();
 

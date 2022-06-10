@@ -44,6 +44,7 @@ namespace PersianMemo.Controllers
             return Json(new { data = data });
         }
 
+        [HttpGet]
         [AllowAnonymous]
         public ViewResult Details(int? id)
         {
@@ -166,6 +167,11 @@ namespace PersianMemo.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+
+        //public IActionResult AddToExercise()
+        //{
+
+        //}
 
         private string ProcessUploadedAudioFile(WordCreateViewModel model)
         {
