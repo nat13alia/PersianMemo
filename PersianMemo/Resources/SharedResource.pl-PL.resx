@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="accept" xml:space="preserve">
+    <value>Zaakceptuj</value>
+  </data>
   <data name="add" xml:space="preserve">
     <value>Dodaj</value>
   </data>
@@ -180,6 +183,9 @@
   <data name="english" xml:space="preserve">
     <value>Angielski</value>
   </data>
+  <data name="exercise" xml:space="preserve">
+    <value>Ćwiczenie</value>
+  </data>
   <data name="homePage" xml:space="preserve">
     <value>Strona Główna</value>
   </data>
@@ -212,6 +218,9 @@
   </data>
   <data name="newWord" xml:space="preserve">
     <value>Nowe Słówko</value>
+  </data>
+  <data name="next" xml:space="preserve">
+    <value>Następne Słówko</value>
   </data>
   <data name="noneRightNow" xml:space="preserve">
     <value>Brak w tym momencie</value>
@@ -251,6 +260,9 @@
   </data>
   <data name="translation" xml:space="preserve">
     <value>Tłumaczenie</value>
+  </data>
+  <data name="typeTheAnswer" xml:space="preserve">
+    <value>Tutaj Wpisz Odpowiedź</value>
   </data>
   <data name="update" xml:space="preserve">
     <value>Zapisz Zmiany</value>

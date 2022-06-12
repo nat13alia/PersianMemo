@@ -8,7 +8,8 @@ namespace PersianMemo.ViewModels
 {
     public class ExerciseDetailsViewModel
     {
-        public Exercise Exercise { get; set; }
-        public string PageTitle { get; set; }
+        public int ExerciseId { get; set; }
+        public IEnumerable<Word> WordsList { get; set; }
+        public Word CurrentWord { get; set; }
     }
 }

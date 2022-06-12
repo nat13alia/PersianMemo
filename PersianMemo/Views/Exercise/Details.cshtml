@@ -1,0 +1,24 @@
+﻿@model ExerciseDetailsViewModel
+@inject LanguageService language
+
+@{
+    ViewBag.Title = language.Getkey("exercise");
+    var firstWordId = Model.WordsList.FirstOrDefault().Id;
+}
+
+
+<div class="card-group">
+    @foreach (var word in Model.WordsList)
+    {
+        var photoPath = "~/Images/" + (word.PhotoPath ?? "noimage.png");
+        var audioPath = "/audio/" + word.PronunciationPath;
+
+        <div class="card">
+            <div class="card-header text-center">
+                <h3>@word.PersianWord</h3>
+            </div>
+            <img class="card-img-top imgThumbnail mx-auto" src="@photoPath" asp-append-version="true" style="display:block" />
+        </div>
+    }
+</div>
+<a asp-controller="exercise" asp-action="learnlisten" asp-route-id="@Model.ExerciseId" asp-route-wordId="@firstWordId" class="btn btn-primary m-1"><i class="fa-solid fa-graduation-cap"></i></a>

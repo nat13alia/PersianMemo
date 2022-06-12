@@ -15,5 +15,8 @@ namespace PersianMemo.ViewModels
         public Difficulty? Difficulty { get; set; }
         public IFormFile Photo { get; set; }
         public IFormFile Pronunciation { get; set; }
+        public WordStatus Status { get; set; }
+        public double EF { get; set; }
+
     }
 }

@@ -20,5 +20,7 @@ namespace PersianMemo.Models
         public int WordId { get; set; }
         [ForeignKey("WordId")]
         public Word Word { get; set; }
+        public bool DidListen { get; set; }
+        public Answer WriteAnswer { get; set; }
     }
 }

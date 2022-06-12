@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PersianMemo.Models;
+using PersianMemo.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,47 +30,78 @@ namespace PersianMemo.Controllers
             _exercisesWordsRepository = exercisesWordsRepository;
             _language = language;
         }
-        
-        public IActionResult Index(int[] ids)
+
+        [HttpGet]
+        public IActionResult Details(int id)
         {
-            var model = new List<Word>();
-            foreach (int id in ids)
+            var model = new ExerciseDetailsViewModel
             {
-                var word = _wordRepository.GetWord(id);
-                model.Add(word);
-            }
+                WordsList = _exercisesWordsRepository.GetWords(id),
+                ExerciseId = id            
+            };
 
             return View(model);
         }
 
-        public IActionResult SaveExercise(int[] ids)
+        [HttpGet]
+        public IActionResult LearnListen(int id, int wordId)
         {
-            List<Word> words = new List<Word>();
-
-            foreach (int id in ids)
+            LearnListenViewModel model = new LearnListenViewModel
             {
-                var word = _wordRepository.GetWord(id);
-                words.Add(word);
-            }
-
-            var exercise = new Exercise
-            {
-                UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)
+                Exercise = _exerciseRepository.GetExercise(id),
+                Words = _exercisesWordsRepository.GetWords(id),
+                CurrentWordId = wordId,
+                CurrentExerciseId = id
             };
-
-            _exerciseRepository.Add(exercise);
-
-            foreach (Word w in words)
-            {
-                var exerciseWordPair = new ExercisesWords
-                {
-                    ExerciseId = exercise.Id,
-                    WordId = w.Id
-                };
-                _exercisesWordsRepository.Add(exerciseWordPair);
-            }
-
-            return RedirectToAction("exercise", "index");
+            return View(model);
         }
+
+        [HttpPost]
+        public IActionResult LearnListen(LearnListenViewModel model)
+        {
+            var previousExWordpair = _exercisesWordsRepository.GetPair(model.CurrentExerciseId, model.CurrentWordId);
+            previousExWordpair.DidListen = true;
+            _exercisesWordsRepository.Update(previousExWordpair);
+
+            var restOfWords = _exercisesWordsRepository.GetAllPairsForExercise(model.CurrentExerciseId).Where(p => p.DidListen == false).ToList();
+            if(restOfWords.Count != 0)
+            {
+                return RedirectToAction("learnlisten", "exercise", new { id = model.CurrentExerciseId, wordId = restOfWords.FirstOrDefault().WordId });
+            } else
+            {
+                return RedirectToAction("index", "home");
+            }
+        }
+
+        [HttpGet]
+        public IActionResult LearnWrite(int id, int wordId)
+        {
+            LearnWriteViewModel model = new LearnWriteViewModel
+            {
+                Exercise = _exerciseRepository.GetExercise(id),
+                Words = _exercisesWordsRepository.GetWords(id),
+                CurrentWordId = wordId,
+                CurrentExerciseId = id
+            };
+            return View(model);
+        }
+        //[HttpPost]
+        //public IActionResult LearnWrite(LearnWriteViewModel model)
+        //{
+        //    var wordExPair = _exercisesWordsRepository.GetPair(model.CurrentExerciseId, model.CurrentWordId);
+        //    if (model.Answer == _wordRepository.GetWord(model.CurrentWordId).PersianWord)
+        //    {
+        //        //Correct answer
+        //        _exercisesWordsRepository.Delete(wordExPair.Id);
+        //        return RedirectToAction("details", "home", new { id = model.CurrentWordId });
+        //    }
+        //    else
+        //    {
+        //        //Incorrect answer
+        //        wordExPair.ListenAnswer = Answer.AnsweredIncorrectly;
+        //        _exercisesWordsRepository.Update(wordExPair);
+        //        return RedirectToAction("details", "home", new { id = model.CurrentWordId });
+        //    }
+        //}
     }
 }

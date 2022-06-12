@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -12,6 +13,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace PersianMemo.Controllers
 {
@@ -22,12 +24,19 @@ namespace PersianMemo.Controllers
         private readonly LanguageService _language;
 
         private readonly IWordRepository _wordRepository;
+        private readonly IExerciseRepository _exerciseRepository;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IExercisesWordsRepository _exercisesWordsRepository;
+
         private readonly string wwwrootDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
 
-        public HomeController(IWordRepository wordRepository, ILogger<HomeController> logger, LanguageService language)
+        public HomeController(IWordRepository wordRepository, ILogger<HomeController> logger, LanguageService language, IExerciseRepository exerciseRepository, UserManager<IdentityUser> userManager, IExercisesWordsRepository exercisesWordsRepository)
         {
-            _wordRepository = wordRepository;
             _logger = logger;
+            _exerciseRepository = exerciseRepository;
+            _wordRepository = wordRepository;
+            _userManager = userManager;
+            _exercisesWordsRepository = exercisesWordsRepository;
             _language = language;
         }
 
@@ -35,6 +44,38 @@ namespace PersianMemo.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Index(int[] ids)
+        {
+            List<Word> words = new List<Word>();
+
+            foreach (int id in ids)
+            {
+                var word = _wordRepository.GetWord(id);
+                words.Add(word);
+            }
+
+            var exercise = new Exercise
+            {
+                UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)
+            };
+
+            _exerciseRepository.Add(exercise);
+
+            foreach (Word w in words)
+            {
+                var exerciseWordPair = new ExercisesWords
+                {
+                    ExerciseId = exercise.Id,
+                    WordId = w.Id,
+                    DidListen = false,
+                    WriteAnswer = 0
+                };
+                _exercisesWordsRepository.Add(exerciseWordPair);
+            }
+            return Json(new { data = exercise.Id });
         }
 
         [AllowAnonymous]
@@ -84,8 +125,10 @@ namespace PersianMemo.Controllers
                     Translation = model.Translation,
                     Difficulty = model.Difficulty,
                     PhotoPath = uniquePhotoFileName,
-                    PronunciationPath = uniquePronunciationFileName
-                };
+                    PronunciationPath = uniquePronunciationFileName,
+                    Status = WordStatus.NotStarted,
+                    EF = 2.5
+            };
                 _wordRepository.Add(newWord);
                 return RedirectToAction("details", new { id = newWord.Id });
             }
@@ -109,7 +152,9 @@ namespace PersianMemo.Controllers
                 Translation = word.Translation,
                 Difficulty = word.Difficulty,
                 ExistingPhotoPath = word.PhotoPath,
-                ExistingPronunciationPath = word.PronunciationPath
+                ExistingPronunciationPath = word.PronunciationPath,
+                Status = word.Status,
+                EF = word.EF
 
             };
             return View(wordEditViewModel);

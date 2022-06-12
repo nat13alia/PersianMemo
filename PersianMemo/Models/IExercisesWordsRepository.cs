@@ -9,5 +9,10 @@ namespace PersianMemo.Models
     {
         IEnumerable<Word> GetWords(int exerciseId);
         ExercisesWords Add(ExercisesWords exerciseWordPair);
+        ExercisesWords GetPair(int exerciseId, int wordId);
+        IEnumerable<ExercisesWords> GetAllPairsForExercise(int exerciseId);
+        ExercisesWords Update(ExercisesWords pairChanges);
+        ExercisesWords Delete(int Id);
+
     }
 }
