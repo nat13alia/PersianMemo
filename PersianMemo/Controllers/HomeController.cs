@@ -213,11 +213,6 @@ namespace PersianMemo.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //public IActionResult AddToExercise()
-        //{
-
-        //}
-
         private string ProcessUploadedAudioFile(WordCreateViewModel model)
         {
             string uniquePronunciationFileName = null;

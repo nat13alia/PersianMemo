@@ -51,6 +51,7 @@ namespace PersianMemo.Models
 
         public ExercisesWords Update(ExercisesWords pairChanges)
         {
+            context.ChangeTracker.Clear();
             var pair = context.ExercisesWords.Attach(pairChanges);
             pair.State = EntityState.Modified;
             context.SaveChanges();

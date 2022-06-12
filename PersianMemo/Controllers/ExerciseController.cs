@@ -63,13 +63,14 @@ namespace PersianMemo.Controllers
             previousExWordpair.DidListen = true;
             _exercisesWordsRepository.Update(previousExWordpair);
 
+
             var restOfWords = _exercisesWordsRepository.GetAllPairsForExercise(model.CurrentExerciseId).Where(p => p.DidListen == false).ToList();
             if(restOfWords.Count != 0)
             {
                 return RedirectToAction("learnlisten", "exercise", new { id = model.CurrentExerciseId, wordId = restOfWords.FirstOrDefault().WordId });
             } else
             {
-                return RedirectToAction("index", "home");
+                return RedirectToAction("learnwrite", "exercise", new { id = model.CurrentExerciseId, wordId = _exercisesWordsRepository.GetAllPairsForExercise(model.CurrentExerciseId).FirstOrDefault().WordId });
             }
         }
 
@@ -85,23 +86,59 @@ namespace PersianMemo.Controllers
             };
             return View(model);
         }
-        //[HttpPost]
-        //public IActionResult LearnWrite(LearnWriteViewModel model)
-        //{
-        //    var wordExPair = _exercisesWordsRepository.GetPair(model.CurrentExerciseId, model.CurrentWordId);
-        //    if (model.Answer == _wordRepository.GetWord(model.CurrentWordId).PersianWord)
-        //    {
-        //        //Correct answer
-        //        _exercisesWordsRepository.Delete(wordExPair.Id);
-        //        return RedirectToAction("details", "home", new { id = model.CurrentWordId });
-        //    }
-        //    else
-        //    {
-        //        //Incorrect answer
-        //        wordExPair.ListenAnswer = Answer.AnsweredIncorrectly;
-        //        _exercisesWordsRepository.Update(wordExPair);
-        //        return RedirectToAction("details", "home", new { id = model.CurrentWordId });
-        //    }
-        //}
+
+        [HttpPost]
+        public IActionResult LearnWrite(LearnWriteViewModel model)
+        {
+            var previousExWordpair = _exercisesWordsRepository.GetPair(model.CurrentExerciseId, model.CurrentWordId);
+            var correctAnswer = _wordRepository.GetWord(model.CurrentWordId).PersianWord;
+
+            if (model.Answer == correctAnswer)
+            {
+                //Correct answer
+                ExercisesWords pairChanges = new ExercisesWords
+                {
+                    Id = previousExWordpair.Id,
+                    ExerciseId = previousExWordpair.ExerciseId,
+                    WordId = previousExWordpair.WordId,
+                    DidListen = previousExWordpair.DidListen,
+                    WriteAnswer = Answer.AnsweredCorrectly
+                };
+
+                _exercisesWordsRepository.Update(pairChanges);
+                var restOfWords = _exercisesWordsRepository.GetAllPairsForExercise(model.CurrentExerciseId).Where(p => p.WriteAnswer != Answer.AnsweredCorrectly).OrderBy(p => p.WriteAnswer).ToList();
+                if (restOfWords.Count != 0)
+                {
+                    return RedirectToAction("learnwrite", "exercise", new { id = model.CurrentExerciseId, wordId = restOfWords.FirstOrDefault().WordId });
+                }
+                else
+                {
+                    return RedirectToAction("index", "home");
+                }
+            }
+            else
+            {
+                //Incorrect answer
+                ExercisesWords pairChanges = new ExercisesWords
+                {
+                    Id = previousExWordpair.Id,
+                    ExerciseId = previousExWordpair.ExerciseId,
+                    WordId = previousExWordpair.WordId,
+                    DidListen = previousExWordpair.DidListen,
+                    WriteAnswer = Answer.AnsweredIncorrectly
+                };
+
+                _exercisesWordsRepository.Update(pairChanges);
+                var restOfWords = _exercisesWordsRepository.GetAllPairsForExercise(model.CurrentExerciseId).Where(p => p.WriteAnswer != Answer.AnsweredCorrectly).OrderBy(p => p.WriteAnswer).ToList();
+                if (restOfWords.Count != 0)
+                {
+                    return RedirectToAction("learnwrite", "exercise", new { id = model.CurrentExerciseId, wordId = restOfWords.FirstOrDefault().WordId });
+                }
+                else
+                {
+                    return RedirectToAction("index", "home");
+                }
+            }
+        }
     }
 }
