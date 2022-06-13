@@ -42,6 +42,8 @@ namespace PersianMemo
             services.AddScoped<IWordRepository, SQLWordRepository>();
             services.AddScoped<IExerciseRepository, SQLExerciseRepository>();
             services.AddScoped<IExercisesWordsRepository, SQLExercisesWordsRepository>();
+            services.AddScoped<IRevisionRepository, SQLRevisionRepository>();
+
 
 
             services.AddSingleton<LanguageService>();

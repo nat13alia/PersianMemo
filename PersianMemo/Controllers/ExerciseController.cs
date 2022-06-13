@@ -21,13 +21,15 @@ namespace PersianMemo.Controllers
         private readonly IWordRepository _wordRepository;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IExercisesWordsRepository _exercisesWordsRepository;
+        private readonly IRevisionRepository _revisionRepository;
 
-        public ExerciseController(IExerciseRepository exerciseRepository, LanguageService language, IWordRepository wordRepository, UserManager<IdentityUser> userManager, IExercisesWordsRepository exercisesWordsRepository)
+        public ExerciseController(IExerciseRepository exerciseRepository, LanguageService language, IWordRepository wordRepository, UserManager<IdentityUser> userManager, IExercisesWordsRepository exercisesWordsRepository, IRevisionRepository revisionRepository)
         {
             _exerciseRepository = exerciseRepository;
             _wordRepository = wordRepository;
             _userManager = userManager;
             _exercisesWordsRepository = exercisesWordsRepository;
+            _revisionRepository = revisionRepository;
             _language = language;
         }
 
@@ -91,6 +93,8 @@ namespace PersianMemo.Controllers
         public IActionResult LearnWrite(LearnWriteViewModel model)
         {
             var previousExWordpair = _exercisesWordsRepository.GetPair(model.CurrentExerciseId, model.CurrentWordId);
+            var previousWord = _wordRepository.GetWord(model.CurrentWordId);
+
             var correctAnswer = _wordRepository.GetWord(model.CurrentWordId).PersianWord;
 
             if (model.Answer == correctAnswer)
@@ -104,8 +108,35 @@ namespace PersianMemo.Controllers
                     DidListen = previousExWordpair.DidListen,
                     WriteAnswer = Answer.AnsweredCorrectly
                 };
-
                 _exercisesWordsRepository.Update(pairChanges);
+
+                Word wordChanges = new Word
+                {
+                    Id = previousWord.Id,
+                    PersianWord = previousWord.PersianWord,
+                    Translation = previousWord.Translation,
+                    Difficulty = previousWord.Difficulty,
+                    PhotoPath = previousWord.PhotoPath,
+                    PronunciationPath = previousWord.PronunciationPath,
+                    EF = previousWord.EF,
+                    Status = WordStatus.InProgress,
+                    RevisionsCount = previousWord.RevisionsCount,
+                    NextRevision = DateTime.Today.AddDays(1),
+                    RevisionInterval = previousWord.RevisionInterval
+                };
+
+                _wordRepository.Update(wordChanges);
+
+                Revision revision = new Revision
+                {
+                    UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
+                    WordId = previousWord.Id,
+                    WriteAnswer = Answer.NotAnsweredYet,
+                    RevisionDate = wordChanges.NextRevision
+                };
+                _revisionRepository.Add(revision);
+
+
                 var restOfWords = _exercisesWordsRepository.GetAllPairsForExercise(model.CurrentExerciseId).Where(p => p.WriteAnswer != Answer.AnsweredCorrectly).OrderBy(p => p.WriteAnswer).ToList();
                 if (restOfWords.Count != 0)
                 {
@@ -127,8 +158,8 @@ namespace PersianMemo.Controllers
                     DidListen = previousExWordpair.DidListen,
                     WriteAnswer = Answer.AnsweredIncorrectly
                 };
-
                 _exercisesWordsRepository.Update(pairChanges);
+
                 var restOfWords = _exercisesWordsRepository.GetAllPairsForExercise(model.CurrentExerciseId).Where(p => p.WriteAnswer != Answer.AnsweredCorrectly).OrderBy(p => p.WriteAnswer).ToList();
                 if (restOfWords.Count != 0)
                 {

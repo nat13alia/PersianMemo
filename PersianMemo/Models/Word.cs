@@ -12,6 +12,8 @@ namespace PersianMemo.Models
         {
             Status = WordStatus.NotStarted;
             EF = 2.5;
+            RevisionsCount = 0;
+            RevisionInterval = 1;
         }
         public int Id { get; set; }
         [Required]
@@ -26,5 +28,8 @@ namespace PersianMemo.Models
 
         public WordStatus Status { get; set; }
         public double EF { get; set; }
+        public int RevisionsCount { get; set; }
+        public DateTime NextRevision { get; set; }
+        public int RevisionInterval { get; set; }
     }
 }

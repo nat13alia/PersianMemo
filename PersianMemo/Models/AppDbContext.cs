@@ -17,6 +17,7 @@ namespace PersianMemo.Models
         public DbSet<Word> Words { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<ExercisesWords> ExercisesWords { get; set; }
+        public DbSet<Revision> Revisions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -47,22 +47,26 @@
 
         $(document).ready(function () {
             var language = document.querySelector('#lang').value;
-            var details;
+            var details,
+                goToExercise;
             if (language === "PL") {
-                details = "Szczegóły"
+                details = "Szczegóły";
+                goToExercise = "Przejdź do ćwiczenia zaznaczonych słówek";
             } else {
                 details = "Details";
+                goToExercise = "Practise selected words"
+
             }
-            loadDataTable(details);
+            loadDataTable(details, goToExercise);
         });
 
 
-        function loadDataTable(details) {
+        function loadDataTable(details, goToExercise) {
             dataTable = $('#tblWords').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
                     {
-                        text: 'Go to Exercise',
+                        text: `${goToExercise}`,
                         attr: {
                             id: 'button'
                         }
