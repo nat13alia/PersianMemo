@@ -153,6 +153,9 @@
   <data name="choosePronunciationAudioFile" xml:space="preserve">
     <value>Choose a File with Pronunciation</value>
   </data>
+  <data name="completed" xml:space="preserve">
+    <value>Completed</value>
+  </data>
   <data name="confirmPassword" xml:space="preserve">
     <value>Confirm Password</value>
   </data>
@@ -188,6 +191,9 @@
   </data>
   <data name="homePage" xml:space="preserve">
     <value>Home Page</value>
+  </data>
+  <data name="inProgress" xml:space="preserve">
+    <value>In Progress</value>
   </data>
   <data name="insertANewWord" xml:space="preserve">
     <value>Insert a New Word</value>
@@ -225,6 +231,9 @@
   <data name="noneRightNow" xml:space="preserve">
     <value>None Right Now</value>
   </data>
+  <data name="notStarted" xml:space="preserve">
+    <value>Not Started</value>
+  </data>
   <data name="password" xml:space="preserve">
     <value>Password</value>
   </data>
@@ -242,6 +251,12 @@
   </data>
   <data name="rememberMe" xml:space="preserve">
     <value>Remember Me</value>
+  </data>
+  <data name="revision" xml:space="preserve">
+    <value>Revision</value>
+  </data>
+  <data name="revisions" xml:space="preserve">
+    <value>Revisions</value>
   </data>
   <data name="roleId" xml:space="preserve">
     <value>Role Id</value>

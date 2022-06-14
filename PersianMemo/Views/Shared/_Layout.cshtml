@@ -1,5 +1,10 @@
 ﻿@inject SignInManager<IdentityUser> signInManager
 @inject LanguageService language
+@inject IRevisionRepository _revisionRepository
+
+@{
+    var revisions = $"{language.Getkey("revisions")} ({_revisionRepository.GetWords(User.FindFirstValue(ClaimTypes.NameIdentifier), DateTime.Now.Date).ToList().Count()})";
+}
 <!DOCTYPE html>
 
 <html>
@@ -49,7 +54,7 @@
     <div class="container">
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <a asp-controller="home" asp-action="index" class="navbar-brand">
-                <img src="~/images/emblem-of-iran.png" height="40" width="40" />
+                <img src="~/images/emblem-of-iran-lion.png" height="40" width="40" />
             </a>
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
@@ -62,7 +67,13 @@
                     <li class="nav-item">
                         <a asp-controller="home" asp-action="create" class="nav-link">@language.Getkey("addANewWord")</a>
                     </li>
-                </ul>
+                    @if (signInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item">
+                            <a asp-controller="revision" asp-action="details" class="nav-link">@revisions</a>
+                        </li>
+                    }
+                    </ul>
             </div>
 
             <ul class="navbar-nav ms-auto">
@@ -96,11 +107,11 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                     <li>
                         <a asp-controller="Language" asp-action="ChangeLanguage" asp-route-culture="en-US"
-                           class="dropdown-item"><i class="flag-icon flag-icon-us"></i> @language.Getkey("english")</a>
+                           class="dropdown-item">@language.Getkey("english")</a>
                     </li>
                     <li>
                         <a asp-controller="Language" asp-action="ChangeLanguage" asp-route-culture="pl-PL"
-                           class="dropdown-item"><i class="flag-icon flag-icon-pl"></i> @language.Getkey("polish")</a>
+                           class="dropdown-item"><i class="flag-icon flag-icon-pl"></i> @language.Getkey("polish")<img src="~/images/pl-flag.jpg" height="40" width="40" /></a></a>
                     </li>
                 </ul>
             </div>

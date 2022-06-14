@@ -43,6 +43,7 @@ namespace PersianMemo.Models
 
         public Word Update(Word wordChanges)
         {
+            context.ChangeTracker.Clear();
             var word = context.Words.Attach(wordChanges);
             word.State = EntityState.Modified;
             context.SaveChanges();

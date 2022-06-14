@@ -1,8 +1,8 @@
-﻿@model ExerciseDetailsViewModel
+﻿@model RevisionDetailsViewModel
 @inject LanguageService language
 
 @{
-    ViewBag.Title = language.Getkey("exercise");
+    ViewBag.Title = language.Getkey("revision");
     var firstWordId = Model.WordsList.FirstOrDefault().Id;
 }
 
@@ -21,5 +21,5 @@
         </div>
     }
 </div>
-<a asp-controller="exercise" asp-action="learnlisten" asp-route-id="@Model.ExerciseId" asp-route-wordId="@firstWordId" class="btn btn-primary m-1"><i class="fa-solid fa-graduation-cap"></i></a>
+<a asp-controller="Revision" asp-action="Revise" asp-route-id="@firstWordId" class="btn btn-primary m-1"><i class="fa-solid fa-graduation-cap"></i></a>
 <a asp-controller="home" asp-action="index" class="btn btn-primary">@language.Getkey("back")</a>

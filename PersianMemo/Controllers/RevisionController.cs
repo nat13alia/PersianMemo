@@ -9,162 +9,197 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using PersianMemo.UtilityClasses;
 
 namespace PersianMemo.Controllers
 {
     public class RevisionController : Controller
     {
-        //    if(previousWord.RevisionsCount == 0)
-        //            {
-        //                Word wordChanges = new Word
-        //                {
-        //                    Id = previousWord.Id,
-        //                    PersianWord = previousWord.PersianWord,
-        //                    Translation = previousWord.Translation,
-        //                    Difficulty = previousWord.Difficulty,
-        //                    PhotoPath = previousWord.PhotoPath,
-        //                    PronunciationPath = previousWord.PronunciationPath,
-        //                    EF = previousWord.EF,
-        //                    Status = WordStatus.InProgress,
-        //                    RevisionsCount = previousWord.RevisionsCount,
-        //                    NextRevision = DateTime.Today.AddDays(1)
-        //                };
-        //}
-        //private readonly LanguageService _language;
+        private readonly LanguageService _language;
+        private readonly IWordRepository _wordRepository;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IRevisionRepository _revisionRepository;
 
-        //    private readonly IExerciseRepository _exerciseRepository;
-        //    private readonly IWordRepository _wordRepository;
-        //    private readonly UserManager<IdentityUser> _userManager;
-        //    private readonly IExercisesWordsRepository _exercisesWordsRepository;
+        public RevisionController(LanguageService language, IWordRepository wordRepository, UserManager<IdentityUser> userManager, IRevisionRepository revisionRepository)
+        {
+            _wordRepository = wordRepository;
+            _userManager = userManager;
+            _revisionRepository = revisionRepository;
+            _language = language;
+        }
 
-        //    public ExerciseController(IExerciseRepository exerciseRepository, LanguageService language, IWordRepository wordRepository, UserManager<IdentityUser> userManager, IExercisesWordsRepository exercisesWordsRepository)
-        //    {
-        //        _exerciseRepository = exerciseRepository;
-        //        _wordRepository = wordRepository;
-        //        _userManager = userManager;
-        //        _exercisesWordsRepository = exercisesWordsRepository;
-        //        _language = language;
-        //    }
+        [HttpGet]
+        public IActionResult Details()
+        {
+            var currentDate = DateTime.Now.Date;
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        //    [HttpGet]
-        //    public IActionResult Details(int id)
-        //    {
-        //        var model = new ExerciseDetailsViewModel
-        //        {
-        //            WordsList = _exercisesWordsRepository.GetWords(id),
-        //            ExerciseId = id            
-        //        };
+            var model = new RevisionDetailsViewModel
+            {
+                WordsList = _revisionRepository.GetWords(currentUserId, currentDate)
+            };
 
-        //        return View(model);
-        //    }
+            if(model.WordsList.Count() > 0)
+            {
+                return View(model);
+            } else
+            {
+                return View("NoRevisionsForToday");
+            }
+        }
 
-        //    [HttpGet]
-        //    public IActionResult LearnListen(int id, int wordId)
-        //    {
-        //        LearnListenViewModel model = new LearnListenViewModel
-        //        {
-        //            Exercise = _exerciseRepository.GetExercise(id),
-        //            Words = _exercisesWordsRepository.GetWords(id),
-        //            CurrentWordId = wordId,
-        //            CurrentExerciseId = id
-        //        };
-        //        return View(model);
-        //    }
+        [HttpGet]
+        public IActionResult Revise(int id)
+        {
+            var currentDate = DateTime.Now.Date;
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            ReviseViewModel model = new ReviseViewModel
+            {
+                Words = _revisionRepository.GetWords(currentUserId, currentDate),
+                CurrentWordId = _revisionRepository.GetWords(currentUserId, currentDate).FirstOrDefault().Id
+            };
+            return View(model);
+        }
 
-        //    [HttpPost]
-        //    public IActionResult LearnListen(LearnListenViewModel model)
-        //    {
-        //        var previousExWordpair = _exercisesWordsRepository.GetPair(model.CurrentExerciseId, model.CurrentWordId);
-        //        previousExWordpair.DidListen = true;
-        //        _exercisesWordsRepository.Update(previousExWordpair);
+        [HttpPost]
+        public IActionResult Revise(ReviseViewModel model)
+        {
+            var currentDate = DateTime.Now.Date;
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var previousWord = _wordRepository.GetWord(model.CurrentWordId);
+
+            var previousRevisionRow = _revisionRepository.GetRevisionRow(currentUserId, previousWord.Id, currentDate);
+
+            var correctAnswer = _wordRepository.GetWord(model.CurrentWordId).PersianWord;
+            Word wordChanges;
+
+            if (model.Answer == correctAnswer)
+            {
+                //Correct answer
+                if (previousWord.RevisionsCount == 0)
+                {
+                    wordChanges = new Word
+                    {
+                        Id = previousWord.Id,
+                        PersianWord = previousWord.PersianWord,
+                        Translation = previousWord.Translation,
+                        Difficulty = previousWord.Difficulty,
+                        PhotoPath = previousWord.PhotoPath,
+                        PronunciationPath = previousWord.PronunciationPath,
+                        EF = previousWord.EF,
+                        Status = WordStatus.InProgress,
+                        RevisionsCount = (previousWord.RevisionInterval + 1),
+                        NextRevision = DateTime.Today.AddDays(3),
+                        RevisionInterval = previousWord.RevisionInterval + 3
+                    };
+                    _wordRepository.Update(wordChanges);
+                } else 
+                {
+                    double newEF = FactorsCalculator.CalculateEF(previousWord.EF, 5);
+                    int newInterval = Convert.ToInt32(FactorsCalculator.CalculateInterval(previousWord.RevisionInterval, newEF));
+                    wordChanges = new Word
+                    {
+                        Id = previousWord.Id,
+                        PersianWord = previousWord.PersianWord,
+                        Translation = previousWord.Translation,
+                        Difficulty = previousWord.Difficulty,
+                        PhotoPath = previousWord.PhotoPath,
+                        PronunciationPath = previousWord.PronunciationPath,
+                        EF = newEF,
+                        Status = WordStatus.InProgress,
+                        RevisionsCount = previousWord.RevisionsCount,
+                        NextRevision = DateTime.Today.AddDays(newInterval),
+                        RevisionInterval = newInterval
+                    };
+                    _wordRepository.Update(wordChanges);
+                }
+
+                Revision revisionChanges = new Revision
+                {
+                    Id = previousRevisionRow.Id,
+                    UserId = previousRevisionRow.UserId,
+                    WordId = previousRevisionRow.WordId,
+                    WriteAnswer = Answer.AnsweredCorrectly,
+                    RevisionDate = wordChanges.NextRevision
+                };
+
+                _revisionRepository.Update(revisionChanges);
+
+                var restOfWords = _revisionRepository.GetAllRevisionsPerDay(currentDate).Where(p => p.WriteAnswer != Answer.AnsweredCorrectly).OrderBy(p => p.WriteAnswer).ToList();
+                if (restOfWords.Count != 0)
+                {
+                    return RedirectToAction("revise", "revision", new { id = restOfWords.FirstOrDefault().WordId });
+                }
+                else
+                {
+                    return RedirectToAction("index", "home");
+                }
+            }
+            else
+            {
+                //Incorrect answer
+                if (previousWord.RevisionsCount == 0)
+                {
+                    wordChanges = new Word
+                    {
+                        Id = previousWord.Id,
+                        PersianWord = previousWord.PersianWord,
+                        Translation = previousWord.Translation,
+                        Difficulty = previousWord.Difficulty,
+                        PhotoPath = previousWord.PhotoPath,
+                        PronunciationPath = previousWord.PronunciationPath,
+                        EF = previousWord.EF,
+                        Status = WordStatus.InProgress,
+                        RevisionsCount = previousWord.RevisionsCount,
+                        NextRevision = DateTime.Today.AddDays(3),
+                        RevisionInterval = previousWord.RevisionInterval + 3
+                    };
+                    _wordRepository.Update(wordChanges);
+                }
+                else
+                {
+                    double newEF = FactorsCalculator.CalculateEF(previousWord.EF, 0);
+                    int newInterval = Convert.ToInt32(FactorsCalculator.CalculateInterval(previousWord.RevisionInterval, newEF));
+                    wordChanges = new Word
+                    {
+                        Id = previousWord.Id,
+                        PersianWord = previousWord.PersianWord,
+                        Translation = previousWord.Translation,
+                        Difficulty = previousWord.Difficulty,
+                        PhotoPath = previousWord.PhotoPath,
+                        PronunciationPath = previousWord.PronunciationPath,
+                        EF = newEF,
+                        Status = WordStatus.InProgress,
+                        RevisionsCount = previousWord.RevisionsCount,
+                        NextRevision = DateTime.Today.AddDays(newInterval),
+                        RevisionInterval = newInterval
+                    };
+                    _wordRepository.Update(wordChanges);
+                }
+
+                Revision revisionChanges = new Revision
+                {
+                    Id = previousRevisionRow.Id,
+                    UserId = previousRevisionRow.UserId,
+                    WordId = previousRevisionRow.WordId,
+                    WriteAnswer = Answer.AnsweredIncorrectly,
+                    RevisionDate = wordChanges.NextRevision
+                };
+
+                _revisionRepository.Update(revisionChanges);
 
 
-        //        var restOfWords = _exercisesWordsRepository.GetAllPairsForExercise(model.CurrentExerciseId).Where(p => p.DidListen == false).ToList();
-        //        if(restOfWords.Count != 0)
-        //        {
-        //            return RedirectToAction("learnlisten", "exercise", new { id = model.CurrentExerciseId, wordId = restOfWords.FirstOrDefault().WordId });
-        //        } else
-        //        {
-        //            return RedirectToAction("learnwrite", "exercise", new { id = model.CurrentExerciseId, wordId = _exercisesWordsRepository.GetAllPairsForExercise(model.CurrentExerciseId).FirstOrDefault().WordId });
-        //        }
-        //    }
-
-        //    [HttpGet]
-        //    public IActionResult LearnWrite(int id, int wordId)
-        //    {
-        //        LearnWriteViewModel model = new LearnWriteViewModel
-        //        {
-        //            Exercise = _exerciseRepository.GetExercise(id),
-        //            Words = _exercisesWordsRepository.GetWords(id),
-        //            CurrentWordId = wordId,
-        //            CurrentExerciseId = id
-        //        };
-        //        return View(model);
-        //    }
-
-        //    [HttpPost]
-        //    public IActionResult LearnWrite(LearnWriteViewModel model)
-        //    {
-        //        var previousExWordpair = _exercisesWordsRepository.GetPair(model.CurrentExerciseId, model.CurrentWordId);
-        //        var previousWord = _wordRepository.GetWord(model.CurrentWordId);
-
-        //        var correctAnswer = _wordRepository.GetWord(model.CurrentWordId).PersianWord;
-
-        //        if (model.Answer == correctAnswer)
-        //        {
-        //            //Correct answer
-        //            ExercisesWords pairChanges = new ExercisesWords
-        //            {
-        //                Id = previousExWordpair.Id,
-        //                ExerciseId = previousExWordpair.ExerciseId,
-        //                WordId = previousExWordpair.WordId,
-        //                DidListen = previousExWordpair.DidListen,
-        //                WriteAnswer = Answer.AnsweredCorrectly
-        //            };
-        //            _exercisesWordsRepository.Update(pairChanges);
-
-        //            Word wordChanges = new Word
-        //            {
-        //                Id = previousExWordpair.Id,
-        //                ExerciseId = previousExWordpair.ExerciseId,
-        //                WordId = previousExWordpair.WordId,
-        //                DidListen = previousExWordpair.DidListen,
-        //                WriteAnswer = Answer.AnsweredCorrectly
-        //            };
-
-        //            var restOfWords = _exercisesWordsRepository.GetAllPairsForExercise(model.CurrentExerciseId).Where(p => p.WriteAnswer != Answer.AnsweredCorrectly).OrderBy(p => p.WriteAnswer).ToList();
-        //            if (restOfWords.Count != 0)
-        //            {
-        //                return RedirectToAction("learnwrite", "exercise", new { id = model.CurrentExerciseId, wordId = restOfWords.FirstOrDefault().WordId });
-        //            }
-        //            else
-        //            {
-        //                return RedirectToAction("index", "home");
-        //            }
-        //        }
-        //        else
-        //        {
-        //            //Incorrect answer
-        //            ExercisesWords pairChanges = new ExercisesWords
-        //            {
-        //                Id = previousExWordpair.Id,
-        //                ExerciseId = previousExWordpair.ExerciseId,
-        //                WordId = previousExWordpair.WordId,
-        //                DidListen = previousExWordpair.DidListen,
-        //                WriteAnswer = Answer.AnsweredIncorrectly
-        //            };
-
-        //            _exercisesWordsRepository.Update(pairChanges);
-        //            var restOfWords = _exercisesWordsRepository.GetAllPairsForExercise(model.CurrentExerciseId).Where(p => p.WriteAnswer != Answer.AnsweredCorrectly).OrderBy(p => p.WriteAnswer).ToList();
-        //            if (restOfWords.Count != 0)
-        //            {
-        //                return RedirectToAction("learnwrite", "exercise", new { id = model.CurrentExerciseId, wordId = restOfWords.FirstOrDefault().WordId });
-        //            }
-        //            else
-        //            {
-        //                return RedirectToAction("index", "home");
-        //            }
-        //        }
-        //    }
+                var restOfWords = _revisionRepository.GetAllRevisionsPerDay(currentDate).Where(p => p.WriteAnswer != Answer.AnsweredCorrectly).OrderBy(p => p.WriteAnswer).ToList();
+                if (restOfWords.Count != 0)
+                {
+                    return RedirectToAction("revise", "revision", new { id = restOfWords.FirstOrDefault().WordId });
+                }
+                else
+                {
+                    return RedirectToAction("index", "home");
+                }
+            }
+        }
     }
 }
+

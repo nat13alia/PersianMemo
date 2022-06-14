@@ -102,15 +102,15 @@
 
                             if (data == 1) {
                                 return `
-                        <a>*</a>
+                        <a>@language.Getkey("notStarted")</a>
                         `
                             } else if (data == 2) {
                                 return `
-                        <a>**</a>
+                        <a>@language.Getkey("inProgress")</a>
                         `
                             } else {
                                 return `
-                        <a>***</a>
+                        <a>@language.Getkey("completed")</a>
                         `
                             }
                         }, "autoWidth": "true"
