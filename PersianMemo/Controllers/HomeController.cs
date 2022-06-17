@@ -22,7 +22,6 @@ namespace PersianMemo.Controllers
         private readonly ILogger<HomeController> _logger;
 
         private readonly LanguageService _language;
-
         private readonly IWordRepository _wordRepository;
         private readonly IExerciseRepository _exerciseRepository;
         private readonly UserManager<IdentityUser> _userManager;
@@ -81,7 +80,8 @@ namespace PersianMemo.Controllers
         [AllowAnonymous]
         public IActionResult GetAll()
         {
-            var data = _wordRepository.GetAllWords();
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var data = _wordRepository.GetAllWords(currentUserId);
             return Json(new { data = data });
         }
 
@@ -89,6 +89,7 @@ namespace PersianMemo.Controllers
         [AllowAnonymous]
         public ViewResult Details(int? id)
         {
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             Word word = _wordRepository.GetWord(id.Value);
             if(word == null)
             {
@@ -98,7 +99,7 @@ namespace PersianMemo.Controllers
             }
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
             {
-                Word = _wordRepository.GetWord(id ?? _wordRepository.GetAllWords().FirstOrDefault().Id),
+                Word = _wordRepository.GetWord(id ?? _wordRepository.GetAllWords(currentUserId).FirstOrDefault().Id),
                 PageTitle = _language.Getkey("wordDetails")
 
             };

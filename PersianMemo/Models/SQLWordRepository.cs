@@ -31,9 +31,9 @@ namespace PersianMemo.Models
             return word;
         }
 
-        public IEnumerable<Word> GetAllWords()
+        public IEnumerable<Word> GetAllWords(string userId)
         {
-            return context.Words;
+            return context.Words.Where(w => w.UserId == userId);
         }
 
         public Word GetWord(int Id)

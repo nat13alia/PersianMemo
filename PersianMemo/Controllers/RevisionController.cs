@@ -71,10 +71,11 @@ namespace PersianMemo.Controllers
             var previousRevisionRow = _revisionRepository.GetRevisionRow(currentUserId, previousWord.Id, currentDate);
 
             var correctAnswer = _wordRepository.GetWord(model.CurrentWordId).PersianWord;
-            Word wordChanges;
+            
 
             if (model.Answer == correctAnswer)
             {
+                Word wordChanges;
                 //Correct answer
                 if (previousWord.RevisionsCount == 0)
                 {
@@ -95,8 +96,18 @@ namespace PersianMemo.Controllers
                     _wordRepository.Update(wordChanges);
                 } else 
                 {
-                    double newEF = FactorsCalculator.CalculateEF(previousWord.EF, 5);
-                    int newInterval = Convert.ToInt32(FactorsCalculator.CalculateInterval(previousWord.RevisionInterval, newEF));
+                    double newEF;
+                    int newInterval;
+                    if (previousRevisionRow.WriteAnswer == Answer.AnsweredIncorrectly)
+                    {
+                        newEF = FactorsCalculator.CalculateEF(previousWord.EF, 0);
+                    }
+                    else
+                    {
+                        newEF = FactorsCalculator.CalculateEF(previousWord.EF, 5);
+                    }
+
+                    newInterval = Convert.ToInt32(FactorsCalculator.CalculateInterval(previousWord.RevisionInterval, newEF));
                     wordChanges = new Word
                     {
                         Id = previousWord.Id,
@@ -132,58 +143,32 @@ namespace PersianMemo.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("index", "home");
+                    var allUserRevisions = _revisionRepository.GetAllRevisionsPerUser(currentUserId);
+                    foreach(Revision revision in allUserRevisions)
+                    {
+                        Revision revChanges = new Revision
+                        {
+                            Id = previousRevisionRow.Id,
+                            UserId = previousRevisionRow.UserId,
+                            WordId = previousRevisionRow.WordId,
+                            WriteAnswer = Answer.NotAnsweredYet,
+                            RevisionDate = wordChanges.NextRevision
+                        };
+                        _revisionRepository.Update(revisionChanges);
+                    }
+
+                    return View("CompletedAllRevisions");
                 }
             }
             else
             {
-                //Incorrect answer
-                if (previousWord.RevisionsCount == 0)
-                {
-                    wordChanges = new Word
-                    {
-                        Id = previousWord.Id,
-                        PersianWord = previousWord.PersianWord,
-                        Translation = previousWord.Translation,
-                        Difficulty = previousWord.Difficulty,
-                        PhotoPath = previousWord.PhotoPath,
-                        PronunciationPath = previousWord.PronunciationPath,
-                        EF = previousWord.EF,
-                        Status = WordStatus.InProgress,
-                        RevisionsCount = previousWord.RevisionsCount,
-                        NextRevision = DateTime.Today.AddDays(3),
-                        RevisionInterval = previousWord.RevisionInterval + 3
-                    };
-                    _wordRepository.Update(wordChanges);
-                }
-                else
-                {
-                    double newEF = FactorsCalculator.CalculateEF(previousWord.EF, 0);
-                    int newInterval = Convert.ToInt32(FactorsCalculator.CalculateInterval(previousWord.RevisionInterval, newEF));
-                    wordChanges = new Word
-                    {
-                        Id = previousWord.Id,
-                        PersianWord = previousWord.PersianWord,
-                        Translation = previousWord.Translation,
-                        Difficulty = previousWord.Difficulty,
-                        PhotoPath = previousWord.PhotoPath,
-                        PronunciationPath = previousWord.PronunciationPath,
-                        EF = newEF,
-                        Status = WordStatus.InProgress,
-                        RevisionsCount = previousWord.RevisionsCount,
-                        NextRevision = DateTime.Today.AddDays(newInterval),
-                        RevisionInterval = newInterval
-                    };
-                    _wordRepository.Update(wordChanges);
-                }
-
                 Revision revisionChanges = new Revision
                 {
                     Id = previousRevisionRow.Id,
                     UserId = previousRevisionRow.UserId,
                     WordId = previousRevisionRow.WordId,
                     WriteAnswer = Answer.AnsweredIncorrectly,
-                    RevisionDate = wordChanges.NextRevision
+                    RevisionDate = previousRevisionRow.RevisionDate
                 };
 
                 _revisionRepository.Update(revisionChanges);

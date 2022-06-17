@@ -5,32 +5,28 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using Xunit;
+using Xunit.Sdk;
 
 namespace PersianMemo.Models
 {
-    public class Word
+    public class UsersWords
     {
-        public Word()
+        public UsersWords()
         {
             Status = WordStatus.NotStarted;
             EF = 2.5;
             RevisionsCount = 0;
             RevisionInterval = 1;
         }
+        [Key]
         public int Id { get; set; }
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public IdentityUser User { get; set; }
-        [Required]
-        [MaxLength(50, ErrorMessage = "Entered value cannot exceed 50 characters")]
-        public string PersianWord { get; set; }
-        [MaxLength(50, ErrorMessage = "Entered value cannot exceed 50 characters")]
-        public string Translation { get; set; }
-        [Required(ErrorMessage = "Please select the difficulty")]
-        public Difficulty? Difficulty { get; set; }
-        public string PhotoPath { get; set; }
-        public string PronunciationPath { get; set; }
-
+        public int WordId { get; set; }
+        [ForeignKey("WordId")]
+        public Word Word { get; set; }
         public WordStatus Status { get; set; }
         public double EF { get; set; }
         public int RevisionsCount { get; set; }

@@ -41,8 +41,16 @@ namespace PersianMemo.Models
 
         public IEnumerable<Revision> GetAllRevisionsPerDay(DateTime date)
         {
-            return context.Revisions;
+            return context.Revisions.Where(r => r.RevisionDate <= date);
         }
+
+        public IEnumerable<Revision> GetAllRevisionsPerUser(string userId)
+        {
+            return context.Revisions.Where(r => r.UserId == userId);
+
+        }
+
+
 
         public Revision GetRevisionRow(string userID, int wordId, DateTime date)
         {

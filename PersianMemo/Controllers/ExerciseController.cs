@@ -113,6 +113,7 @@ namespace PersianMemo.Controllers
                 Word wordChanges = new Word
                 {
                     Id = previousWord.Id,
+                    UserId = previousWord.UserId,
                     PersianWord = previousWord.PersianWord,
                     Translation = previousWord.Translation,
                     Difficulty = previousWord.Difficulty,
