@@ -66,5 +66,16 @@ namespace PersianMemo.Models
             context.SaveChanges();
             return revisionChanges;
         }
+
+        public Revision Delete(int id)
+        {
+            Revision revision = context.Revisions.Find(id);
+            if (revision != null)
+            {
+                context.Revisions.Remove(revision);
+                context.SaveChanges();
+            }
+            return revision;
+        }
     }
 }

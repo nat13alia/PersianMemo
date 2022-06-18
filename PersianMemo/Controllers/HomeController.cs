@@ -122,6 +122,7 @@ namespace PersianMemo.Controllers
 
                 Word newWord = new Word
                 {
+                    UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
                     PersianWord = model.PersianWord,
                     Translation = model.Translation,
                     Difficulty = model.Difficulty,

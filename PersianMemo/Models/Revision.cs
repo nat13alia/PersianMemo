@@ -21,5 +21,6 @@ namespace PersianMemo.Models
         public Word Word { get; set; }
         public Answer WriteAnswer { get; set; }
         public DateTime RevisionDate { get; set; }
+        public DateTime ModifiedDate { get; set; }
     }
 }

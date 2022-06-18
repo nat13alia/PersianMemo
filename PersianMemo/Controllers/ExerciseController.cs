@@ -133,7 +133,8 @@ namespace PersianMemo.Controllers
                     UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
                     WordId = previousWord.Id,
                     WriteAnswer = Answer.NotAnsweredYet,
-                    RevisionDate = wordChanges.NextRevision
+                    RevisionDate = wordChanges.NextRevision,
+                    ModifiedDate = DateTime.Now
                 };
                 _revisionRepository.Add(revision);
 

@@ -13,5 +13,7 @@ namespace PersianMemo.Models
         public IEnumerable<Revision> GetAllRevisionsPerDay(DateTime date);
         public Revision GetRevisionRow(string userID, int wordId, DateTime date);
         public Revision Update(Revision revisionChanges);
+        Revision Delete(int id);
+
     }
 }
