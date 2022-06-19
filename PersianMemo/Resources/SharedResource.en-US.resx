@@ -135,6 +135,9 @@
   <data name="advanced" xml:space="preserve">
     <value>Advanced</value>
   </data>
+  <data name="alreadyHaveAnAccount" xml:space="preserve">
+    <value>Already have an account</value>
+  </data>
   <data name="back" xml:space="preserve">
     <value>Back</value>
   </data>
@@ -158,6 +161,24 @@
   </data>
   <data name="confirmPassword" xml:space="preserve">
     <value>Confirm Password</value>
+  </data>
+  <data name="content11" xml:space="preserve">
+    <value>Learning</value>
+  </data>
+  <data name="content12" xml:space="preserve">
+    <value>Persian</value>
+  </data>
+  <data name="content13" xml:space="preserve">
+    <value>has never been</value>
+  </data>
+  <data name="content14" xml:space="preserve">
+    <value>easier</value>
+  </data>
+  <data name="content2" xml:space="preserve">
+    <value>Get started today for free!</value>
+  </data>
+  <data name="content3" xml:space="preserve">
+    <value>It's free and only takes a minute</value>
   </data>
   <data name="createNewRole" xml:space="preserve">
     <value>Create New Role</value>
@@ -189,6 +210,9 @@
   <data name="exercise" xml:space="preserve">
     <value>Exercise</value>
   </data>
+  <data name="goToExercise" xml:space="preserve">
+    <value>Practise selected words</value>
+  </data>
   <data name="homePage" xml:space="preserve">
     <value>Home Page</value>
   </data>
@@ -218,6 +242,9 @@
   </data>
   <data name="login" xml:space="preserve">
     <value>Login</value>
+  </data>
+  <data name="loginHere" xml:space="preserve">
+    <value>Login Here</value>
   </data>
   <data name="logout" xml:space="preserve">
     <value>Logout</value>
@@ -258,6 +285,9 @@
   <data name="revisions" xml:space="preserve">
     <value>Revisions</value>
   </data>
+  <data name="revisionsCalendar" xml:space="preserve">
+    <value>Revisions Calendar</value>
+  </data>
   <data name="roleId" xml:space="preserve">
     <value>Role Id</value>
   </data>
@@ -269,6 +299,9 @@
   </data>
   <data name="selectDifficultyLevel" xml:space="preserve">
     <value>Select Difficulty Level</value>
+  </data>
+  <data name="signUp" xml:space="preserve">
+    <value>Sign Up</value>
   </data>
   <data name="thereAreNoRolesToDisplay" xml:space="preserve">
     <value>Currently there are no roles to display</value>

@@ -6,36 +6,52 @@
     ViewData["Title"] = language.Getkey("homePage");
 }
 
-<br />
-<div class="row">
+<input type="hidden" id="lang" value="@language.Getkey("lang")">
+@if (signInManager.IsSignedIn(User))
+{
+    <div class="row">
     <div class="col-6">
         <h2 class="text-primary">@language.Getkey("wordsList")</h2>
     </div>
-</div>
+    </div>
 
-<input type="hidden" id="lang" value="@language.Getkey("lang")">
-
-<div class="container">
-    <div class="row">
-        <div>
-            <div class="p-4 border rounded">
-                <table id="tblWords" class="table table-striped table-bordered" style="width:100%">
-                    <thead class="thead-dark">
-                        <tr class="table-info">
-                            <th>@language.Getkey("word")</th>
-                            <th>@language.Getkey("translation")</th>
-                            <th>@language.Getkey("difficulty")</th>
-                            <th>@language.Getkey("pronunciation")</th>
-                            <th>Status</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                </table>
+    <div class="tbl-container">
+        <div class="row">
+            <div>
+                <div class="p-4 border rounded">
+                    <table id="tblWords" class="table table-striped table-bordered" style="width:100%">
+                        <thead class="thead-dark">
+                            <tr class="table-info">
+                                <th>@language.Getkey("word")</th>
+                                <th>@language.Getkey("translation")</th>
+                                <th>@language.Getkey("difficulty")</th>
+                                <th>@language.Getkey("pronunciation")</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
+} else
+{
+    <header class="hero">
+        <div class="content">
+            <h1>@language.Getkey("content11") <span class="sand-colour">@language.Getkey("content12")</span> @language.Getkey("content13") <span class="sand-colour">@language.Getkey("content14")</span> </h1>
+            <p>
+                فارسی را با ما در کمترین زمان یاد بگیرید
+            </p>
+            <p class="sand-colour">@language.Getkey("content2")</p>
+            <div class="btn-content-container">
+                <a asp-controller="account" asp-action="register" class="btn btn-content">@language.Getkey("register")</a>
+                <a asp-controller="account" asp-action="login" class="btn btn-content">@language.Getkey("login")</a>
+            </div>
+        </div>
+    </header>
+    
+}
 
 @section Scripts{
     <script>
