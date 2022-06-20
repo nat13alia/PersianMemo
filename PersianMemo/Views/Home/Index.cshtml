@@ -9,14 +9,16 @@
 <input type="hidden" id="lang" value="@language.Getkey("lang")">
 @if (signInManager.IsSignedIn(User))
 {
-    <div class="row">
-    <div class="col-6">
-        <h2 class="text-primary">@language.Getkey("wordsList")</h2>
-    </div>
-    </div>
-
-    <div class="tbl-container">
-        <div class="row">
+    <div class="wordsList-body">
+        <div class="tbl-container">
+            <div class="tbl-header-flex" >
+                <div class="item1">
+                    <h1 class="h2-text">@language.Getkey("wordsList")</h1>
+                    </div>
+                <div class="item2">
+                    <button id="button" class="dt-button" tabindex="0" aria-controls="tblWords">@language.Getkey("goToExercise")</button>
+                </div>
+            </div>
             <div>
                 <div class="p-4 border rounded">
                     <table id="tblWords" class="table table-striped table-bordered" style="width:100%">
@@ -37,7 +39,7 @@
     </div>
 } else
 {
-    <header class="hero">
+    <header class="main">
         <div class="content">
             <h1>@language.Getkey("content11") <span class="sand-colour">@language.Getkey("content12")</span> @language.Getkey("content13") <span class="sand-colour">@language.Getkey("content14")</span> </h1>
             <p>
@@ -50,8 +52,8 @@
             </div>
         </div>
     </header>
-    
 }
+
 
 @section Scripts{
     <script>
@@ -64,30 +66,28 @@
         $(document).ready(function () {
             var language = document.querySelector('#lang').value;
             var details,
-                goToExercise;
+                previous,
+                next,
+                search;
             if (language === "PL") {
                 details = "Szczegóły";
-                goToExercise = "Przejdź do ćwiczenia zaznaczonych słówek";
+                previous = "Poprzednia";
+                next = "Następna";
+                search = `"Szukaj:"`
             } else {
                 details = "Details";
-                goToExercise = "Practise selected words"
+                previous = "Previous";
+                next = "Next";
+                search = "Search"
 
             }
-            loadDataTable(details, goToExercise);
+            loadDataTable(language, details, previous, next, search);
         });
 
 
-        function loadDataTable(details, goToExercise) {
+        function loadDataTable(language, details, previous, next, search) {
             dataTable = $('#tblWords').DataTable({
                 dom: 'Bfrtip',
-                buttons: [
-                    {
-                        text: `${goToExercise}`,
-                        attr: {
-                            id: 'button'
-                        }
-                    }
-                ],
                 "ajax": {
                     "url": "/Home/GetAll"
                 },
@@ -98,8 +98,6 @@
                     {
                         "data": "pronunciationPath",
                         "render": function (data) {
-
-
                             if (data != null) {
                                 return `
                         <a onclick="playAudio('/audio/${data}')"><i class="fa-solid fa-play"></i></a>
@@ -135,12 +133,23 @@
                         "data": "id",
                         "render": function (data) {
                             return `
-                    <a href="home/details/${data}" class="btn btn-primary m-1">${details}</a>
-                    <a href="home/delete/${data}" class="btn btn-danger m-1"><i class="fa-solid fa-trash"></i></a>
+                    <a href="home/details/${data}" class="btn btn-content m-1">${details}</a>
+                    <a href="home/delete/${data}" class="btn btn-content m-1"><i class="fa-solid fa-trash"></i></a>
                     `                }
                     }
                 ]
             });
+
+            
+            var nextPage = document.querySelector('.paginate_button.next');
+            console.log(nextPage);
+            var previousPage = document.querySelector('.paginate_button.previous');
+            console.log(previousPage);
+            if (language === "PL") {
+                $('label').closest("#tblWords_filter").val(search);
+                nextPage.innerHTML = next;
+                previousPage.innerHTML  = previous;
+            }
 
             $('#tblWords tbody').on('dblclick', 'tr', function () {
                 $(this).toggleClass('selected');

@@ -48,33 +48,39 @@ namespace PersianMemo.Controllers
         [HttpPost]
         public IActionResult Index(int[] ids)
         {
-            List<Word> words = new List<Word>();
+           if(ids.Length == 0)
+           {
+                return View();
+           } else
+           {
+                List<Word> words = new List<Word>();
 
-            foreach (int id in ids)
-            {
-                var word = _wordRepository.GetWord(id);
-                words.Add(word);
-            }
-
-            var exercise = new Exercise
-            {
-                UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)
-            };
-
-            _exerciseRepository.Add(exercise);
-
-            foreach (Word w in words)
-            {
-                var exerciseWordPair = new ExercisesWords
+                foreach (int id in ids)
                 {
-                    ExerciseId = exercise.Id,
-                    WordId = w.Id,
-                    DidListen = false,
-                    WriteAnswer = 0
+                    var word = _wordRepository.GetWord(id);
+                    words.Add(word);
+                }
+
+                var exercise = new Exercise
+                {
+                    UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)
                 };
-                _exercisesWordsRepository.Add(exerciseWordPair);
+
+                _exerciseRepository.Add(exercise);
+
+                foreach (Word w in words)
+                {
+                    var exerciseWordPair = new ExercisesWords
+                    {
+                        ExerciseId = exercise.Id,
+                        WordId = w.Id,
+                        DidListen = false,
+                        WriteAnswer = 0
+                    };
+                    _exercisesWordsRepository.Add(exerciseWordPair);
+                }
+                return Json(new { data = exercise.Id });
             }
-            return Json(new { data = exercise.Id });
         }
 
         [AllowAnonymous]

@@ -33,15 +33,6 @@ html {
     overflow: hidden;
 }
 
-/*button.nav-link {
-    cursor: pointer;
-    display: inline-block;
-    padding: 10px 10px;
-    color: #292929;
-    border: 1px solid #292929;
-    border-radius: 5px;
-}*/
-
 .navbar-light .navbar-nav .nav-link:hover, button.nav-link:hover {
     cursor: pointer;
     display: inline-block;
@@ -88,8 +79,8 @@ ul.navbar-nav {
     margin-left: 30px;
 }
 
-/* HOME INDEX */
-.hero {
+/* HOME LANDING PAGE */
+.main {
     background: url('../images/bg-photos/home-bg.jpg') no-repeat center center;
     background-size: cover;
     height: calc(100vh - 140px);
@@ -97,7 +88,7 @@ ul.navbar-nav {
     position: relative;
 }
 
-.hero .content {
+.main .content {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -107,13 +98,13 @@ ul.navbar-nav {
     padding: 0 20px;
 }
 
-.hero .content h1 {
+.main .content h1 {
     font-size: 55px;
     max-width: 600px;
     margin: 20px 0 30px;
 }
 
-.hero .content p {
+.main .content p {
     color: #fff;
     font-size: 23px;
 }
@@ -141,18 +132,11 @@ ul.navbar-nav {
     justify-content: space-between;
 }
 
-button.dropdownmenu {
-
-}
-.hero * {
+.main * {
     z-index: 10;
 }
 
-.tbl-container {
-    z-index: 11;
-}
-
-.hero::before {
+.main::before {
     content: '';
     position: absolute;
     top: 0;
@@ -169,6 +153,69 @@ button.dropdownmenu {
 
 #tblWords th, #tblWords td {
     text-align: center;
+}
+
+/* HOME WORDS LIST */
+.wordsList-body {
+    box-sizing: border-box;
+    background-size: cover;
+    background: #333;
+}
+
+h1.h2-text {
+    margin: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+.tbl-container {
+    background: #fff;
+    margin: 0px auto;
+    min-width: 600px;
+    max-width: 90vw;
+}
+
+.item1 {
+    flex-grow: 3;
+    flex-basis: 0;
+}
+
+.item2 {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+.tbl-header-flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    background: #333;
+}
+
+#tblWords th {
+    background-color: #f9ee73;
+}
+
+button.dt-button {
+    background: #f9ee73;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 20px;
+    color: #292929;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+input[type="search"] {
+    margin: 0px auto 10px;
+}
+
+}
+
+#tblWords tbody tr.selected > * {
+    box-shadow: inset 0 0 0 9999px rgb(249, 238, 115, 0.9);
+    color: #292929;
 }
 
 /* Login and Register Pages */
