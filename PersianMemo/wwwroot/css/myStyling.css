@@ -8,7 +8,7 @@ html {
 
 .navbar {
     background-color: #f9ee73;
-    height: 80px;
+    height: 60px;
 }
 
 .navbar-light .navbar-nav .nav-link, button.nav-link {
@@ -83,7 +83,7 @@ ul.navbar-nav {
 .main {
     background: url('../images/bg-photos/home-bg.jpg') no-repeat center center;
     background-size: cover;
-    height: calc(100vh - 140px);
+    height: calc(100vh - 120px);
     color: #fff;
     position: relative;
 }
@@ -211,11 +211,9 @@ input[type="search"] {
     margin: 0px auto 10px;
 }
 
-}
-
-#tblWords tbody tr.selected > * {
-    box-shadow: inset 0 0 0 9999px rgb(249, 238, 115, 0.9);
-    color: #292929;
+#tblWords tbody tr.selected {
+    color: white;
+    background-color: #eeeeee;
 }
 
 /* Login and Register Pages */
@@ -224,7 +222,7 @@ input[type="search"] {
     margin: 0;
     padding: 0;
     background: url('../images/bg-photos/login-bg.jpg') no-repeat center center;
-    height: calc(100vh - 140px);
+    height: calc(100vh - 120px);
     background-size: cover;
     display: flex;
     align-items: center;
@@ -235,7 +233,7 @@ input[type="search"] {
     margin: 0;
     padding: 0;
     background: url('../images/bg-photos/register-bg.jpg') no-repeat center center;
-    height: calc(100vh - 140px);
+    height: calc(100vh - 120px);
     background-size: cover;
     display: flex;
     align-items: center;
@@ -320,7 +318,182 @@ input[type="search"] {
     text-decoration: none;
 }
 
+/* Create View */
+#add-word-form.add-word-body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background: url('../images/bg-photos/add-word-bg.jpg') no-repeat center center;
+    height: calc(100vh - 120px);
+    background-size: cover;
+    display: flex;
+    align-items: center;
+}
 
+.add-word-form {
+    margin: auto auto;
+    min-width: 1000px;
+    max-width: 1200px;
+    background: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+
+.add-word-form .form-wrap {
+    background: #fff;
+    padding: 15px 25px;
+}
+
+.add-word-form .form-wrap h1, .add-word-form .form-wrap h1 {
+    text-align: center;
+}
+
+.add-word-form .form-wrap .form-group {
+    margin-top: 15px;
+}
+
+.add-word-form .form-wrap .form-group label {
+    display: block;
+    color: #000;
+}
+
+
+.add-word-form .form-wrap .form-group input {
+    border: #ddd 1px solid;
+    border-radius: 5px;
+}
+
+.add-word-form .form-wrap button {
+    background: #292929;
+    width: 100%;
+    padding: 10px;
+    margin: 20px 0;
+    color: #f9ee73;
+    cursor: pointer;
+}
+
+.add-word-form button:hover {
+    background: #f9ee73;
+    color: #292929;
+}
+
+/* Create View */
+#edit-word-form.edit-word-body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background: url('../images/bg-photos/edit-word-bg.jpg') no-repeat center center;
+    height: calc(100vh - 120px);
+    background-size: cover;
+    display: flex;
+    align-items: center;
+}
+
+.edit-word-form {
+    margin: auto;
+    max-width: 800px;
+    background: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.edit-word-form .form-wrap {
+    background: #fff;
+    padding: 15px 25px;
+}
+
+.edit-word-form .form-wrap h1, .add-word-form .form-wrap h1 {
+    text-align: center;
+}
+
+.edit-word-form .form-wrap .form-group {
+    margin-top: 15px;
+}
+
+.edit-word-form .form-wrap .form-group label {
+    display: block;
+    color: #000;
+}
+
+.edit-word-form .form-wrap .form-group input {
+    border: #ddd 1px solid;
+    border-radius: 5px;
+}
+
+.edit-word-form .form-group button, .edit-word-form .form-group a {
+    background: #292929;
+    padding: 10px;
+    width: 49%;
+    margin: 20px 0;
+    color: #f9ee73;
+    cursor: pointer;
+}
+
+.edit-word-form .form-group button:hover, .edit-word-form .form-group a:hover {
+    background: #f9ee73;
+    color: #292929;
+}
+
+/* Details View */
+
+#details-card.details-card-body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background: url('../images/bg-photos/edit-word-bg.jpg') no-repeat center center;
+    height: calc(100vh - 120px);
+    background-size: cover;
+    display: flex;
+    align-items: center;
+}
+
+.details-card-holder {
+    margin: auto;
+    min-width: 600px;
+    background: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+
+#details-card-footer a {
+    background: #292929;
+    padding: 5px;
+    width: 22%;
+    margin: 10px 0;
+    color: #f9ee73;
+    cursor: pointer;
+}
+
+#details-card-footer a:hover {
+    background: #f9ee73;
+    color: #292929;
+}
+
+.card-body #photo {
+    max-height: 200px;
+}
+
+/* EXERCISE & REVISION DETAILS */
+.card-group {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    margin: 20px;
+}
+
+.details-btn-holder {
+    margin: auto;
+    min-width: 600px;
+    display: flex;
+    justify-content: center;
+}
+
+.details-btn-holder a {
+    width: 20%;
+}
 
 
 

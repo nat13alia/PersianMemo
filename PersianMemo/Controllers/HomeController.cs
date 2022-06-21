@@ -196,7 +196,7 @@ namespace PersianMemo.Controllers
                     word.PronunciationPath = ProcessUploadedAudioFile(model);
                 }
                 Word updatedWord = _wordRepository.Update(word);
-                return RedirectToAction("index");
+                return RedirectToAction("details", new { id = model.Id });
             }
             return View(model);
         }

@@ -3,62 +3,69 @@
 
 @{ ViewBag.Title = language.Getkey("addANewWord"); }
 
-<form enctype="multipart/form-data" method="post" class="mt-3">
-    <div class="form-group row">
-        <label asp-for="PersianWord" class="col-sm-2 col-form-label">@language.Getkey("newWord") </label>
-        <div class="col-sm-10">
-            <input asp-for="PersianWord" class="form-control" placeholder="@language.Getkey("insertANewWord")" />
-            <span asp-validation-for="PersianWord" class="text-danger"></span>
+<div id="add-word-form" class="add-word-body">
+    <div class="add-word-form">
+        <div class="form-wrap">
+            <form enctype="multipart/form-data" method="post" class="mt-3">
+                <div class="form-group row">
+                    <label asp-for="PersianWord" class="col-sm-2 col-form-label">@language.Getkey("newWord") </label>
+                    <div class="col-sm-10">
+                        <input asp-for="PersianWord" class="form-control" placeholder="@language.Getkey("insertANewWord")" />
+                        <span asp-validation-for="PersianWord" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row mt-1">
+                    <label asp-for="Translation" class="col-sm-2 col-form-label">@language.Getkey("translation") </label>
+                    <div class="col-sm-10">
+                        <input asp-for="Translation" class="form-control" placeholder="@language.Getkey("insertTranslation")" />
+                        <span asp-validation-for="Translation" class="text-danger"></span>
+
+                    </div>
+                </div>
+                <div class="form-group row mt-1">
+                    <label asp-for="Difficulty" class="col-sm-2 col-form-label">@language.Getkey("difficulty") </label>
+                    <div class="col-sm-10">
+                        <select asp-for="Difficulty" class="form-select mr-sm-12">
+                            <option value="" selected>@language.Getkey("selectDifficultyLevel")</option>
+                            <option value="@Difficulty.Beginner">@language.Getkey(Enum.GetNames(typeof(Difficulty))[0].ToLower())</option>
+                            <option value="@Difficulty.Basic">@language.Getkey(Enum.GetNames(typeof(Difficulty))[1].ToLower())</option>
+                            <option value="@Difficulty.Intermediate">@language.Getkey(Enum.GetNames(typeof(Difficulty))[2].ToLower())</option>
+                            <option value="@Difficulty.Advanced">@language.Getkey(Enum.GetNames(typeof(Difficulty))[3].ToLower())</option>
+                        </select>
+                        <span asp-validation-for="Difficulty" class="text-danger"></span>
+
+                    </div>
+                </div>
+
+                <div class="form-group row mt-1">
+                    <label asp-for="Photo" class="col-sm-2 col-form-label">@language.Getkey("photo")</label>
+                    <div class="col-sm-10">
+                        <div class="input-group custom-file-button">
+                            <label asp-for="Photo" class="input-group-text" for="photoFile">@language.Getkey("chooseAPhoto")</label>
+                            <input asp-for="Photo" class="form-control custom-file-button" id="photoFile"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row mt-1">
+                    <label asp-for="Pronunciation" class="col-sm-2 col-form-label">@language.Getkey("pronunciation") </label>
+                    <div class="col-sm-10">
+                        <div class="input-group custom-file-button">
+                            <label asp-for="Pronunciation" class="input-group-text" for="audioFile">@language.Getkey("choosePronunciationAudioFile")</label>
+                            <input asp-for="Pronunciation" class="form-control custom-file-button" id="audioFile"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="form-group row">
+                    <div>
+                        <button type="submit" class="btn btn-primary">@language.Getkey("add")</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-    <div class="form-group row mt-1">
-        <label asp-for="Translation" class="col-sm-2 col-form-label">@language.Getkey("translation") </label>
-        <div class="col-sm-10">
-            <input asp-for="Translation" class="form-control" placeholder="@language.Getkey("insertTranslation")" />
-            <span asp-validation-for="Translation" class="text-danger"></span>
+</div>
 
-        </div>
-    </div>
-    <div class="form-group row mt-1">
-        <label asp-for="Difficulty" class="col-sm-2 col-form-label">@language.Getkey("difficulty") </label>
-        <div class="col-sm-10">
-            <select asp-for="Difficulty" class="form-select mr-sm-12">
-                <option value="" selected>@language.Getkey("selectDifficultyLevel")</option>
-                <option value="@Difficulty.Beginner">@language.Getkey(Enum.GetNames(typeof(Difficulty))[0].ToLower())</option>
-                <option value="@Difficulty.Basic">@language.Getkey(Enum.GetNames(typeof(Difficulty))[1].ToLower())</option>
-                <option value="@Difficulty.Intermediate">@language.Getkey(Enum.GetNames(typeof(Difficulty))[2].ToLower())</option>
-                <option value="@Difficulty.Advanced">@language.Getkey(Enum.GetNames(typeof(Difficulty))[3].ToLower())</option>
-            </select>
-            <span asp-validation-for="Difficulty" class="text-danger"></span>
-
-        </div>
-    </div>
-
-    <div class="form-group row mt-1">
-        <label asp-for="Photo" class="col-sm-2 col-form-label">@language.Getkey("photo")</label>
-        <div class="col-sm-10">
-            <div class="input-group custom-file-button">
-                <label asp-for="Photo" class="input-group-text" for="photoFile">@language.Getkey("chooseAPhoto")</label>
-                <input asp-for="Photo" class="form-control custom-file-button" id="photoFile"/>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group row mt-1">
-        <label asp-for="Pronunciation" class="col-sm-2 col-form-label">@language.Getkey("pronunciation") </label>
-        <div class="col-sm-10">
-            <div class="input-group custom-file-button">
-                <label asp-for="Pronunciation" class="input-group-text" for="audioFile">@language.Getkey("choosePronunciationAudioFile")</label>
-                <input asp-for="Pronunciation" class="form-control custom-file-button" id="audioFile"/>
-            </div>
-        </div>
-    </div>
-
-    <div asp-validation-summary="All" class="text-danger"></div>
-
-    <div class="form-group row">
-        <div class="col-sm-10">
-            <button type="submit" class="btn btn-primary">@language.Getkey("add")</button>
-        </div>
-    </div>
-</form>

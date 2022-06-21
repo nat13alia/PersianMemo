@@ -99,11 +99,6 @@ li {
     margin: 10px;
 }
 
-.imgThumbnail {
-    height: 200px;
-    width: auto;
-}
-
 .custom-file-button input[type=file] {
     margin-left: -2px !important;
 }
