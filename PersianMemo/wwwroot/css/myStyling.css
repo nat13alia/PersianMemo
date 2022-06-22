@@ -53,14 +53,20 @@ button.nav-link:link, button.nav-link:visited, button.nav-link:active {
 
 ul.dropdown-menu li {
     display: flex;
-    justify-content: space-around;
     border-radius: 5px;
-    margin: 3px;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 7px;
 }
 
-.dropdown-menu li:hover {
+    ul.dropdown-menu li img {
+        display: inline-block;
+        margin: 5px;
+    }
+
+/*.dropdown-menu li:hover {
     background-color: #292929;
-}
+}*/
 
 .dropdown-menu .dropdown-item:hover {
     padding: 3px 3px;
@@ -87,26 +93,26 @@ ul.navbar-nav {
     position: relative;
 }
 
-.main .content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    height: 100%;
-    padding: 0 20px;
-}
+    .main .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        height: 100%;
+        padding: 0 20px;
+    }
 
-.main .content h1 {
-    font-size: 55px;
-    max-width: 600px;
-    margin: 20px 0 30px;
-}
+        .main .content h1 {
+            font-size: 55px;
+            max-width: 600px;
+            margin: 20px 0 30px;
+        }
 
-.main .content p {
-    color: #fff;
-    font-size: 23px;
-}
+        .main .content p {
+            color: #fff;
+            font-size: 23px;
+        }
 
 .btn-content {
     cursor: pointer;
@@ -120,10 +126,10 @@ ul.navbar-nav {
     min-width: 130px;
 }
 
-.btn-content:hover {
-    opacity: 0.9;
-    color: #fff;
-}
+    .btn-content:hover {
+        opacity: 0.9;
+        color: #fff;
+    }
 
 .btn-content-container {
     display: flex;
@@ -248,75 +254,75 @@ input[type="search"] {
     border-radius: 5px;
 }
 
-.login-signup-form .form-wrap {
-    background: #fff;
-    padding: 15px 25px;
-}
+    .login-signup-form .form-wrap {
+        background: #fff;
+        padding: 15px 25px;
+    }
 
-.login-signup-form .form-wrap h1, .login-signup-form .form-wrap h1 {
-    text-align: center;
-}
+        .login-signup-form .form-wrap h1, .login-signup-form .form-wrap h1 {
+            text-align: center;
+        }
 
-.login-signup-form .form-wrap .form-group {
-    margin-top: 15px;
-}
+        .login-signup-form .form-wrap .form-group {
+            margin-top: 15px;
+        }
 
-.login-signup-form .form-wrap .form-group label {
-    display: block;
-    color: #666;
-}
+            .login-signup-form .form-wrap .form-group label {
+                display: block;
+                color: #666;
+            }
 
-.login-signup-form .form-wrap .form-group .checkbox {
-    display: flex;
-    align-items: center;
-}
+            .login-signup-form .form-wrap .form-group .checkbox {
+                display: flex;
+                align-items: center;
+            }
 
-.login-signup-form .form-wrap .form-group .checkbox label {
-    display: block;
-    color: #666;
-    margin: 0px 10px;
-}
+                .login-signup-form .form-wrap .form-group .checkbox label {
+                    display: block;
+                    color: #666;
+                    margin: 0px 10px;
+                }
 
-.login-signup-form .form-wrap .form-group .checkbox input {
-    display: block;
-    width: auto;
-}
+                .login-signup-form .form-wrap .form-group .checkbox input {
+                    display: block;
+                    width: auto;
+                }
 
-.login-signup-form .form-wrap .form-group input {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    border: #ddd 1px solid;
-    border-radius: 5px;
-}
+            .login-signup-form .form-wrap .form-group input {
+                display: block;
+                width: 100%;
+                padding: 10px;
+                border: #ddd 1px solid;
+                border-radius: 5px;
+            }
 
-.login-signup-form .form-wrap button {
-    background: #292929;
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin-top: 20px;
-    color: #f9ee73;
-    cursor: pointer;
-}
+        .login-signup-form .form-wrap button {
+            background: #292929;
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            color: #f9ee73;
+            cursor: pointer;
+        }
 
-.login-signup-form button:hover {
-    background: #666666;
-    color: #f9ee73;
-}
+    .login-signup-form button:hover {
+        background: #666666;
+        color: #f9ee73;
+    }
 
-.login-signup-form footer {
-    text-align: center;
-    margin-top: 10px;
-}
+    .login-signup-form footer {
+        text-align: center;
+        margin-top: 10px;
+    }
 
-.login-signup-form footer {
-    color: #292929;
-}
+    .login-signup-form footer {
+        color: #292929;
+    }
 
-.login-signup-form a {
-    text-decoration: none;
-}
+    .login-signup-form a {
+        text-decoration: none;
+    }
 
 /* Create View */
 #add-word-form.add-word-body {
@@ -339,43 +345,43 @@ input[type="search"] {
     border-radius: 5px;
 }
 
-.add-word-form .form-wrap {
-    background: #fff;
-    padding: 15px 25px;
-}
+    .add-word-form .form-wrap {
+        background: #fff;
+        padding: 15px 25px;
+    }
 
-.add-word-form .form-wrap h1, .add-word-form .form-wrap h1 {
-    text-align: center;
-}
+        .add-word-form .form-wrap h1, .add-word-form .form-wrap h1 {
+            text-align: center;
+        }
 
-.add-word-form .form-wrap .form-group {
-    margin-top: 15px;
-}
+        .add-word-form .form-wrap .form-group {
+            margin-top: 15px;
+        }
 
-.add-word-form .form-wrap .form-group label {
-    display: block;
-    color: #000;
-}
+            .add-word-form .form-wrap .form-group label {
+                display: block;
+                color: #000;
+            }
 
 
-.add-word-form .form-wrap .form-group input {
-    border: #ddd 1px solid;
-    border-radius: 5px;
-}
+            .add-word-form .form-wrap .form-group input {
+                border: #ddd 1px solid;
+                border-radius: 5px;
+            }
 
-.add-word-form .form-wrap button {
-    background: #292929;
-    width: 100%;
-    padding: 10px;
-    margin: 20px 0;
-    color: #f9ee73;
-    cursor: pointer;
-}
+        .add-word-form .form-wrap button {
+            background: #292929;
+            width: 100%;
+            padding: 10px;
+            margin: 20px 0;
+            color: #f9ee73;
+            cursor: pointer;
+        }
 
-.add-word-form button:hover {
-    background: #f9ee73;
-    color: #292929;
-}
+    .add-word-form button:hover {
+        background: #f9ee73;
+        color: #292929;
+    }
 
 /* Create View */
 #edit-word-form.edit-word-body {
@@ -398,42 +404,42 @@ input[type="search"] {
     padding: 20px;
 }
 
-.edit-word-form .form-wrap {
-    background: #fff;
-    padding: 15px 25px;
-}
+    .edit-word-form .form-wrap {
+        background: #fff;
+        padding: 15px 25px;
+    }
 
-.edit-word-form .form-wrap h1, .add-word-form .form-wrap h1 {
-    text-align: center;
-}
+        .edit-word-form .form-wrap h1, .add-word-form .form-wrap h1 {
+            text-align: center;
+        }
 
-.edit-word-form .form-wrap .form-group {
-    margin-top: 15px;
-}
+        .edit-word-form .form-wrap .form-group {
+            margin-top: 15px;
+        }
 
-.edit-word-form .form-wrap .form-group label {
-    display: block;
-    color: #000;
-}
+            .edit-word-form .form-wrap .form-group label {
+                display: block;
+                color: #000;
+            }
 
-.edit-word-form .form-wrap .form-group input {
-    border: #ddd 1px solid;
-    border-radius: 5px;
-}
+            .edit-word-form .form-wrap .form-group input {
+                border: #ddd 1px solid;
+                border-radius: 5px;
+            }
 
-.edit-word-form .form-group button, .edit-word-form .form-group a {
-    background: #292929;
-    padding: 10px;
-    width: 49%;
-    margin: 20px 0;
-    color: #f9ee73;
-    cursor: pointer;
-}
+    .edit-word-form .form-group button, .edit-word-form .form-group a {
+        background: #292929;
+        padding: 10px;
+        width: 49%;
+        margin: 20px 0;
+        color: #f9ee73;
+        cursor: pointer;
+    }
 
-.edit-word-form .form-group button:hover, .edit-word-form .form-group a:hover {
-    background: #f9ee73;
-    color: #292929;
-}
+        .edit-word-form .form-group button:hover, .edit-word-form .form-group a:hover {
+            background: #f9ee73;
+            color: #292929;
+        }
 
 /* Details View */
 
@@ -492,9 +498,9 @@ input[type="search"] {
     justify-content: center;
 }
 
-.details-btn-holder a {
-    width: 20%;
-}
+    .details-btn-holder a {
+        width: 20%;
+    }
 
 .ex-details-body {
     box-sizing: border-box;
@@ -523,9 +529,9 @@ input[type="search"] {
     justify-content: center;
 }
 
-.learn-listen-holder button {
-    width: 20%;
-}
+    .learn-listen-holder button {
+        width: 20%;
+    }
 
 .learn-listen-form {
     margin: auto;
@@ -534,9 +540,9 @@ input[type="search"] {
     border-radius: 5px;
 }
 
-.learn-listen-form form {
-    padding-top: 50px;
-}
+    .learn-listen-form form {
+        padding-top: 50px;
+    }
 
 
 /* Learn write */
@@ -562,6 +568,13 @@ input[type="search"] {
     width: 20%;
     background-color: #f9ee73;
     color: #292929;
+}
+
+.learn-write-holder button:hover {
+    background-color: #292929;
+    color: #f9ee73;
+    border: 1px solid #f9ee73;
+    border-radius: 5px;
 }
 
 .learn-write-form {
@@ -606,9 +619,9 @@ input[type="search"] {
     border-radius: 5px;
 }
 
-.revise-form form {
-    padding-top: 50px;
-}
+    .revise-form form {
+        padding-top: 50px;
+    }
 
 /* Other views */
 
@@ -644,16 +657,16 @@ input[type="search"] {
     padding: 200px 20px;
 }
 
-.overlay-content h1 {
-    font-size: 55px;
-    max-width: 600px;
-    margin: 20px 0 30px;
-}
+    .overlay-content h1 {
+        font-size: 55px;
+        max-width: 600px;
+        margin: 20px 0 30px;
+    }
 
-.overlay-content p {
-    color: #fff;
-    font-size: 23px;
-}
+    .overlay-content p {
+        color: #fff;
+        font-size: 23px;
+    }
 
 .other-btn-holder {
     margin: auto;
@@ -662,11 +675,91 @@ input[type="search"] {
     justify-content: center;
 }
 
+/* Roles View */
 
+#roles-card.roles-card-body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background: url('../images/bg-photos/admin-bg.jpg') no-repeat center center;
+    height: calc(100vh - 120px);
+    background-size: cover;
+    display: flex;
+    align-items: center;
+}
 
+.roles-card-holder {
+    padding: 20px;
+    margin: auto;
+    min-width: 600px;
+    background: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
 
+/* Edit Role */
 
+#edit-role-form.edit-role-body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background: url('../images/bg-photos/admin-bg.jpg') no-repeat center center;
+    height: calc(100vh - 120px);
+    background-size: cover;
+    display: flex;
+    align-items: center;
+}
 
+.edit-role-holder {
+    padding: 20px;
+    margin: auto;
+    min-width: 600px;
+    background: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
 
+.edit-role-btn-holder {
+    margin: auto;
+    min-width: 600px;
+    display: flex;
+    justify-content: center;
+}
 
+.edit-role-btn-holder > *{
+    margin: 20px 10px;
+}
+
+/* New Role */
+
+#new-role-form.new-role-body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background: url('../images/bg-photos/admin-bg.jpg') no-repeat center center;
+    height: calc(100vh - 120px);
+    background-size: cover;
+    display: flex;
+    align-items: center;
+}
+
+.new-role-holder {
+    padding: 20px;
+    margin: auto;
+    min-width: 600px;
+    background: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+
+.new-role-btn-holder {
+    margin: auto;
+    min-width: 600px;
+    display: flex;
+    justify-content: center;
+}
+
+.new-role-btn-holder button {
+    margin-top: 30px;
+}
 

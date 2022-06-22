@@ -249,6 +249,12 @@
   <data name="logout" xml:space="preserve">
     <value>Wyloguj</value>
   </data>
+  <data name="manageRoles" xml:space="preserve">
+    <value>Zarządzaj Rolami</value>
+  </data>
+  <data name="manageUsers" xml:space="preserve">
+    <value>Zarządzaj Użytkownikami</value>
+  </data>
   <data name="newWord" xml:space="preserve">
     <value>Nowe Słówko</value>
   </data>

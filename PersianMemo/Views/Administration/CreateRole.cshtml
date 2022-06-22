@@ -5,18 +5,26 @@
     ViewBag.Title = language.Getkey("createNewRole");
 }
 
-<h1>@ViewBag.Title</h1>
+<div id="new-role-form" class="new-role-body">
+    <div class="new-role-holder">
+        <div class="text-center">
+            <h1>@ViewBag.Title</h1>
+        </div>
 
-<div class="row">
-    <div class="col-md-12">
-        <form method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="RoleName">@language.Getkey("roleName")</label>
-                <input asp-for="RoleName" class="form-control" />
-                <span asp-validation-for="RoleName" class="text-danger"></span>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="RoleName">@language.Getkey("roleName")</label>
+                        <input asp-for="RoleName" class="form-control" />
+                        <span asp-validation-for="RoleName" class="text-danger"></span>
+                    </div>
+                    <div class="new-role-btn-holder">
+                        <button type="submit" width="auto" class="btn btn-primary">@language.Getkey("createRole")</button>
+                    </div>
+                </form>
             </div>
-            <button type="submit" width="auto" class="btn btn-primary">@language.Getkey("createRole")</button>
-        </form>
+        </div>
     </div>
 </div>
