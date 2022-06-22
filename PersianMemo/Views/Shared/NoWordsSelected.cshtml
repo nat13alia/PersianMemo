@@ -2,8 +2,13 @@
     ViewBag.Title = "You have not selected any words to practise!";
 }
 
-<h1>You have no revisions for today</h1>
-
-<a asp-controller="home" asp-action="index">
-	"You have not selected any words to practise!"
-</a>
+<div class="overlay">
+    <div class="overlay-content">
+        <h1 class="text-center">You have not selected any words to practise!</h1>
+        <div class="other-btn-holder">
+            <a asp-controller="home" asp-action="index" class="btn btn-content">
+                Click here to navigate to the home page
+            </a>
+        </div>
+    </div>
+</div>

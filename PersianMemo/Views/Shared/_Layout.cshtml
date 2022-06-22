@@ -83,12 +83,20 @@
                         </li>
                         <li class="nav-item">
                             <a asp-controller="revision" asp-action="details" class="nav-link">@revisions</a>
+                        </li> 
+                        @*<li class="nav-item">
+                            <a asp-controller="calendar" asp-action="index" class="nav-link">@language.Getkey("revisionsCalendar")</a>
+                        </li>*@}
+                    @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                            <a asp-controller="administration" asp-action="index" class="nav-link">@language.Getkey("list")</a>
                         </li>
                         <li class="nav-item">
-                            <a asp-controller="calendar" asp-action="index" class="nav-link">@language.Getkey("revisionsCalendar")</a>
+                            <a asp-controller="home" asp-action="create" class="nav-link">@language.Getkey("addANewWord")</a>
                         </li>
                     }
-                    </ul>
+                </ul>
             </div>
 
             <div class="dropdown">

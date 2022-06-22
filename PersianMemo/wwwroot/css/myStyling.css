@@ -30,7 +30,6 @@ html {
     height: 60px;
     color: #292929;
     background-color: #f9ee73;
-    overflow: hidden;
 }
 
 .navbar-light .navbar-nav .nav-link:hover, button.nav-link:hover {
@@ -160,6 +159,7 @@ ul.navbar-nav {
     box-sizing: border-box;
     background-size: cover;
     background: #333;
+    min-height: calc(100vh - 120px);
 }
 
 h1.h2-text {
@@ -480,8 +480,9 @@ input[type="search"] {
     flex-wrap: wrap;
 }
 
-.card {
+.ex-details-body .card {
     margin: 20px;
+    padding: 20px;
 }
 
 .details-btn-holder {
@@ -495,6 +496,171 @@ input[type="search"] {
     width: 20%;
 }
 
+.ex-details-body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background: url('../images/bg-photos/ex-rev-details.jpg') no-repeat center center;
+    min-height: calc(100vh - 120px);
+    background-size: cover;
+}
+
+/* LEARN LISTEN View */
+
+.learn-listen-body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background: url('../images/bg-photos/learn-listen-bg.jpg') no-repeat center center;
+    min-height: calc(100vh - 120px);
+    background-size: cover;
+}
+
+.learn-listen-holder {
+    margin: auto;
+    min-width: 600px;
+    display: flex;
+    justify-content: center;
+}
+
+.learn-listen-holder button {
+    width: 20%;
+}
+
+.learn-listen-form {
+    margin: auto;
+    min-width: 1000px;
+    max-width: 1200px;
+    border-radius: 5px;
+}
+
+.learn-listen-form form {
+    padding-top: 50px;
+}
+
+
+/* Learn write */
+
+.learn-write-body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background: url('../images/bg-photos/learn-write-bg.jpg') no-repeat center center;
+    min-height: calc(100vh - 120px);
+    background-size: cover;
+}
+
+.learn-write-holder {
+    margin: auto;
+    min-width: 600px;
+    display: flex;
+    justify-content: center;
+}
+
+.learn-write-holder button {
+    margin-top: 30px;
+    width: 20%;
+    background-color: #f9ee73;
+    color: #292929;
+}
+
+.learn-write-form {
+    margin: auto;
+    min-width: 1000px;
+    max-width: 1200px;
+    border-radius: 5px;
+}
+
+.learn-write-form form {
+    padding-top: 50px;
+}
+
+
+/* revise write */
+
+.revise-body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background: url('../images/bg-photos/revise-bg.jpg') no-repeat center center;
+    min-height: calc(100vh - 120px);
+    background-size: cover;
+}
+
+.revise-holder {
+    margin: auto;
+    min-width: 600px;
+    display: flex;
+    justify-content: center;
+}
+
+.revise-holder button {
+    margin-top: 30px;
+    width: 20%;
+}
+
+.revise-form {
+    margin: auto;
+    min-width: 1000px;
+    max-width: 1200px;
+    border-radius: 5px;
+}
+
+.revise-form form {
+    padding-top: 50px;
+}
+
+/* Other views */
+
+.overlay {
+    background: url('../images/bg-photos/other-views-bg.jpg') no-repeat center center;
+    background-size: cover;
+    min-height: calc(100vh - 120px);
+    color: #fff;
+    position: relative;
+}
+
+.overlay * {
+    z-index: 20;
+}
+
+.overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+}
+
+.overlay-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    padding: 200px 20px;
+}
+
+.overlay-content h1 {
+    font-size: 55px;
+    max-width: 600px;
+    margin: 20px 0 30px;
+}
+
+.overlay-content p {
+    color: #fff;
+    font-size: 23px;
+}
+
+.other-btn-holder {
+    margin: auto;
+    min-width: 600px;
+    display: flex;
+    justify-content: center;
+}
 
 
 

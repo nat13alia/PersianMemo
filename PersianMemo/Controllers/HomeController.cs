@@ -50,7 +50,7 @@ namespace PersianMemo.Controllers
         {
            if(ids.Length == 0)
            {
-                return View();
+                return RedirectToAction("NoWordsSelected");
            } else
            {
                 List<Word> words = new List<Word>();
@@ -83,7 +83,12 @@ namespace PersianMemo.Controllers
             }
         }
 
-        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult NoWordsSelected()
+        {
+            return View("NoWordsSelected");
+        }
+
         public IActionResult GetAll()
         {
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -92,7 +97,6 @@ namespace PersianMemo.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public ViewResult Details(int? id)
         {
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);

@@ -146,7 +146,7 @@ namespace PersianMemo.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("index", "home");
+                    return View("CompletedExercise");
                 }
             }
             else
@@ -163,14 +163,7 @@ namespace PersianMemo.Controllers
                 _exercisesWordsRepository.Update(pairChanges);
 
                 var restOfWords = _exercisesWordsRepository.GetAllPairsForExercise(model.CurrentExerciseId).Where(p => p.WriteAnswer != Answer.AnsweredCorrectly).OrderBy(p => p.WriteAnswer).ToList();
-                if (restOfWords.Count != 0)
-                {
-                    return RedirectToAction("learnwrite", "exercise", new { id = model.CurrentExerciseId, wordId = restOfWords.FirstOrDefault().WordId });
-                }
-                else
-                {
-                    return RedirectToAction("index", "home");
-                }
+                return RedirectToAction("learnwrite", "exercise", new { id = model.CurrentExerciseId, wordId = restOfWords.FirstOrDefault().WordId });
             }
         }
     }

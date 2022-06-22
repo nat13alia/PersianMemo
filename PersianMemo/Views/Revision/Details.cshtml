@@ -6,12 +6,12 @@
     var firstWordId = Model.WordsList.FirstOrDefault().Id;
 }
 
-
-<div class="card-group">
-    @foreach (var word in Model.WordsList)
-    {
-        var photoPath = "~/Images/" + (word.PhotoPath ?? "noimage.png");
-        var audioPath = "/audio/" + word.PronunciationPath;
+<div class="ex-details-body">
+    <div class="card-group">
+        @foreach (var word in Model.WordsList)
+        {
+            var photoPath = "~/Images/" + (word.PhotoPath ?? "noimage.png");
+            var audioPath = "/audio/" + word.PronunciationPath;
 
         <div class="col-4">
             <div class="card">
@@ -21,11 +21,12 @@
                 <img class="card-img-top imgThumbnail mx-auto" src="@photoPath" asp-append-version="true" style="display:block" />
             </div>
         </div>
-    }
-</div>
-<div class="details-btn-holder">
-    <a asp-controller="Revision" asp-action="Revise" asp-route-id="@firstWordId" class="btn btn-content"><i class="fa-solid fa-graduation-cap"></i></a>
-    <a asp-controller="home" asp-action="index" class="btn btn-content">@language.Getkey("back")</a>
+        }
+    </div>
+    <div class="details-btn-holder">
+        <a asp-controller="Revision" asp-action="Revise" asp-route-id="@firstWordId" class="btn btn-content"><i class="fa-solid fa-graduation-cap"></i></a>
+        <a asp-controller="home" asp-action="index" class="btn btn-content">@language.Getkey("back")</a>
+    </div>
 </div>
 
 
