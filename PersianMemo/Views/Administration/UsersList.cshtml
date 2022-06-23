@@ -1,0 +1,52 @@
+﻿@model IEnumerable<IdentityUser>
+@inject LanguageService language
+
+@{ ViewBag.Title = @language.Getkey("users"); }
+
+<div id="users-card" class="users-card-body">
+    <div class="users-card-holder">
+        <div class="text-center">
+            <h1>@ViewBag.Title</h1>
+        </div>
+
+        <div>
+            @if (Model.Any())
+            {
+                <a class="btn btn-primary mb-3" style="width:auto" asp-action="Register"
+                   asp-controller="account">@language.Getkey("addNewUser")
+                </a> 
+                foreach (var user in Model)
+                {
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            @language.Getkey("userID") : @user.Id
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">@user.UserName</h5>
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn btn-primary" asp-controller="Administration"
+                               asp-action="EditUser" asp-route-id="@user.Id">@language.Getkey("edit")</a>
+                            <a asp-action="DeleteUser" asp-route-id="@user.Id"class="btn btn-danger">@language.Getkey("delete")</a>
+                        </div>
+                    </div> }
+                }
+                else
+                {
+                <div class="card">
+                    <div class="card-header">
+                        @language.Getkey("thereAreNoUsersToDisplay")
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            Use the button below to create a user
+                        </h5>
+                        <a class="btn btn-primary" style="width:auto"
+                           asp-controller="Account" asp-action="Register">
+                            @@role.Id">@language.Getkey("addNewUser")
+                        </a>
+                    </div>
+                </div>}
+        </div>
+    </div>
+</div>

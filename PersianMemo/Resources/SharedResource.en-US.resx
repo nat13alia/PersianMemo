@@ -129,6 +129,9 @@
   <data name="addNewRole" xml:space="preserve">
     <value>Add New Role</value>
   </data>
+  <data name="addNewUser" xml:space="preserve">
+    <value>Add New User</value>
+  </data>
   <data name="addRemoveUsersFromRole" xml:space="preserve">
     <value>Add or Remove Users From/To this Role</value>
   </data>
@@ -203,6 +206,9 @@
   </data>
   <data name="editTheWord" xml:space="preserve">
     <value>Edit The Word</value>
+  </data>
+  <data name="editUser" xml:space="preserve">
+    <value>Edit User</value>
   </data>
   <data name="editUsersInRole" xml:space="preserve">
     <value>Add or Remove users from this role</value>
@@ -315,6 +321,9 @@
   <data name="thereAreNoRolesToDisplay" xml:space="preserve">
     <value>Currently there are no roles to display</value>
   </data>
+  <data name="thereAreNoUsersToDisplay" xml:space="preserve">
+    <value>There Are No Users To Display</value>
+  </data>
   <data name="translation" xml:space="preserve">
     <value>Translation</value>
   </data>
@@ -324,11 +333,23 @@
   <data name="update" xml:space="preserve">
     <value>Update</value>
   </data>
+  <data name="userID" xml:space="preserve">
+    <value>User ID</value>
+  </data>
   <data name="userLogin" xml:space="preserve">
     <value>User Login</value>
   </data>
+  <data name="userName" xml:space="preserve">
+    <value>User Name</value>
+  </data>
   <data name="userRegistration" xml:space="preserve">
     <value>User Registration</value>
+  </data>
+  <data name="userRoles" xml:space="preserve">
+    <value>User Roles</value>
+  </data>
+  <data name="users" xml:space="preserve">
+    <value>Users</value>
   </data>
   <data name="usersInThisRole" xml:space="preserve">
     <value>Users in this Role</value>

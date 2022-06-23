@@ -1,0 +1,67 @@
+﻿@model EditUserViewModel
+@inject LanguageService language
+
+@{ ViewBag.Title = language.Getkey("editUser"); }
+
+<div id="edit-user-form" class="edit-user-body">
+    <div class="edit-user-holder">
+        <div class="text-center">
+            <h1>@ViewBag.Title</h1>
+        </div>
+
+        <form method="post" class="mt-3">
+            <div class="form-group row">
+                <label asp-for="Id" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Id" disabled class="form-control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="UserName" class="col-sm-3 col-form-label">@language.Getkey("userName")</label>
+                <div class="col-sm-9">
+                    <input asp-for="UserName" class="form-control">
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Email" class="col-sm-3 col-form-label">Email</label>
+                <div class="col-sm-9">
+                    <input asp-for="Email" class="form-control">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="form-group row">
+                <div class="edit-role-btn-holder">
+                    <button type="submit" class="btn btn-primary" style="width:auto">@language.Getkey("update")</button>
+                    <a asp-action="UsersList" class="btn btn-primary">@language.Getkey("cancel")</a>
+                </div>
+            </div>
+
+            <div class="card edit-role-card">
+                <div class="card-header">
+                    <h3>@language.Getkey("userRoles")</h3>
+                </div>
+                <div class="card-body">
+                    @if (Model.Roles.Any())
+                    {
+                        foreach (var role in Model.Roles)
+                        {
+                            <h5 class="card-title">@role</h5> 
+                        }
+                    }
+                    else
+                    {
+                    <h5 class="card-title">@language.Getkey("noneRightNow")</h5>
+                    }
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-primary" style="width:auto">@language.Getkey("manageRoles")</a>
+                </div>
+                @*asp-controller="Administration" asp-action="EditUsersInRole" asp-route-roleId="@Model.Id"*@
+            </div>
+        </form>
+    </div>
+</div>

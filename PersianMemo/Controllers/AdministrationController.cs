@@ -23,6 +23,65 @@ namespace PersianMemo.Controllers
         }
 
         [HttpGet]
+        public IActionResult UsersList()
+        {
+            var users = userManager.Users;
+            return View(users);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditUser(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"Cannot find a user with {id}";
+                return View("NotFound");
+            }
+
+            var userRoles = await userManager.GetRolesAsync(user);
+
+            var model = new EditUserViewModel()
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Email = user.Email,
+                Roles = userRoles
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditUser(EditUserViewModel model)
+        {
+            var user = await userManager.FindByIdAsync(model.Id);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"Cannot find a user with {model.Id}";
+                return View("NotFound");
+            }
+            else
+            {
+                user.Email = model.Email;
+                user.UserName = model.UserName;
+
+                var result = await userManager.UpdateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("UsersList");
+                }
+
+                foreach(var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View(model);
+            }
+        }
+
+        [HttpGet]
         public IActionResult RolesList()
         {
             var roles = roleManager.Roles;

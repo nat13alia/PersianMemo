@@ -93,26 +93,26 @@ ul.navbar-nav {
     position: relative;
 }
 
-    .main .content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        height: 100%;
-        padding: 0 20px;
-    }
+.main .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    padding: 0 20px;
+}
 
-        .main .content h1 {
-            font-size: 55px;
-            max-width: 600px;
-            margin: 20px 0 30px;
-        }
+.main .content h1 {
+    font-size: 55px;
+    max-width: 600px;
+    margin: 20px 0 30px;
+}
 
-        .main .content p {
-            color: #fff;
-            font-size: 23px;
-        }
+.main .content p {
+    color: #fff;
+    font-size: 23px;
+}
 
 .btn-content {
     cursor: pointer;
@@ -126,10 +126,10 @@ ul.navbar-nav {
     min-width: 130px;
 }
 
-    .btn-content:hover {
-        opacity: 0.9;
-        color: #fff;
-    }
+.btn-content:hover {
+    opacity: 0.9;
+    color: #fff;
+}
 
 .btn-content-container {
     display: flex;
@@ -164,7 +164,7 @@ ul.navbar-nav {
 .wordsList-body {
     box-sizing: border-box;
     background-size: cover;
-    background: #333;
+    background: url('../images/bg-photos/admin-bg.jpg') no-repeat center center;
     min-height: calc(100vh - 120px);
 }
 
@@ -192,6 +192,7 @@ h1.h2-text {
 }
 
 .tbl-header-flex {
+
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -254,75 +255,75 @@ input[type="search"] {
     border-radius: 5px;
 }
 
-    .login-signup-form .form-wrap {
-        background: #fff;
-        padding: 15px 25px;
-    }
+.login-signup-form .form-wrap {
+    background: #fff;
+    padding: 15px 25px;
+}
 
-        .login-signup-form .form-wrap h1, .login-signup-form .form-wrap h1 {
-            text-align: center;
-        }
+.login-signup-form .form-wrap h1, .login-signup-form .form-wrap h1 {
+    text-align: center;
+}
 
-        .login-signup-form .form-wrap .form-group {
-            margin-top: 15px;
-        }
+.login-signup-form .form-wrap .form-group {
+    margin-top: 15px;
+}
 
-            .login-signup-form .form-wrap .form-group label {
-                display: block;
-                color: #666;
-            }
+.login-signup-form .form-wrap .form-group label {
+    display: block;
+    color: #666;
+}
 
-            .login-signup-form .form-wrap .form-group .checkbox {
-                display: flex;
-                align-items: center;
-            }
+.login-signup-form .form-wrap .form-group .checkbox {
+    display: flex;
+    align-items: center;
+}
 
-                .login-signup-form .form-wrap .form-group .checkbox label {
-                    display: block;
-                    color: #666;
-                    margin: 0px 10px;
-                }
+.login-signup-form .form-wrap .form-group .checkbox label {
+    display: block;
+    color: #666;
+    margin: 0px 10px;
+}
 
-                .login-signup-form .form-wrap .form-group .checkbox input {
-                    display: block;
-                    width: auto;
-                }
+.login-signup-form .form-wrap .form-group .checkbox input {
+    display: block;
+    width: auto;
+}
 
-            .login-signup-form .form-wrap .form-group input {
-                display: block;
-                width: 100%;
-                padding: 10px;
-                border: #ddd 1px solid;
-                border-radius: 5px;
-            }
+.login-signup-form .form-wrap .form-group input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: #ddd 1px solid;
+    border-radius: 5px;
+}
 
-        .login-signup-form .form-wrap button {
-            background: #292929;
-            display: block;
-            width: 100%;
-            padding: 10px;
-            margin-top: 20px;
-            color: #f9ee73;
-            cursor: pointer;
-        }
+.login-signup-form .form-wrap button {
+    background: #292929;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    color: #f9ee73;
+    cursor: pointer;
+}
 
-    .login-signup-form button:hover {
-        background: #666666;
-        color: #f9ee73;
-    }
+.login-signup-form button:hover {
+    background: #666666;
+    color: #f9ee73;
+}
 
-    .login-signup-form footer {
-        text-align: center;
-        margin-top: 10px;
-    }
+.login-signup-form footer {
+    text-align: center;
+    margin-top: 10px;
+}
 
-    .login-signup-form footer {
-        color: #292929;
-    }
+.login-signup-form footer {
+    color: #292929;
+}
 
-    .login-signup-form a {
-        text-decoration: none;
-    }
+.login-signup-form a {
+    text-decoration: none;
+}
 
 /* Create View */
 #add-word-form.add-word-body {
@@ -345,43 +346,43 @@ input[type="search"] {
     border-radius: 5px;
 }
 
-    .add-word-form .form-wrap {
-        background: #fff;
-        padding: 15px 25px;
-    }
+.add-word-form .form-wrap {
+    background: #fff;
+    padding: 15px 25px;
+}
 
-        .add-word-form .form-wrap h1, .add-word-form .form-wrap h1 {
-            text-align: center;
-        }
+.add-word-form .form-wrap h1, .add-word-form .form-wrap h1 {
+    text-align: center;
+}
 
-        .add-word-form .form-wrap .form-group {
-            margin-top: 15px;
-        }
+.add-word-form .form-wrap .form-group {
+    margin-top: 15px;
+}
 
-            .add-word-form .form-wrap .form-group label {
-                display: block;
-                color: #000;
-            }
+.add-word-form .form-wrap .form-group label {
+    display: block;
+    color: #000;
+}
 
 
-            .add-word-form .form-wrap .form-group input {
-                border: #ddd 1px solid;
-                border-radius: 5px;
-            }
+.add-word-form .form-wrap .form-group input {
+    border: #ddd 1px solid;
+    border-radius: 5px;
+}
 
-        .add-word-form .form-wrap button {
-            background: #292929;
-            width: 100%;
-            padding: 10px;
-            margin: 20px 0;
-            color: #f9ee73;
-            cursor: pointer;
-        }
+.add-word-form .form-wrap button {
+    background: #292929;
+    width: 100%;
+    padding: 10px;
+    margin: 20px 0;
+    color: #f9ee73;
+    cursor: pointer;
+}
 
-    .add-word-form button:hover {
-        background: #f9ee73;
-        color: #292929;
-    }
+.add-word-form button:hover {
+    background: #f9ee73;
+    color: #292929;
+}
 
 /* Create View */
 #edit-word-form.edit-word-body {
@@ -498,9 +499,9 @@ input[type="search"] {
     justify-content: center;
 }
 
-    .details-btn-holder a {
-        width: 20%;
-    }
+.details-btn-holder a {
+    width: 20%;
+}
 
 .ex-details-body {
     box-sizing: border-box;
@@ -786,4 +787,58 @@ input[type="search"] {
     border-radius: 5px;
 }
 
+/* Users View */
+
+#users-card.users-card-body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background: url('../images/bg-photos/admin-bg.jpg') no-repeat center center;
+    min-height: calc(100vh - 120px);
+    background-size: cover;
+    display: flex;
+    align-items: center;
+}
+
+.users-card-holder {
+    padding: 20px;
+    margin: 30px auto;
+    min-width: 600px;
+    background: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+
+/* Edit User */
+
+#edit-user-form.edit-user-body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background: url('../images/bg-photos/admin-bg.jpg') no-repeat center center;
+    height: calc(100vh - 120px);
+    background-size: cover;
+    display: flex;
+    align-items: center;
+}
+
+.edit-user-holder {
+    padding: 20px;
+    margin: auto;
+    min-width: 600px;
+    background: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+
+.edit-user-btn-holder {
+    margin: auto;
+    min-width: 600px;
+    display: flex;
+    justify-content: center;
+}
+
+.edit-user-btn-holder > * {
+    margin: 20px 10px;
+}
 
