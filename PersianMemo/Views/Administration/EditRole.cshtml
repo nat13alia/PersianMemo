@@ -51,7 +51,7 @@
                      }
                 </div>
                 <div class="card-footer">
-                    <a href="#" class="btn btn-primary" style="width:auto">@language.Getkey("addRemoveUsersFromRole")</a>
+                    <a asp-controller="Administration" asp-action="EditUsersInRole" asp-route-roleId="@Model.Id" class="btn btn-primary" style="width:auto">@language.Getkey("addRemoveUsersFromRole")</a>
                 </div>
             </div>
         </form>

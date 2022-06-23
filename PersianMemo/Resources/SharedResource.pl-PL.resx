@@ -204,6 +204,9 @@
   <data name="editTheWord" xml:space="preserve">
     <value>Edytuj Słówko</value>
   </data>
+  <data name="editUsersInRole" xml:space="preserve">
+    <value>Dodaj lub usuń użytkowników z/do tej roli</value>
+  </data>
   <data name="english" xml:space="preserve">
     <value>Angielski</value>
   </data>

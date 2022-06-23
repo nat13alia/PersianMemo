@@ -404,42 +404,42 @@ input[type="search"] {
     padding: 20px;
 }
 
-    .edit-word-form .form-wrap {
-        background: #fff;
-        padding: 15px 25px;
-    }
+.edit-word-form .form-wrap {
+    background: #fff;
+    padding: 15px 25px;
+}
 
-        .edit-word-form .form-wrap h1, .add-word-form .form-wrap h1 {
-            text-align: center;
-        }
+.edit-word-form .form-wrap h1, .add-word-form .form-wrap h1 {
+    text-align: center;
+}
 
-        .edit-word-form .form-wrap .form-group {
-            margin-top: 15px;
-        }
+.edit-word-form .form-wrap .form-group {
+    margin-top: 15px;
+}
 
-            .edit-word-form .form-wrap .form-group label {
-                display: block;
-                color: #000;
-            }
+.edit-word-form .form-wrap .form-group label {
+    display: block;
+    color: #000;
+}
 
-            .edit-word-form .form-wrap .form-group input {
-                border: #ddd 1px solid;
-                border-radius: 5px;
-            }
+.edit-word-form .form-wrap .form-group input {
+    border: #ddd 1px solid;
+    border-radius: 5px;
+}
 
-    .edit-word-form .form-group button, .edit-word-form .form-group a {
-        background: #292929;
-        padding: 10px;
-        width: 49%;
-        margin: 20px 0;
-        color: #f9ee73;
-        cursor: pointer;
-    }
+.edit-word-form .form-group button, .edit-word-form .form-group a {
+    background: #292929;
+    padding: 10px;
+    width: 49%;
+    margin: 20px 0;
+    color: #f9ee73;
+    cursor: pointer;
+}
 
-        .edit-word-form .form-group button:hover, .edit-word-form .form-group a:hover {
-            background: #f9ee73;
-            color: #292929;
-        }
+.edit-word-form .form-group button:hover, .edit-word-form .form-group a:hover {
+    background: #f9ee73;
+    color: #292929;
+}
 
 /* Details View */
 
@@ -682,7 +682,7 @@ input[type="search"] {
     margin: 0;
     padding: 0;
     background: url('../images/bg-photos/admin-bg.jpg') no-repeat center center;
-    height: calc(100vh - 120px);
+    min-height: calc(100vh - 120px);
     background-size: cover;
     display: flex;
     align-items: center;
@@ -762,4 +762,28 @@ input[type="search"] {
 .new-role-btn-holder button {
     margin-top: 30px;
 }
+
+/* Edit Users In Role */
+
+#edit-usersInRole-form.edit-usersInRole-body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background: url('../images/bg-photos/admin-bg.jpg') no-repeat center center;
+    height: calc(100vh - 120px);
+    background-size: cover;
+    display: flex;
+    align-items: center;
+}
+
+.edit-usersInRole-holder {
+    padding: 20px;
+    margin: auto;
+    min-width: 600px;
+    max-width: 1000px;
+    background: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+
 
