@@ -58,9 +58,9 @@
                     }
                 </div>
                 <div class="card-footer">
-                    <a class="btn btn-primary" style="width:auto">@language.Getkey("manageRoles")</a>
+                    <a asp-controller="Administration" asp-action="ManageUserRoles" asp-route-userId="@Model.Id" class="btn btn-primary" style="width:auto">@language.Getkey("manageRoles")</a>
                 </div>
-                @*asp-controller="Administration" asp-action="EditUsersInRole" asp-route-roleId="@Model.Id"*@
+                
             </div>
         </form>
     </div>

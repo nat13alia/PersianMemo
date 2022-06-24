@@ -25,9 +25,11 @@
                     <h5 class="card-title">@role.Name</h5>
                 </div>
                 <div class="card-footer">
-                    <a class="btn btn-primary" asp-controller="Administration"
-                       asp-action="EditRole" asp-route-id="@role.Id">@language.Getkey("edit")</a>
-                    <a href="#" class="btn btn-danger">@language.Getkey("delete")</a>
+                    <form asp-action="DeleteRole" asp-route-roleId="@role.Id" method="post">
+                        <a class="btn btn-primary" asp-controller="Administration"
+                           asp-action="EditRole" asp-route-id="@role.Id">@language.Getkey("edit")</a>
+                        <button onclick="return confirm('Are you sure you want to delete role: @role.Name')" type="submit" asp-action="DeleteRole" asp-route-roleId="@role.Id" class="btn btn-danger">@language.Getkey("delete")</button>
+                    </form>
                 </div>
             </div> }
             }

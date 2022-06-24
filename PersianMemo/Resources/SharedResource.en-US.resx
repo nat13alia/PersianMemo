@@ -261,6 +261,9 @@
   <data name="manageRoles" xml:space="preserve">
     <value>Manage Roles</value>
   </data>
+  <data name="manageUserRoles" xml:space="preserve">
+    <value>Manage User Roles</value>
+  </data>
   <data name="manageUsers" xml:space="preserve">
     <value>Manage Users</value>
   </data>

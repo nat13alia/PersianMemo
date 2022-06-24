@@ -261,6 +261,9 @@
   <data name="manageRoles" xml:space="preserve">
     <value>Zarządzaj Rolami</value>
   </data>
+  <data name="manageUserRoles" xml:space="preserve">
+    <value>Zarządzaj rolami użytkownika</value>
+  </data>
   <data name="manageUsers" xml:space="preserve">
     <value>Zarządzaj Użytkownikami</value>
   </data>

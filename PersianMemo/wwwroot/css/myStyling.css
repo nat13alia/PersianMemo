@@ -59,10 +59,10 @@ ul.dropdown-menu li {
     margin-right: 7px;
 }
 
-    ul.dropdown-menu li img {
-        display: inline-block;
-        margin: 5px;
-    }
+ul.dropdown-menu li img {
+    display: inline-block;
+    margin: 5px;
+}
 
 /*.dropdown-menu li:hover {
     background-color: #292929;
@@ -73,6 +73,7 @@ ul.dropdown-menu li {
     margin-bottom: 2px;
     color: #f9ee73;
     background-color: #292929;
+    border-radius: 5px;
 }
 
 ul.navbar-nav {
@@ -161,44 +162,44 @@ ul.navbar-nav {
 }
 
 /* HOME WORDS LIST */
-.wordsList-body {
+#words-list.words-list {
     box-sizing: border-box;
-    background-size: cover;
+    margin: 0;
+    padding: 0;
     background: url('../images/bg-photos/admin-bg.jpg') no-repeat center center;
     min-height: calc(100vh - 120px);
+    background-size: cover;
+    display: flex;
+    align-items: center;
+}
+
+.words-list-tblcontainer {
+    margin: 30px auto;
+    min-width: calc(100vw - 200px);
+    background: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
 }
 
 h1.h2-text {
     margin: 20px;
-    color: #fff;
+    color: #333;
     text-align: center;
 }
 
 .tbl-container {
     background: #fff;
-    margin: 0px auto;
-    min-width: 600px;
-    max-width: 90vw;
-}
-
-.item1 {
-    flex-grow: 3;
-    flex-basis: 0;
-}
-
-.item2 {
-    flex-grow: 1;
-    flex-basis: 0;
 }
 
 .tbl-header-flex {
-
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    background: #333;
+    justify-content: space-around;
 }
 
+#tblWords {
+    background: #fff;
+}
 #tblWords th {
     background-color: #f9ee73;
 }
@@ -212,6 +213,11 @@ button.dt-button {
     color: #292929;
     cursor: pointer;
     border-radius: 5px;
+}
+
+button.dt-button:hover {
+    background: #292929;
+    color: #f9ee73;
 }
 
 input[type="search"] {
@@ -372,7 +378,7 @@ input[type="search"] {
 
 .add-word-form .form-wrap button {
     background: #292929;
-    width: 100%;
+    width: 30%;
     padding: 10px;
     margin: 20px 0;
     color: #f9ee73;
@@ -498,6 +504,8 @@ input[type="search"] {
     display: flex;
     justify-content: center;
 }
+
+create-word-btn-holder
 
 .details-btn-holder a {
     width: 20%;
@@ -840,5 +848,28 @@ input[type="search"] {
 
 .edit-user-btn-holder > * {
     margin: 20px 10px;
+}
+
+/* Manage User Roles */
+
+#manage-userroles-form.manage-userroles-body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background: url('../images/bg-photos/admin-bg.jpg') no-repeat center center;
+    height: calc(100vh - 120px);
+    background-size: cover;
+    display: flex;
+    align-items: center;
+}
+
+.manage-userroles-holder {
+    padding: 20px;
+    margin: auto;
+    min-width: 600px;
+    max-width: 1000px;
+    background: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
 }
 
