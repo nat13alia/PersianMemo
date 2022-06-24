@@ -94,6 +94,7 @@ namespace PersianMemo.Controllers
         {
             var previousExWordpair = _exercisesWordsRepository.GetPair(model.CurrentExerciseId, model.CurrentWordId);
             var previousWord = _wordRepository.GetWord(model.CurrentWordId);
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var correctAnswer = _wordRepository.GetWord(model.CurrentWordId).PersianWord;
 
@@ -127,17 +128,26 @@ namespace PersianMemo.Controllers
                 };
 
                 _wordRepository.Update(wordChanges);
-
-                Revision revision = new Revision
+                // check if revision exists for this word already from the past
+                var existingRevision = _revisionRepository.GetAllRevisionsPerUser(currentUserId).Where(r => r.UserId == currentUserId).FirstOrDefault();
+                if(existingRevision == null)
                 {
-                    UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
-                    WordId = previousWord.Id,
-                    WriteAnswer = Answer.NotAnsweredYet,
-                    RevisionDate = wordChanges.NextRevision,
-                    ModifiedDate = DateTime.Now
-                };
-                _revisionRepository.Add(revision);
-
+                    Revision revision = new Revision
+                    {
+                        UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
+                        WordId = previousWord.Id,
+                        WriteAnswer = Answer.NotAnsweredYet,
+                        RevisionDate = wordChanges.NextRevision,
+                        ModifiedDate = DateTime.Now
+                    };
+                    _revisionRepository.Add(revision);
+                } else
+                {
+                    existingRevision.WriteAnswer = Answer.NotAnsweredYet;
+                    existingRevision.RevisionDate = wordChanges.NextRevision;
+                    existingRevision.ModifiedDate = DateTime.Now;
+                    _revisionRepository.Update(existingRevision);
+                }
 
                 var restOfWords = _exercisesWordsRepository.GetAllPairsForExercise(model.CurrentExerciseId).Where(p => p.WriteAnswer != Answer.AnsweredCorrectly).OrderBy(p => p.WriteAnswer).ToList();
                 if (restOfWords.Count != 0)
@@ -146,6 +156,12 @@ namespace PersianMemo.Controllers
                 }
                 else
                 {
+                    var exWordPairsToRemove = _exercisesWordsRepository.GetAllPairsForExercise(model.CurrentExerciseId);
+                    foreach(ExercisesWords pair in exWordPairsToRemove)
+                    {
+                        _exercisesWordsRepository.Delete(pair.Id);
+                    }
+                    var exerciseToRemove = _exerciseRepository.Delete(model.CurrentExerciseId);
                     return View("CompletedExercise");
                 }
             }
