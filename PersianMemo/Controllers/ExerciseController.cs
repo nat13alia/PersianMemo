@@ -77,15 +77,20 @@ namespace PersianMemo.Controllers
         }
 
         [HttpGet]
-        public IActionResult LearnWrite(int id, int wordId)
+        public IActionResult LearnWrite(int id, int wordId, string? jsToRun)
         {
             LearnWriteViewModel model = new LearnWriteViewModel
             {
                 Exercise = _exerciseRepository.GetExercise(id),
                 Words = _exercisesWordsRepository.GetWords(id),
                 CurrentWordId = wordId,
-                CurrentExerciseId = id
+                CurrentExerciseId = id,
+                JavascriptToRun = jsToRun
             };
+            if(TempData["audiopath"] != null)
+            {
+                ViewBag.AudioPath = TempData["audiopath"].ToString();
+            }
             return View(model);
         }
 
@@ -111,27 +116,19 @@ namespace PersianMemo.Controllers
                 };
                 _exercisesWordsRepository.Update(pairChanges);
 
-                Word wordChanges = new Word
-                {
-                    Id = previousWord.Id,
-                    UserId = previousWord.UserId,
-                    PersianWord = previousWord.PersianWord,
-                    Translation = previousWord.Translation,
-                    Difficulty = previousWord.Difficulty,
-                    PhotoPath = previousWord.PhotoPath,
-                    PronunciationPath = previousWord.PronunciationPath,
-                    EF = previousWord.EF,
-                    Status = WordStatus.InProgress,
-                    RevisionsCount = previousWord.RevisionsCount,
-                    NextRevision = DateTime.Today.AddDays(1),
-                    RevisionInterval = previousWord.RevisionInterval
-                };
+                Word wordChanges = _wordRepository.GetWord(model.CurrentWordId);
 
-                _wordRepository.Update(wordChanges);
                 // check if revision exists for this word already from the past
-                var existingRevision = _revisionRepository.GetAllRevisionsPerUser(currentUserId).Where(r => r.UserId == currentUserId).FirstOrDefault();
+                var existingRevision = _revisionRepository.GetAllRevisionsPerUser(currentUserId).Where(r => r.WordId == model.CurrentWordId).FirstOrDefault();
                 if(existingRevision == null)
                 {
+                    wordChanges.Status = WordStatus.InProgress;
+                    wordChanges.RevisionsCount = previousWord.RevisionsCount;
+                    wordChanges.NextRevision = DateTime.Today.AddDays(1);
+                    wordChanges.RevisionInterval = previousWord.RevisionInterval;
+
+                    _wordRepository.Update(wordChanges);
+
                     Revision revision = new Revision
                     {
                         UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
@@ -143,6 +140,14 @@ namespace PersianMemo.Controllers
                     _revisionRepository.Add(revision);
                 } else
                 {
+                    wordChanges.EF = 2.5;
+                    wordChanges.Status = WordStatus.InProgress;
+                    wordChanges.RevisionsCount = 0;
+                    wordChanges.NextRevision = DateTime.Today.AddDays(1);
+                    wordChanges.RevisionInterval = 1;
+
+                    _wordRepository.Update(wordChanges);
+
                     existingRevision.WriteAnswer = Answer.NotAnsweredYet;
                     existingRevision.RevisionDate = wordChanges.NextRevision;
                     existingRevision.ModifiedDate = DateTime.Now;
@@ -152,7 +157,8 @@ namespace PersianMemo.Controllers
                 var restOfWords = _exercisesWordsRepository.GetAllPairsForExercise(model.CurrentExerciseId).Where(p => p.WriteAnswer != Answer.AnsweredCorrectly).OrderBy(p => p.WriteAnswer).ToList();
                 if (restOfWords.Count != 0)
                 {
-                    return RedirectToAction("learnwrite", "exercise", new { id = model.CurrentExerciseId, wordId = restOfWords.FirstOrDefault().WordId });
+                    TempData["audiopath"] = $"/audio/{_wordRepository.GetWord(model.CurrentWordId).PronunciationPath}";
+                    return RedirectToAction("learnwrite", "exercise", new { id = model.CurrentExerciseId, wordId = restOfWords.FirstOrDefault().WordId, jsToRun = "ShowSuccessPopup()" });
                 }
                 else
                 {
@@ -162,7 +168,8 @@ namespace PersianMemo.Controllers
                         _exercisesWordsRepository.Delete(pair.Id);
                     }
                     var exerciseToRemove = _exerciseRepository.Delete(model.CurrentExerciseId);
-                    return View("CompletedExercise");
+                    TempData["audiopath"] = $"/audio/{_wordRepository.GetWord(model.CurrentWordId).PronunciationPath}";
+                    return RedirectToAction("CompletedExercise");
                 }
             }
             else
@@ -179,8 +186,18 @@ namespace PersianMemo.Controllers
                 _exercisesWordsRepository.Update(pairChanges);
 
                 var restOfWords = _exercisesWordsRepository.GetAllPairsForExercise(model.CurrentExerciseId).Where(p => p.WriteAnswer != Answer.AnsweredCorrectly).OrderBy(p => p.WriteAnswer).ToList();
-                return RedirectToAction("learnwrite", "exercise", new { id = model.CurrentExerciseId, wordId = restOfWords.FirstOrDefault().WordId });
+                TempData["audiopath"] = $"/audio/{_wordRepository.GetWord(model.CurrentWordId).PronunciationPath}";
+                return RedirectToAction("learnwrite", "exercise", new { id = model.CurrentExerciseId, wordId = restOfWords.FirstOrDefault().WordId, jsToRun = "ShowErrorPopup()" });
             }
+        }
+
+        public IActionResult CompletedExercise()
+        {
+            if (TempData["audiopath"] != null)
+            {
+                ViewBag.AudioPath = TempData["audiopath"].ToString();
+            }
+            return View();
         }
     }
 }

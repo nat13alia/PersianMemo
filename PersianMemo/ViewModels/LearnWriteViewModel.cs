@@ -12,5 +12,6 @@ namespace PersianMemo.ViewModels
         public string Answer { get; set; }
         public int CurrentWordId { get; set; }
         public int CurrentExerciseId { get; set; }
+        public string JavascriptToRun { get; set; }
     }
 }

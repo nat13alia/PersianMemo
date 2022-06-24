@@ -5,7 +5,6 @@
 @{
     ViewBag.Title = language.Getkey("learn");
     var photoPath = $"~/images/{_wordRepository.GetWord(Model.CurrentWordId).PhotoPath}" ?? "noimage.png";
-    var audioPath = $"/audio/{_wordRepository.GetWord(Model.CurrentWordId).PronunciationPath}";
 }
 
 <div class="learn-write-body">
@@ -27,15 +26,10 @@
                                     <span asp-validation-for="Answer" class="text-danger"></span>
                                 </div>
                             </div>
-                            @*@if (audioPath != null)
+                            @if (ViewBag.AudioPath != null)
                                 {
-                                    <audio id="audioPlayer" src="@audioPath" type="audio/wav" autoplay></audio>
+                                    <audio id="audioPlayer" src="@ViewBag.AudioPath" type="audio/wav"></audio>
                                 }
-
-                                else
-                                {
-                                    <img class="card-body text-center" width="100" height="100" src="~/Audio/noaudio.png" asp-append-version="true" />
-                                }*@
                         </div>
                     </div>
                 </div>
@@ -49,12 +43,29 @@
     </div>
 </div>
 
-        @section Scripts{
-            <script type="text/javascript">
-                            //var playSound = function () {
-                            //    document.getElementById("audioPlayer").play();
-                            //}
-            </script>
+@section Scripts{
+    <script> 
+        function playSound() {
+            document.getElementById("audioPlayer").play();
         }
+        
+        @Model.JavascriptToRun
+
+        function ShowErrorPopup() {
+            Swal.fire({
+                icon: 'error',
+                text: 'Incorrect Answer!'
+            })
+        }
+
+        function ShowSuccessPopup() {
+            Swal.fire({
+                icon: 'success',
+                text: 'Correct Answer!'
+            });
+            playSound(); 
+        }
+    </script>
+}
 
 

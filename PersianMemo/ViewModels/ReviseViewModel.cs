@@ -10,5 +10,6 @@ namespace PersianMemo.ViewModels
         public IEnumerable<Word> Words { get; set; }
         public string Answer { get; set; }
         public int CurrentWordId { get; set; }
+        public string JavascriptToRun { get; set; }
     }
 }

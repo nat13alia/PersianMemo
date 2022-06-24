@@ -10,6 +10,9 @@
 				Click here to navigate to the home page
 			</a>
 		</div>
+		@if (ViewBag.AudioPath != null)
+		{
+			<audio id="audioPlayer" src="@ViewBag.AudioPath" type="audio/wav" autoplay></audio>
+		}
 	</div>
 </div>
-

@@ -49,15 +49,20 @@ namespace PersianMemo.Controllers
         }
 
         [HttpGet]
-        public IActionResult Revise(int id)
+        public IActionResult Revise(int id, string? jsToRun)
         {
             var currentDate = DateTime.Now.Date;
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             ReviseViewModel model = new ReviseViewModel
             {
                 Words = _revisionRepository.GetWords(currentUserId, currentDate),
-                CurrentWordId = id
+                CurrentWordId = id,
+                JavascriptToRun = jsToRun
             };
+            if (TempData["audiopath"] != null)
+            {
+                ViewBag.AudioPath = TempData["audiopath"].ToString();
+            }
             return View(model);
         }
 
@@ -174,7 +179,8 @@ namespace PersianMemo.Controllers
 
                 if (revisionsLeft.Count != 0)
                 {
-                    return RedirectToAction("revise", "revision", new { id = revisionsLeft.FirstOrDefault().WordId });
+                    TempData["audiopath"] = $"/audio/{_wordRepository.GetWord(model.CurrentWordId).PronunciationPath}";
+                    return RedirectToAction("revise", "revision", new { id = revisionsLeft.FirstOrDefault().WordId, jsToRun = "ShowSuccessPopup()" });
                 }
                 else
                 {
@@ -193,6 +199,7 @@ namespace PersianMemo.Controllers
                         _revisionRepository.Update(revChanges);
                     }
 
+                    TempData["audiopath"] = $"/audio/{_wordRepository.GetWord(model.CurrentWordId).PronunciationPath}";
                     return View("CompletedAllRevisions");
                 }
             }
@@ -212,8 +219,18 @@ namespace PersianMemo.Controllers
 
                 var revisionsLeft = _revisionRepository.GetAllRevisionsPerDay(currentDate).Where(r => r.WriteAnswer != Answer.AnsweredCorrectly).OrderBy(r => r.ModifiedDate).ToList();
 
-                return RedirectToAction("revise", "revision", new { id = revisionsLeft.FirstOrDefault().WordId });
+                TempData["audiopath"] = $"/audio/{_wordRepository.GetWord(model.CurrentWordId).PronunciationPath}";
+                return RedirectToAction("revise", "revision", new { id = revisionsLeft.FirstOrDefault().WordId, jsToRun = "ShowErrorPopup()" });
             }
+        }
+
+        public IActionResult CompletedAllRevisions()
+        {
+            if (TempData["audiopath"] != null)
+            {
+                ViewBag.AudioPath = TempData["audiopath"].ToString();
+            }
+            return View();
         }
     }
 }
