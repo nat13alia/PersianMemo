@@ -337,7 +337,7 @@ input[type="search"] {
     margin: 0;
     padding: 0;
     background: url('../images/bg-photos/add-word-bg.jpg') no-repeat center center;
-    height: calc(100vh - 120px);
+    min-height: calc(100vh - 120px);
     background-size: cover;
     display: flex;
     align-items: center;
@@ -396,14 +396,14 @@ input[type="search"] {
     margin: 0;
     padding: 0;
     background: url('../images/bg-photos/edit-word-bg.jpg') no-repeat center center;
-    height: calc(100vh - 120px);
+    min-height: calc(100vh - 120px);
     background-size: cover;
     display: flex;
     align-items: center;
 }
 
 .edit-word-form {
-    margin: auto;
+    margin: 30px auto;
     max-width: 800px;
     background: #fff;
     border: 1px solid #fff;
@@ -449,20 +449,19 @@ input[type="search"] {
 }
 
 /* Details View */
-
 #details-card.details-card-body {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     background: url('../images/bg-photos/edit-word-bg.jpg') no-repeat center center;
-    height: calc(100vh - 120px);
+    min-height: calc(100vh - 120px);
     background-size: cover;
     display: flex;
     align-items: center;
 }
 
 .details-card-holder {
-    margin: auto;
+    margin: 30px auto;
     min-width: 600px;
     background: #fff;
     border: 1px solid #fff;
@@ -699,7 +698,7 @@ create-word-btn-holder
 
 .roles-card-holder {
     padding: 20px;
-    margin: auto;
+    margin: 30px auto;
     min-width: 600px;
     background: #fff;
     border: 1px solid #fff;
@@ -721,7 +720,7 @@ create-word-btn-holder
 
 .edit-role-holder {
     padding: 20px;
-    margin: auto;
+    margin: 30px auto;
     min-width: 600px;
     background: #fff;
     border: 1px solid #fff;
