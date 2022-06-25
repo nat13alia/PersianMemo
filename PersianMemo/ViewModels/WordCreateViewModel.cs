@@ -6,10 +6,11 @@ namespace PersianMemo.ViewModels
 {
     public class WordCreateViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Please insert the word")]
         [MaxLength(50, ErrorMessage = "Entered value cannot exceed 50 characters")]
         public string PersianWord { get; set; }
-        [MaxLength(50, ErrorMessage = "Entered value cannot exceed 50 characters")]
+        [Required(ErrorMessage = "Please insert translation")]
+        [MaxLength(150, ErrorMessage = "Entered value cannot exceed 50 characters")]
         public string Translation { get; set; }
         [Required(ErrorMessage = "Please select the difficulty")]
         public Difficulty? Difficulty { get; set; }
@@ -17,6 +18,5 @@ namespace PersianMemo.ViewModels
         public IFormFile Pronunciation { get; set; }
         public WordStatus Status { get; set; }
         public double EF { get; set; }
-
     }
 }

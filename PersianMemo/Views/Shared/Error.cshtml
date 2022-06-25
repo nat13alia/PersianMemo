@@ -1,6 +1,16 @@
-﻿@{
-	ViewBag.Title = "Error";
-}
+﻿<div class="error-body">
+    <div class="error-holder">
+        @if (ViewBag.ErrorTitle == null)
+        {
+            <h3 class="text-danger text-center">An error occured while processing your request. The support team is notified and we are working on the fix.</h3>
+            <h5 class="text-danger text-center">Please contact us at support@persianmemo.com</h5>
+        }
+        else
+        {
+            <h1 class="text-danger text-center">@ViewBag.ErrorTitle</h1>
+            <h5 class="text-danger text-center">@ViewBag.ErrorMessage</h5>
+        }
+    </div>
+</div>
 
-<h3>An error occured while processing your request. The support team is notified and we are working on the fix.</h3>
-<h5>Please contact us at support@persianmemo.com</h5>
+

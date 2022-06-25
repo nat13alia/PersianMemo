@@ -23,6 +23,12 @@ namespace PersianMemo.Models
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Seed();
+
+            foreach(var FK in modelBuilder.Model.GetEntityTypes()
+                .SelectMany(e => e.GetForeignKeys()))
+            {
+                FK.DeleteBehavior = DeleteBehavior.Restrict;
+            }
         }
     }
 }

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using PersianMemo.Controllers;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace PersianMemo.Controllers
 {
@@ -15,11 +17,13 @@ namespace PersianMemo.Controllers
     {
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<IdentityUser> userManager;
+        private readonly ILogger<AdministrationController> logger;
 
-        public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
+        public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager, ILogger<AdministrationController> logger)
         {
             this.roleManager = roleManager;
             this.userManager = userManager;
+            this.logger = logger;
         }
 
         [HttpGet]
@@ -284,18 +288,29 @@ namespace PersianMemo.Controllers
             }
             else
             {
-                var result = await roleManager.DeleteAsync(role);
-
-                if (result.Succeeded)
+                try
                 {
-                    return RedirectToAction("RolesList");
-                }
+                    var result = await roleManager.DeleteAsync(role);
 
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("RolesList");
+                    }
+
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                    return View("RolesList");
                 }
-                return View("RolesList");
+                catch(DbUpdateException ex)
+                {
+                    logger.LogError($"Error deleting role");
+                    ViewBag.ErrorTitle = $"{role.Name} role is currently in use";
+                    ViewBag.ErrorMessage = $"{role.Name} role cannot be deleted." +
+                        $"To delete this role first remove all users from this role!";
+                    return View("Error");
+                }
             }
         }
 
