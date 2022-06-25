@@ -154,7 +154,9 @@ namespace PersianMemo.Controllers
                     _revisionRepository.Update(existingRevision);
                 }
 
-                var restOfWords = _exercisesWordsRepository.GetAllPairsForExercise(model.CurrentExerciseId).Where(p => p.WriteAnswer != Answer.AnsweredCorrectly).OrderBy(p => p.WriteAnswer).ToList();
+                var restOfWords = _exercisesWordsRepository.GetAllPairsForExercise(model.CurrentExerciseId).Where(
+                    p => p.WriteAnswer != Answer.AnsweredCorrectly).OrderBy(p => p.WriteAnswer).ToList();
+
                 if (restOfWords.Count != 0)
                 {
                     TempData["audiopath"] = $"/audio/{_wordRepository.GetWord(model.CurrentWordId).PronunciationPath}";

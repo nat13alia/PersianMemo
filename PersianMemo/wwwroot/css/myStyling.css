@@ -1,6 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
-/* LAYOUT */
+﻿/* LAYOUT */
 html {
     position: relative;
     min-height: 100%;
@@ -665,16 +663,16 @@ create-word-btn-holder
     padding: 200px 20px;
 }
 
-    .overlay-content h1 {
-        font-size: 55px;
-        max-width: 600px;
-        margin: 20px 0 30px;
-    }
+.overlay-content h1 {
+    font-size: 55px;
+    max-width: 600px;
+    margin: 20px 0 30px;
+}
 
-    .overlay-content p {
-        color: #fff;
-        font-size: 23px;
-    }
+.overlay-content p {
+    color: #fff;
+    font-size: 23px;
+}
 
 .other-btn-holder {
     margin: auto;
@@ -872,3 +870,17 @@ create-word-btn-holder
     border-radius: 5px;
 }
 
+/* Access Denied */
+.acess-denied-container {
+    background-size: cover;
+    min-height: calc(100vh - 120px);
+    color: #f00;
+}
+
+.acess-denied-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}

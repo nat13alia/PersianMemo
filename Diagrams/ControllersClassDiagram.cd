@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PersianMemo.Controllers.AccountController">
+    <Position X="0.5" Y="1.75" Width="1.75" />
+    <Members>
+      <Method Name="AccountController" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAgIAIAABAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Controllers\AccountController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PersianMemo.Controllers.AdministrationController">
+    <Position X="2.75" Y="1.75" Width="2" />
+    <Members>
+      <Method Name="AdministrationController" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>QIAICAAAAAAAAAAkAAAAAAAAAAAAACACAAAAAAAQAgA=</HashCode>
+      <FileName>Controllers\AdministrationController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PersianMemo.Controllers.ErrorController">
+    <Position X="0.5" Y="4.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAQAAAAAAAAAAIAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\ErrorController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PersianMemo.Controllers.ExerciseController">
+    <Position X="7.75" Y="1.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAARAAEACABAAAAAAAAQAAAAgAEAIAAAAAAQAAAAAA=</HashCode>
+      <FileName>Controllers\ExerciseController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PersianMemo.Controllers.HomeController">
+    <Position X="5" Y="1.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAARAAAAAABBAAAAAAAQAQAIAUEAUACAgEAQAAACAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PersianMemo.Controllers.LanguageController">
+    <Position X="10.25" Y="5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\LanguageController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PersianMemo.Controllers.RevisionController">
+    <Position X="10.5" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAARAAAACABAAAgAAAAAAAAAAAAAAAAAABAQAAAAAA=</HashCode>
+      <FileName>Controllers\RevisionController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.AspNetCore.Mvc.Controller" Collapsed="true">
+    <Position X="5.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

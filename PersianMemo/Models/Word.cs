@@ -21,16 +21,16 @@ namespace PersianMemo.Models
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public IdentityUser User { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please insert the word")]
         [MaxLength(50, ErrorMessage = "Entered value cannot exceed 50 characters")]
         public string PersianWord { get; set; }
+        [Required(ErrorMessage = "Please insert translation")]
         [MaxLength(150, ErrorMessage = "Entered value cannot exceed 50 characters")]
         public string Translation { get; set; }
         [Required(ErrorMessage = "Please select the difficulty")]
         public Difficulty? Difficulty { get; set; }
         public string PhotoPath { get; set; }
         public string PronunciationPath { get; set; }
-
         public WordStatus Status { get; set; }
         public double EF { get; set; }
         public int RevisionsCount { get; set; }

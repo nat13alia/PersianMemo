@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PersianMemo.Models.SQLExerciseRepository" BaseTypeListCollapsed="true">
+    <Position X="2.5" Y="4.5" Width="1.5" />
+    <Members>
+      <Method Name="SQLExerciseRepository" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAYCAAAAAAAAAAAAAAAAAAAAAAEAAACQAAAAAAAAAAA=</HashCode>
+      <FileName>Models\SQLRepository\SQLExerciseRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PersianMemo.Models.SQLExercisesWordsRepository" BaseTypeListCollapsed="true">
+    <Position X="4.5" Y="4.5" Width="1.5" />
+    <Members>
+      <Method Name="SQLExercisesWordsRepository" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAYCAAgAAAAAAAAAAAABAAAAAAEAAAAIAAAAQAAAAAA=</HashCode>
+      <FileName>Models\SQLRepository\SQLExercisesWordsRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PersianMemo.Models.SQLRevisionRepository" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="4.5" Width="1.5" />
+    <Members>
+      <Method Name="SQLRevisionRepository" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAYCAAgAABAAAAAAAAAAAAAEAAEAAAgAAAAAQAAAAAA=</HashCode>
+      <FileName>Models\SQLRepository\SQLRevisionRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.178" />
+  </Class>
+  <Class Name="PersianMemo.Models.SQLWordRepository" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <Members>
+      <Method Name="SQLWordRepository" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAYCAAAAAAAAAAAAAAAAEAEAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\SQLRepository\SQLWordRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="PersianMemo.Models.IExerciseRepository">
+    <Position X="2.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAAAAAAAAAAAAAAAAAAEAAACQAAAAAAAAAAA=</HashCode>
+      <FileName>Models\IRepository\IExerciseRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PersianMemo.Models.IExercisesWordsRepository">
+    <Position X="4.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAgAAAAAAAAAAAABAAAAAAEAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Models\IRepository\IExercisesWordsRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PersianMemo.Models.IRevisionRepository">
+    <Position X="6.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAgAABAAAAAAAAAAAAAEAAEAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\IRepository\IRevisionRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PersianMemo.Models.IWordRepository">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAAAAAAAAAAAAEAEAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\IRepository\IWordRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

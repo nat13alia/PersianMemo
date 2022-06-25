@@ -183,6 +183,9 @@
   <data name="content3" xml:space="preserve">
     <value>Zajmie to tylko minutkę</value>
   </data>
+  <data name="correctAnswer" xml:space="preserve">
+    <value>Dobra Odpowiedź!</value>
+  </data>
   <data name="createNewRole" xml:space="preserve">
     <value>Stwórz Nową Rolę</value>
   </data>
@@ -224,6 +227,9 @@
   </data>
   <data name="homePage" xml:space="preserve">
     <value>Strona Główna</value>
+  </data>
+  <data name="incorrectAnswer" xml:space="preserve">
+    <value>Zła Odpowiedź!</value>
   </data>
   <data name="inProgress" xml:space="preserve">
     <value>Nauka w toku</value>
