@@ -891,7 +891,7 @@ create-word-btn-holder
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background: #a00;
+    background: url('../images/bg-photos/admin-bg.jpg') no-repeat center center;
     height: calc(100vh - 120px);
     background-size: cover;
     display: flex;
@@ -900,6 +900,52 @@ create-word-btn-holder
 }
 
 .error-holder {
+    padding: 20px;
+    margin: auto;
+    min-width: 600px;
+    max-width: 1000px;
+    background: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+
+/* REGISTRATION SUCCESSFUL */
+.regSucc-body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background: url('../images/bg-photos/admin-bg.jpg') no-repeat center center;
+    height: calc(100vh - 120px);
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.regSucc-holder {
+    padding: 20px;
+    margin: auto;
+    min-width: 600px;
+    max-width: 1000px;
+    background: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+
+/* Confirm Email SUCCESSFUL */
+.regSucc-body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background: url('../images/bg-photos/admin-bg.jpg') no-repeat center center;
+    height: calc(100vh - 120px);
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.regSucc-holder {
     padding: 20px;
     margin: auto;
     min-width: 600px;

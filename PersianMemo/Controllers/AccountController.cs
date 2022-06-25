@@ -20,11 +20,13 @@ namespace PersianMemo.Controllers
     {
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
+        private readonly ILogger<AccountController> logger;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, ILogger<AccountController> logger)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.logger = logger;
         }
 
         [AllowAnonymous]
@@ -45,17 +47,14 @@ namespace PersianMemo.Controllers
 
                 if (result.Succeeded)
                 {
+                    var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var confirmLink = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, token = token }, Request.Scheme);
+                    logger.Log(LogLevel.Warning, confirmLink);
                     if(signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                     {
                         return RedirectToAction("UsersList", "Administration");
                     }
-                    await signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("index", "home");
-                }
-
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(String.Empty, error.Description);
+                    return View("RegistrationSuccessful");
                 }
             }
             return View(model);
@@ -74,12 +73,21 @@ namespace PersianMemo.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+                var user = await userManager.FindByEmailAsync(model.Email);
+
+                if (user != null && !user.EmailConfirmed &&
+                            (await userManager.CheckPasswordAsync(user, model.Password)))
+                {
+                    ModelState.AddModelError(string.Empty, "Email not confirmed yet");
+                    return View(model);
+                }
+
+                var result = await signInManager.PasswordSignInAsync(model.Email,
+                                        model.Password, model.RememberMe, false);
 
                 if (result.Succeeded)
                 {
-
-                    if (Url.IsLocalUrl(returnUrl))
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                     {
                         return Redirect(returnUrl);
                     }
@@ -89,8 +97,9 @@ namespace PersianMemo.Controllers
                     }
                 }
 
-                ModelState.AddModelError(String.Empty, "Invalid Login Attempt");
+                ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
             }
+
             return View(model);
         }
 
@@ -114,6 +123,31 @@ namespace PersianMemo.Controllers
             {
                 return Json($"Email {email} is already in use");
             }
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        {
+            if (userId == null || token == null)
+            {
+                return RedirectToAction("index", "home");
+            }
+
+            var user = await userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"The User ID {userId} is invalid";
+                return View("NotFound");
+            }
+
+            var result = await userManager.ConfirmEmailAsync(user, token);
+            if (result.Succeeded)
+            {
+                return View();
+            }
+
+            ViewBag.ErrorTitle = "Email cannot be confirmed";
+            return View("Error");
         }
     }
 }

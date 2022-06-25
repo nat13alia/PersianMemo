@@ -38,7 +38,11 @@ namespace PersianMemo
 
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
-            }).AddEntityFrameworkStores<AppDbContext>();
+                options.Password.RequiredLength = 8;
+                options.SignIn.RequireConfirmedEmail = true;
+            })
+            .AddEntityFrameworkStores<AppDbContext>()
+            .AddDefaultTokenProviders();
 
             services.AddScoped<IWordRepository, SQLWordRepository>();
             services.AddScoped<IExerciseRepository, SQLExerciseRepository>();
