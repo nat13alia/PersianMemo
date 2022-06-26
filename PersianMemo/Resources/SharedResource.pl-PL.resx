@@ -222,6 +222,9 @@
   <data name="exercise" xml:space="preserve">
     <value>Ćwiczenie</value>
   </data>
+  <data name="forgotPassword" xml:space="preserve">
+    <value>Zapomniałeś hasła?</value>
+  </data>
   <data name="goToExercise" xml:space="preserve">
     <value>Przejdź do ćwiczenia zaznaczonych słówek</value>
   </data>
@@ -303,6 +306,9 @@
   <data name="rememberMe" xml:space="preserve">
     <value>Zapamiętaj Mnie</value>
   </data>
+  <data name="resetPassword" xml:space="preserve">
+    <value>Reset hasła</value>
+  </data>
   <data name="revise" xml:space="preserve">
     <value />
   </data>
@@ -329,6 +335,9 @@
   </data>
   <data name="signUp" xml:space="preserve">
     <value>Zarejestruj się</value>
+  </data>
+  <data name="submit" xml:space="preserve">
+    <value>Wyślij</value>
   </data>
   <data name="thereAreNoRolesToDisplay" xml:space="preserve">
     <value>Obecnie brak ról do wyświetlenia</value>

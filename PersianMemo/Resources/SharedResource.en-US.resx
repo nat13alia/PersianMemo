@@ -222,6 +222,9 @@
   <data name="exercise" xml:space="preserve">
     <value>Exercise</value>
   </data>
+  <data name="forgotPassword" xml:space="preserve">
+    <value>Forgot Password?</value>
+  </data>
   <data name="goToExercise" xml:space="preserve">
     <value>Practise selected words</value>
   </data>
@@ -303,6 +306,9 @@
   <data name="rememberMe" xml:space="preserve">
     <value>Remember Me</value>
   </data>
+  <data name="resetPassword" xml:space="preserve">
+    <value>Reset Password</value>
+  </data>
   <data name="revision" xml:space="preserve">
     <value>Revision</value>
   </data>
@@ -326,6 +332,9 @@
   </data>
   <data name="signUp" xml:space="preserve">
     <value>Sign Up</value>
+  </data>
+  <data name="submit" xml:space="preserve">
+    <value>Submit</value>
   </data>
   <data name="thereAreNoRolesToDisplay" xml:space="preserve">
     <value>Currently there are no roles to display</value>
