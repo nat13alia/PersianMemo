@@ -17,16 +17,15 @@
                 <img class="card-body text-center" id="photo" src="@photoPath" asp-append-version="true" />
                 <h4>ID: @Model.Word.Id</h4>
                 <h4>@language.Getkey("translation") : @Model.Word.Translation</h4>
+                <h4>@language.Getkey("synonym") : @Model.Word.PersianSynonym</h4>
                 <h4>@language.Getkey("difficulty"): @language.Getkey(Enum.GetName(typeof(Difficulty), Model.Word.Difficulty).ToString().ToLower())</h4>
                 @if (Model.Word.PronunciationPath != null)
                 {
-                    <audio id="audioPlayer" src="@audioPath" type="audio/wav" autoplay controls></audio>
-                }
+            <audio id="audioPlayer" src="@audioPath" type="audio/wav" autoplay controls></audio> }
 
-                else
-                {
-                    <img class="card-body text-center" width="100" height ="100" src="~/Audio/noaudio.png" asp-append-version="true" />
-                }
+                        else
+                        {
+            <img class="card-body text-center" width="100" height="100" src="~/Audio/noaudio.png" asp-append-version="true" />}
             </div>
 
             <div id="details-card-footer" class="card-footer text-center">

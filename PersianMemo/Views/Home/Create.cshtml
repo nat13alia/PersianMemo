@@ -22,6 +22,13 @@
 
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label asp-for="PersianSynonym" class="col-sm-2 col-form-label">@language.Getkey("synonym") </label>
+                    <div class="col-sm-10">
+                        <input asp-for="PersianSynonym" class="form-control" placeholder="@language.Getkey("insertASynonym")" />
+                        <span asp-validation-for="PersianSynonym" class="text-danger"></span>
+                    </div>
+                </div>
                 <div class="form-group row mt-1">
                     <label asp-for="Difficulty" class="col-sm-2 col-form-label">@language.Getkey("difficulty") </label>
                     <div class="col-sm-10">
@@ -42,7 +49,7 @@
                     <div class="col-sm-10">
                         <div class="input-group custom-file-button">
                             <label asp-for="Photo" class="input-group-text" for="photoFile">@language.Getkey("chooseAPhoto")</label>
-                            <input asp-for="Photo" class="form-control custom-file-button" id="photoFile"/>
+                            <input asp-for="Photo" class="form-control custom-file-button" id="photoFile" />
                         </div>
                     </div>
                 </div>
@@ -52,7 +59,7 @@
                     <div class="col-sm-10">
                         <div class="input-group custom-file-button">
                             <label asp-for="Pronunciation" class="input-group-text" for="audioFile">@language.Getkey("choosePronunciationAudioFile")</label>
-                            <input asp-for="Pronunciation" class="form-control custom-file-button" id="audioFile"/>
+                            <input asp-for="Pronunciation" class="form-control custom-file-button" id="audioFile" />
                         </div>
                     </div>
                 </div>

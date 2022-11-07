@@ -24,7 +24,8 @@ namespace PersianMemo.Models
         [Required(ErrorMessage = "Please insert the word")]
         [MaxLength(50, ErrorMessage = "Entered value cannot exceed 50 characters")]
         public string PersianWord { get; set; }
-        [Required(ErrorMessage = "Please insert translation")]
+        [MaxLength(150, ErrorMessage = "Entered value cannot exceed 50 characters")]
+        public string PersianSynonym { get; set; }
         [MaxLength(150, ErrorMessage = "Entered value cannot exceed 50 characters")]
         public string Translation { get; set; }
         [Required(ErrorMessage = "Please select the difficulty")]

@@ -102,8 +102,9 @@ namespace PersianMemo.Controllers
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var correctAnswer = _wordRepository.GetWord(model.CurrentWordId).PersianWord;
+            var synonym = _wordRepository.GetWord(model.CurrentWordId).PersianSynonym;
 
-            if (model.Answer == correctAnswer)
+            if (model.Answer == correctAnswer || model.Answer == synonym)
             {
                 //Correct answer
                 ExercisesWords pairChanges = new ExercisesWords

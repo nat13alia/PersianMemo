@@ -240,6 +240,9 @@
   <data name="insertANewWord" xml:space="preserve">
     <value>Insert a New Word</value>
   </data>
+  <data name="insertASynonym" xml:space="preserve">
+    <value>Insert A Synonym</value>
+  </data>
   <data name="insertTheWord" xml:space="preserve">
     <value>Insert The Word</value>
   </data>
@@ -335,6 +338,9 @@
   </data>
   <data name="submit" xml:space="preserve">
     <value>Submit</value>
+  </data>
+  <data name="synonym" xml:space="preserve">
+    <value>Synonym</value>
   </data>
   <data name="thereAreNoRolesToDisplay" xml:space="preserve">
     <value>Currently there are no roles to display</value>

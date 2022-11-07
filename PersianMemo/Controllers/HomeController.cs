@@ -134,6 +134,7 @@ namespace PersianMemo.Controllers
                 {
                     UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
                     PersianWord = model.PersianWord,
+                    PersianSynonym = model.PersianSynonym,
                     Translation = model.Translation,
                     Difficulty = model.Difficulty,
                     PhotoPath = uniquePhotoFileName,
@@ -161,6 +162,7 @@ namespace PersianMemo.Controllers
             {
                 Id = word.Id,
                 PersianWord = word.PersianWord,
+                PersianSynonym = word.PersianSynonym,
                 Translation = word.Translation,
                 Difficulty = word.Difficulty,
                 ExistingPhotoPath = word.PhotoPath,
@@ -179,6 +181,7 @@ namespace PersianMemo.Controllers
             {
                 Word word = _wordRepository.GetWord(model.Id);
                 word.PersianWord = model.PersianWord;
+                word.PersianSynonym = model.PersianSynonym;
                 word.Translation = model.Translation;
                 word.Difficulty = model.Difficulty;
                 if(model.Photo != null)

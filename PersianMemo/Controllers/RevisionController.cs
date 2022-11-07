@@ -76,9 +76,11 @@ namespace PersianMemo.Controllers
             var previousRevisionRow = _revisionRepository.GetRevisionRow(currentUserId, previousWord.Id, currentDate);
 
             var correctAnswer = _wordRepository.GetWord(model.CurrentWordId).PersianWord;
+            var synonym = _wordRepository.GetWord(model.CurrentWordId).PersianSynonym;
+
             double EFholder = 2.9;
 
-            if (model.Answer == correctAnswer)
+            if (model.Answer == correctAnswer || model.Answer == synonym)
             {
                 Word wordChanges;
                 double newEF;

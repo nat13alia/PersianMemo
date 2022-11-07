@@ -240,6 +240,9 @@
   <data name="insertANewWord" xml:space="preserve">
     <value>Wprowadź nowe słówko</value>
   </data>
+  <data name="insertASynonym" xml:space="preserve">
+    <value>Wprowadź perski synonim</value>
+  </data>
   <data name="insertTheWord" xml:space="preserve">
     <value>Wprowadź Słówko</value>
   </data>
@@ -338,6 +341,9 @@
   </data>
   <data name="submit" xml:space="preserve">
     <value>Wyślij</value>
+  </data>
+  <data name="synonym" xml:space="preserve">
+    <value>synonim</value>
   </data>
   <data name="thereAreNoRolesToDisplay" xml:space="preserve">
     <value>Obecnie brak ról do wyświetlenia</value>

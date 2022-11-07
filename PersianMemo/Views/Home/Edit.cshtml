@@ -18,6 +18,13 @@
                     <span asp-validation-for="PersianWord" class="text-danger"></span>
                 </div>
             </div>
+            <div class="form-group row">
+                <label asp-for="PersianSynonym" class="col-sm-2 col-form-label">@language.Getkey("synonym") </label>
+                <div class="col-sm-10">
+                    <input asp-for="PersianSynonym" class="form-control" placeholder="@language.Getkey("insertASynonym")" />
+                    <span asp-validation-for="PersianSynonym" class="text-danger"></span>
+                </div>
+            </div>
             <div class="form-group row mt-1">
                 <label asp-for="Translation" class="col-sm-2 col-form-label">@language.Getkey("translation") </label>
                 <div class="col-sm-10">
@@ -46,13 +53,13 @@
                 <div class="col-sm-10">
                     <div class="input-group custom-file-button">
                         <label asp-for="Photo" class="input-group-text" for="photoFile">@language.Getkey("chooseAPhoto")</label>
-                        <input asp-for="Photo" class="form-control custom-file-button" id="photoFile" title="test"/>
+                        <input asp-for="Photo" class="form-control custom-file-button" id="photoFile" title="test" />
                     </div>
                 </div>
             </div>
             <hr />
             <div class="form-group row col-sm-4 offset-4">
-                <img src="@photoPath" width="100" height ="100" asp-append-version="true" />
+                <img src="@photoPath" width="100" height="100" asp-append-version="true" />
             </div>
 
             <div class="form-group row mt-1">
@@ -60,21 +67,19 @@
                 <div class="col-sm-10">
                     <div class="input-group custom-file-button">
                         <label asp-for="Pronunciation" class="input-group-text" for="audioFile">@language.Getkey("choosePronunciationAudioFile")</label>
-                        <input asp-for="Pronunciation" class="form-control custom-file-button" id="audioFile"/>
+                        <input asp-for="Pronunciation" class="form-control custom-file-button" id="audioFile" />
                     </div>
                 </div>
             </div>
             <hr />
             <div class="form-group row col-sm-4 offset-4">
                 @if (Model.ExistingPronunciationPath != null)
-                    {
-                        <audio id="audioPlayer" src="@audioPath" type="audio/wav" autoplay controls></audio>
-                    }
+                {
+        <audio id="audioPlayer" src="@audioPath" type="audio/wav" autoplay controls></audio> }
 
                     else
                     {
-                        <img class="card-body text-center" width="100" height ="100" src="~/Audio/noaudio.png" asp-append-version="true" />
-                    }
+        <img class="card-body text-center" width="100" height="100" src="~/Audio/noaudio.png" asp-append-version="true" />}
             </div>
             <hr />
 
